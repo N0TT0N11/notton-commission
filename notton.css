@@ -233,3 +233,9 @@ body {
   width: 100%;
   margin-top: 24px !important;
 }
+
+#akane-concepts .ak .tos-content .rate-public-card{background:transparent;border:0;box-shadow:none;border-radius:0;margin:0;padding:14px 0;}
+#akane-concepts .ak .tos-content .rate-paragraph{white-space:pre-wrap;}
+#akane-concepts .ak .tos-content img,#akane-concepts .ak .tos-content video{max-width:100%;}
+#akane-concepts .ak .tos-content .rate-public-card h2:empty{display:none;}
+#akane-concepts .ak .hero .hero-tos{background:#fff;border:2px solid #e6c779;border-radius:999px;padding:12px 24px;color:#80572e;font:inherit;font-weight:600;}

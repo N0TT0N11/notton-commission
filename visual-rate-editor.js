@@ -1,9 +1,13 @@
+import {tosModel} from './tos-core.js';
+const editingTos=document.body.dataset.editor==='tos';
+const contentKey=editingTos?'tosContent':'priceRate';
+const editorModel=site=>editingTos?tosModel(site):normalize(site);
 import {elements,defaults,elementIcon} from './element-library.js?v=test3';
 import {normalize, render, el, button, uid, clone, readImage, readMedia, mediaSource, move} from './rate-core.js?v=20261004-test4';
 let saved={};
 let savedSignature='';
 let saving=false;
-let model=normalize(saved), selected=null, sectionId=model.sections[0]?.id, insertAt=null;
+let model=editorModel(saved), selected=null, sectionId=model.sections[0]?.id, insertAt=null;
 savedSignature=JSON.stringify(model);
 let history=[clone(model)], cursor=0, pending=null, preview=false, drag=null, timer;
 const canvas=document.querySelector('#rate-page');
@@ -56,12 +60,12 @@ function toolbar(){
     const snapshotModel=clone(model);
     status.textContent='กำลังบันทึก…';
     try {
-      await window.NottonData.save({priceRate:snapshotModel});
+      await window.NottonData.save({[contentKey]:snapshotModel});
       savedSignature=JSON.stringify(snapshotModel);
       status.textContent=savedSignature===JSON.stringify(model)?'บันทึกแล้ว':'บันทึกแล้ว · มีการแก้ไขใหม่ที่ยังไม่ได้บันทึก';
     } catch(error) {status.textContent=window.NottonData.errorMessage(error);}
     finally {saving=false;tools.querySelector('button').disabled=false;}
-  },'บันทึก'),action('เปิดหน้า Price rate',()=>window.open('price-rate.html','_blank','noopener'),'↗'),action('มุมมองมือถือ',()=>{document.body.classList.toggle('ve-mobile');},'▯'),action('Sections',showSections,'#'),action('พรีวิว',()=>{preview=!preview;document.body.classList.toggle('ve-preview',preview);paint();properties.hidden=true;addPanel.hidden=true;},'▷'),undo,redo,action('เพิ่มองค์ประกอบ',()=>{addPanel.hidden=!addPanel.hidden;buildAdd();},'+'),action('Dock left',()=>setDock('left'),'⇤'),action('Dock right',()=>setDock('right'),'⇥'));
+  },'บันทึก'),action(editingTos?'เปิด TOS':'เปิดหน้า Price rate',()=>window.open(editingTos?'index.html#tos':'price-rate.html','_blank','noopener'),'↗'),action('มุมมองมือถือ',()=>{document.body.classList.toggle('ve-mobile');},'▯'),action('Sections',showSections,'#'),action('พรีวิว',()=>{preview=!preview;document.body.classList.toggle('ve-preview',preview);paint();properties.hidden=true;addPanel.hidden=true;},'▷'),undo,redo,action('เพิ่มองค์ประกอบ',()=>{addPanel.hidden=!addPanel.hidden;buildAdd();},'+'),action('Dock left',()=>setDock('left'),'⇤'),action('Dock right',()=>setDock('right'),'⇥'));
   tools.querySelector('[aria-label="Dock left"]').disabled=dockSide==='left';
   tools.querySelector('[aria-label="Dock right"]').disabled=dockSide==='right';
 }
@@ -229,7 +233,7 @@ window.NottonData.authReady(async user=>{
   if(!user)return;
   try {
     const site=await window.NottonData.loadFresh();
-    model=normalize(site);savedSignature=JSON.stringify(model);
+    model=editorModel(site);savedSignature=JSON.stringify(model);
     sectionId=model.sections[0]?.id;history=[clone(model)];cursor=0;
     paint();toolbar();status.textContent='พร้อมแก้ไข';
   }catch(error){status.textContent=window.NottonData.errorMessage(error);}
