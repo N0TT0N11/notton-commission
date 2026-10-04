@@ -1,0 +1,940 @@
+<!doctype html><html lang="th"><head><meta charset="utf-8"><link rel="icon" type="image/svg+xml" href="favicon.svg"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Notton admin</title><style>body{margin:0;padding:16px;background:#fffaf0}#akane-concepts{max-width:1120px;margin:auto}button{cursor:pointer}
+</style><link rel="stylesheet" href="notton.css"></head><body><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;700&amp;display=swap">
+<style>
+#akane-concepts .ak { --ak-bg:#fffaf5;--ak-paper:#ffffff;--ak-text:#493a32;--ak-muted:#806959;--ak-line:#eedfd3;--ak-soft:#ffeadb;--ak-accent:#ae4c20;--ak-green:#fff0e3;--ak-orange:#ed8b50;font:16px/1.6 'Tahoma',sans-serif;color:var(--ak-text);background:var(--ak-bg);padding:28px;border-radius:24px;position:relative;overflow:hidden;min-height:1050px;box-sizing:border-box}
+#akane-concepts .ak *{box-sizing:border-box}#akane-concepts .ak [hidden]{display:none!important}
+#akane-concepts .ak .interior{position:relative;z-index:1}
+#akane-concepts .ak .sparkles{position:absolute;inset:0;pointer-events:none;overflow:hidden}#akane-concepts .ak .sparkles span{position:absolute;color:var(--ak-orange);opacity:.35;animation:ak-drift 15s ease-in-out infinite alternate}#akane-concepts .ak .sparkles span:nth-child(2n){animation-duration:20s} @keyframes ak-drift{to{transform:translate(25px,-60px) rotate(30deg)}}
+#akane-concepts .ak header{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:4px 0 20px;border-bottom:1px solid var(--ak-line);flex-wrap:wrap}
+#akane-concepts .ak .brand{font-family:Georgia,serif;font-size:27px;letter-spacing:-.6px}#akane-concepts .ak .brand small{display:block;font:13px Tahoma,sans-serif;letter-spacing:3px;color:var(--ak-muted)}
+#akane-concepts .ak nav{display:flex;gap:14px;flex-wrap:wrap}#akane-concepts .ak a{color:var(--ak-text);text-decoration:none}#akane-concepts .ak nav a:first-child{color:var(--ak-accent)}
+#akane-concepts .ak h1{font:52px/1.12 Georgia,serif;letter-spacing:-1px;margin:14px 0}#akane-concepts .ak h2{font:30px/1.2 Georgia,serif;margin:0 0 12px}#akane-concepts .ak h3{font:21px/1.4 Georgia,serif;margin:0 0 10px}#akane-concepts .ak p{margin:8px 0;color:var(--ak-muted)}
+#akane-concepts .ak .eyebrow{font-size:13px;letter-spacing:2px;color:var(--ak-accent);text-transform:uppercase}#akane-concepts .ak .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center;padding:30px 0}
+#akane-concepts .ak .hero-art{min-height:180px;background:var(--ak-soft);border-radius:90px 90px 16px 16px;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;border:6px solid var(--ak-paper)}#akane-concepts .ak .hero-art i{display:block;margin:auto auto 12px;width:34px;height:34px}
+#akane-concepts .ak .row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}#akane-concepts .ak .pill{display:inline-block;background:var(--ak-green);padding:5px 12px;border-radius:30px;font-size:14px}
+#akane-concepts .ak button{font:inherit;color:var(--ak-text);border:1px solid var(--ak-line);background:var(--ak-paper);border-radius:12px;padding:10px 13px;transition:transform .18s,background .18s}#akane-concepts .ak button:hover{transform:translateY(-2px)}#akane-concepts .ak button[aria-pressed=true]{background:var(--ak-soft);border-color:var(--ak-accent);color:var(--ak-accent)}#akane-concepts .ak button.primary{background:var(--ak-accent);color:var(--ak-paper);border-color:var(--ak-accent)}
+#akane-concepts .ak .content-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:22px}#akane-concepts .ak .gallery{display:grid;grid-template-columns:1fr 1fr;gap:12px}#akane-concepts .ak figure{margin:0}#akane-concepts .ak .art-slot{height:154px;border-radius:16px;background:var(--ak-paper);border:1px solid var(--ak-line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--ak-muted)}#akane-concepts .ak figure:first-child{grid-column:1/-1}#akane-concepts .ak figure:first-child .art-slot{height:210px;background:linear-gradient(140deg,var(--ak-paper),var(--ak-soft))}#akane-concepts .ak figcaption{font-size:14px;margin:7px 3px;color:var(--ak-muted)}
+#akane-concepts .ak .calculator{padding:24px;background:var(--ak-paper);border:1px solid var(--ak-line);border-radius:22px}#akane-concepts .ak fieldset{border:0;padding:0;margin:15px 0}#akane-concepts .ak legend{font-size:14px;color:var(--ak-muted);margin-bottom:9px}#akane-concepts .ak .choices{display:flex;gap:7px;flex-wrap:wrap}#akane-concepts .ak .choices button{padding:8px 11px;font-size:14px}
+#akane-concepts .ak .quote{border-top:1px solid var(--ak-line);padding-top:15px;margin-top:16px}#akane-concepts .ak .price{font:41px Georgia,serif;color:var(--ak-accent)}#akane-concepts .ak .small{font-size:14px;color:var(--ak-muted)}#akane-concepts .ak .quote label{display:flex;align-items:center;gap:8px;margin:7px 0}#akane-concepts .ak .footer{margin-top:24px;border-top:1px solid var(--ak-line);padding:18px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+#akane-concepts .ak .admin-preview{border-top:1px dashed var(--ak-line);margin-top:24px;padding-top:20px}#akane-concepts .ak summary{color:var(--ak-accent);padding:10px 0}#akane-concepts .ak .admin-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:16px;margin-top:0}#akane-concepts .ak .admin-panel{background:var(--ak-paper);border:1px solid var(--ak-line);border-radius:18px;padding:18px}#akane-concepts .ak input:not([type=checkbox]),#akane-concepts .ak select{width:100%;padding:10px;border:1px solid var(--ak-line);border-radius:10px;background:var(--ak-bg);color:var(--ak-text);font:inherit;margin:5px 0 12px}#akane-concepts .ak .upload{padding:30px 12px;text-align:center;border:1px dashed var(--ak-accent);border-radius:14px;background:var(--ak-bg);margin:12px 0}#akane-concepts .ak .upload input{font-size:14px}#akane-concepts .ak .upload img{width:100%;max-height:180px;object-fit:contain;border-radius:10px}#akane-concepts .ak .manage-item{padding:12px 0;border-bottom:1px solid var(--ak-line)}
+#akane-concepts .ak.atelier .hero{grid-template-columns:1fr;text-align:center;max-width:670px;margin:auto}#akane-concepts .ak.atelier .hero-art{display:none}#akane-concepts .ak.atelier h1{font-size:48px}#akane-concepts .ak.atelier .hero .row{justify-content:center}#akane-concepts .ak.atelier .content-grid{display:flex;flex-direction:column-reverse}#akane-concepts .ak.atelier .calculator{display:grid;grid-template-columns:1.4fr .8fr;gap:20px;border-radius:12px}#akane-concepts .ak.atelier .gallery{grid-template-columns:repeat(3,1fr)}#akane-concepts .ak.atelier figure:first-child{grid-column:auto}#akane-concepts .ak.atelier figure:first-child .art-slot{height:154px}#akane-concepts .ak.atelier .quote{border-top:0;border-left:1px solid var(--ak-line);padding:0 0 0 20px;margin:0}
+@media(max-width:680px){#akane-concepts .ak{padding:18px;min-height:1660px}#akane-concepts .ak h1{font-size:41px}#akane-concepts .ak .hero,#akane-concepts .ak .content-grid,#akane-concepts .ak .admin-grid{grid-template-columns:1fr}#akane-concepts .ak nav{gap:12px;font-size:14px}#akane-concepts .ak .hero-art{min-height:120px}#akane-concepts .ak.atelier .calculator{display:block}#akane-concepts .ak.atelier .quote{border-left:0;border-top:1px solid var(--ak-line);padding:15px 0 0;margin-top:18px}#akane-concepts .ak.atelier .gallery{grid-template-columns:1fr 1fr}#akane-concepts .ak.atelier figure:first-child{grid-column:1/-1}}
+@media(prefers-reduced-motion:reduce){#akane-concepts .ak .sparkles span{animation:none}#akane-concepts .ak button{transition:none}}
+
+#akane-concepts .ak{padding:0;min-height:960px;border-radius:18px;background:var(--ak-bg)}
+#akane-concepts .ak .interior{padding:30px 36px}
+#akane-concepts .ak header{border-bottom:0;align-items:flex-start;margin-bottom:22px}
+#akane-concepts .ak nav{max-width:480px;justify-content:flex-end;align-items:center;font-size:14px;gap:14px}
+#akane-concepts .ak nav a:first-child{color:var(--ak-text)}
+#akane-concepts .ak nav a[aria-current=page]{text-decoration:underline;text-underline-offset:8px;color:var(--ak-accent)}
+#akane-concepts .ak .hero{display:block;max-width:none;padding:18px 0 32px;border-bottom:1px solid var(--ak-line);position:relative}
+#akane-concepts .ak h1{font-size:43px;margin:9px 0 14px;line-height:1.2;letter-spacing:0}
+#akane-concepts .ak h1 br{display:none}#akane-concepts .ak h1 br:after{content:' / '}
+#akane-concepts .ak .hero h1{max-width:680px}
+#akane-concepts .ak .hero p{max-width:500px;font-size:16px}
+#akane-concepts .ak .hero-art{display:none}
+#akane-concepts .ak .hero .row{margin-top:20px}
+#akane-concepts .ak .content-grid{display:block;margin-top:26px}
+#akane-concepts .ak .works>h2{font-size:25px}#akane-concepts .ak .works>.eyebrow{display:none}
+#akane-concepts .ak .gallery{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:18px;align-items:start}
+#akane-concepts .ak figure{padding:9px;background:var(--ak-paper);border:1px solid var(--ak-line);box-shadow:0 5px 16px color-mix(in srgb,var(--ak-text) 6%,transparent)}
+#akane-concepts .ak figure:first-child{grid-column:auto;margin-top:0}
+#akane-concepts .ak figure:nth-child(2){margin-top:0}
+#akane-concepts .ak figure:nth-child(3){margin-top:0}
+#akane-concepts .ak .art-slot{height:250px;border:0;border-radius:0;background:linear-gradient(155deg,var(--ak-soft),var(--ak-bg));font-size:14px}
+#akane-concepts .ak figure:first-child .art-slot{height:300px}
+#akane-concepts .ak figcaption{padding:7px 3px;margin-bottom:0}
+#akane-concepts .ak .calculator{max-width:780px;margin:35px auto 0;display:grid;grid-template-columns:1.35fr 1fr;gap:30px;background:var(--ak-paper);padding:28px}
+#akane-concepts .ak .calculator .quote{border-top:0;border-left:1px solid var(--ak-line);margin-top:0;padding:0 0 0 24px}
+#akane-concepts .ak .footer{margin-top:50px}
+#akane-concepts .ak.atelier{min-height:960px}
+#akane-concepts .ak.atelier .interior{display:grid;grid-template-columns:170px 1fr;column-gap:32px;padding:32px}
+#akane-concepts .ak.atelier header{grid-row:1/5;display:block;border-right:1px solid var(--ak-line);padding-right:22px;margin:0}
+#akane-concepts .ak.atelier .brand{font-size:26px}#akane-concepts .ak.atelier .brand small{letter-spacing:1px;line-height:1.8;margin-top:8px}
+#akane-concepts .ak.atelier nav{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;margin-top:32px;gap:20px}
+#akane-concepts .ak.atelier .hero{grid-column:2;text-align:left;max-width:none;margin:0;padding:0 0 28px}
+#akane-concepts .ak.atelier .hero .row{justify-content:flex-start}
+#akane-concepts .ak.atelier .content-grid,#akane-concepts .ak.atelier .footer,#akane-concepts .ak.atelier .admin-preview{grid-column:2}
+#akane-concepts .ak.atelier .content-grid{display:block}
+#akane-concepts .ak.atelier .gallery{grid-template-columns:1fr 1fr;gap:12px}
+#akane-concepts .ak.atelier figure{padding:0;border:0;box-shadow:none;transform:none;margin:0;background:none}
+#akane-concepts .ak.atelier figure:first-child{grid-column:1/-1}
+#akane-concepts .ak.atelier figure:first-child .art-slot{height:230px}
+#akane-concepts .ak.atelier .art-slot{height:150px;border-radius:10px}
+#akane-concepts .ak.atelier .calculator{display:block;margin-top:0;padding:22px}
+#akane-concepts .ak.atelier .calculator .quote{border-left:0;border-top:1px solid var(--ak-line);padding:20px 0 0;margin-top:20px}
+@media(max-width:680px){#akane-concepts .ak,#akane-concepts .ak.atelier{min-height:1500px}#akane-concepts .ak .interior{padding:22px}#akane-concepts .ak header{display:block}#akane-concepts .ak nav{justify-content:flex-start;margin-top:18px;gap:12px}#akane-concepts .ak h1{font-size:32px}#akane-concepts .ak .gallery{grid-template-columns:1fr 1fr;gap:14px}#akane-concepts .ak figure:first-child{grid-column:1/-1}#akane-concepts .ak figure:nth-child(2){margin-top:10px}#akane-concepts .ak .art-slot{height:190px}#akane-concepts .ak figure:first-child .art-slot{height:250px}#akane-concepts .ak .calculator{display:block;padding:18px}#akane-concepts .ak .calculator .quote{border-left:0;border-top:1px solid var(--ak-line);padding:20px 0 0;margin-top:20px}#akane-concepts .ak.atelier .interior{display:block;padding:22px}#akane-concepts .ak.atelier header{border-right:0;border-bottom:1px solid var(--ak-line);padding:0 0 18px;margin-bottom:24px}#akane-concepts .ak.atelier nav{flex-direction:row;flex-wrap:wrap;margin-top:18px;gap:12px}}
+
+
+#akane-concepts .ak{min-height:0;background:var(--ak-paper);border-radius:0}
+#akane-concepts .ak .interior{padding:28px 34px;max-width:1120px;margin:auto}
+#akane-concepts .ak header{align-items:center;border-bottom:1px solid var(--ak-line);padding-bottom:20px;margin-bottom:0}
+#akane-concepts .ak .brand{font-family:Tahoma,sans-serif;font-size:23px;letter-spacing:0}
+#akane-concepts .ak h1,#akane-concepts .ak h2,#akane-concepts .ak h3{font-family:Tahoma,sans-serif}
+#akane-concepts .ak .hero{padding:32px 0;background:var(--ak-paper)}
+#akane-concepts .ak .content-grid{margin-top:28px}
+#akane-concepts .ak .category-filters{margin:18px 0 26px;gap:8px}
+#akane-concepts .ak .category-section{margin:0 0 28px;padding-bottom:28px;border-bottom:1px solid var(--ak-line)}
+#akane-concepts .ak .category-section h3{font-size:21px;margin-bottom:14px}
+#akane-concepts .ak .gallery{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
+#akane-concepts .ak figure,#akane-concepts .ak figure:nth-child(n){grid-column:auto;transform:none;margin:0;padding:0;border:1px solid var(--ak-line);border-radius:10px;overflow:hidden;box-shadow:none;background:var(--ak-paper)}
+#akane-concepts .ak .art-slot,#akane-concepts .ak figure:first-child .art-slot{height:auto;aspect-ratio:4/5;border-radius:0;background:var(--ak-bg);padding:0}
+#akane-concepts .ak .art-slot img{width:100%;height:100%;object-fit:contain}
+#akane-concepts .ak figcaption{padding:12px;margin:0;color:var(--ak-text)}
+#akane-concepts .ak .art-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+#akane-concepts .ak .art-tags span{font-size:13px;color:var(--ak-accent);background:var(--ak-soft);padding:3px 8px;border-radius:4px}
+#akane-concepts .ak button:hover{transform:none;background:var(--ak-soft)}
+#akane-concepts .ak .footer{margin-top:24px}
+@media(max-width:680px){#akane-concepts .ak .interior{padding:20px}#akane-concepts .ak .gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}#akane-concepts .ak .category-filters button{padding:9px 11px}#akane-concepts .ak figure:first-child{grid-column:auto}}
+@media(max-width:380px){#akane-concepts .ak .gallery{grid-template-columns:1fr}}
+
+#akane-concepts .ak .grouped-gallery[data-filter=All]{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+#akane-concepts .ak .grouped-gallery[data-filter=All] .gallery{grid-template-columns:1fr}
+@media(max-width:680px){#akane-concepts .ak .grouped-gallery[data-filter=All]{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}}
+@media(max-width:380px){#akane-concepts .ak .grouped-gallery[data-filter=All]{grid-template-columns:1fr}}
+
+#akane-concepts .ak a{display:inline-flex;align-items:center;justify-content:center;padding:8px 16px;border:1px solid var(--ak-line);border-radius:999px;background:var(--ak-paper);font-size:14px;text-decoration:none}
+#akane-concepts .ak a:hover{background:var(--ak-soft);border-color:var(--ak-orange)}
+#akane-concepts .ak nav a[aria-current=page]{text-decoration:none;background:var(--ak-soft);border-color:var(--ak-accent)}
+#akane-concepts .ak .language{border-radius:999px}
+#akane-concepts .ak[data-animation=petals] .sparkles span{animation:ak-petals 18s linear infinite;color:var(--ak-orange)}
+#akane-concepts .ak[data-animation=dots] .sparkles span{animation:ak-dots 12s ease-in-out infinite alternate;color:var(--ak-orange)}
+@keyframes ak-petals{from{transform:translateY(-120px) rotate(0);opacity:0}20%{opacity:.3}to{transform:translate(55px,350px) rotate(220deg);opacity:0}}
+@keyframes ak-dots{to{transform:translateY(-80px);opacity:.1}}
+@media(prefers-reduced-motion:reduce){#akane-concepts .ak[data-animation] .sparkles span{animation:none}}
+
+#akane-concepts .ak .latest-carousel{margin:20px 0 36px;padding:18px;background:var(--ak-bg);border-radius:14px}
+#akane-concepts .ak .latest-stage figure{display:grid;grid-template-columns:1.5fr 1fr;border:0;background:var(--ak-paper)}
+#akane-concepts .ak .latest-stage .art-slot{aspect-ratio:auto;height:280px;background:var(--ak-soft)}
+#akane-concepts .ak .latest-stage figcaption{display:flex;flex-direction:column;justify-content:center;padding:24px}
+#akane-concepts .ak .latest-controls{justify-content:center;margin-top:14px}
+#akane-concepts .ak .latest-prev,#akane-concepts .ak .latest-next,#akane-concepts .ak .latest-pause{border-radius:999px;min-width:40px}
+#akane-concepts .ak .latest-count{font-size:14px;min-width:48px;text-align:center}
+@media(max-width:680px){#akane-concepts .ak .latest-stage figure{grid-template-columns:1fr}#akane-concepts .ak .latest-stage .art-slot{height:240px}#akane-concepts .ak .latest-stage figcaption{padding:16px}}
+
+#akane-concepts .ak .latest-carousel{padding:0;background:none}
+#akane-concepts .ak .latest-stage{overflow:hidden;container-type:inline-size;border-radius:10px;touch-action:pan-y}
+#akane-concepts .ak .latest-track{display:flex;width:max-content;animation:ak-slide-right 48s linear infinite;will-change:transform}
+#akane-concepts .ak .latest-group{display:flex;gap:16px;padding-right:16px}
+#akane-concepts .ak .latest-stage figure{display:block;flex:0 0 auto;width:calc((100cqw - 32px)/3);min-width:180px;border:1px solid var(--ak-line);border-radius:10px}
+#akane-concepts .ak .latest-stage .art-slot{height:auto;aspect-ratio:4/5;background:var(--ak-bg)}
+#akane-concepts .ak .latest-stage figcaption{display:block;padding:12px}
+#akane-concepts .ak .latest-count{display:none}
+#akane-concepts .ak .latest-stage.paused .latest-track,#akane-concepts .ak .latest-carousel:hover .latest-track{animation-play-state:paused}
+@keyframes ak-slide-right{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+@media(max-width:680px){#akane-concepts .ak .latest-stage figure{width:72cqw;min-width:0}}
+@media(prefers-reduced-motion:reduce){#akane-concepts .ak .latest-track{animation:none}}
+
+@media(max-width:1366px),(any-pointer:coarse){#akane-concepts .ak a,#akane-concepts .ak button{min-height:44px}#akane-concepts .ak .language,#akane-concepts .ak .latest-prev,#akane-concepts .ak .latest-next{min-width:44px}#akane-concepts .ak input:not([type=checkbox]),#akane-concepts .ak select{font-size:18px}}
+#akane-concepts .ak nav{min-width:0}
+#akane-concepts .ak .quote,#akane-concepts .ak .calculator>div{min-width:0}
+
+#akane-concepts .ak{--ak-bg:#fff7df;--ak-paper:rgba(255,255,255,.7);--ak-text:#5a4a42;--ak-muted:#826c63;--ak-line:rgba(255,255,255,.85);--ak-soft:#f8eed0;--ak-accent:#825522;--ak-green:#e6f0cc;--ak-orange:#b77a30;background:linear-gradient(135deg,#fff7df,#f1ddaa);border:1px solid rgba(255,255,255,.75);border-radius:30px}
+#akane-concepts .ak .interior{padding:26px}
+#akane-concepts .ak header,#akane-concepts .ak .contact-top,#akane-concepts .ak .hero,#akane-concepts .ak .works,#akane-concepts .ak .calculator,#akane-concepts .ak .admin-panel{background:var(--ak-paper);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);border:1px solid var(--ak-line);border-radius:22px;padding:20px;box-shadow:0 5px 20px rgba(125,80,95,.04)}
+#akane-concepts .ak header{margin-bottom:14px}
+#akane-concepts .ak .hero{margin-top:16px}
+#akane-concepts .ak .contact-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 16px}
+#akane-concepts .ak .contact-top>span{font-size:14px;font-weight:bold;margin-right:4px}
+#akane-concepts .ak a,#akane-concepts .ak button{background:rgba(255,255,255,.7);border:1px solid rgba(255,183,197,.7);border-radius:999px}
+#akane-concepts .ak a:hover,#akane-concepts .ak button:hover{background:#eedcb3}
+#akane-concepts .ak button.primary{background:#e4c77e;color:#5a4a42;border:2px solid white}
+#akane-concepts .ak .art-slot,#akane-concepts .ak figure:first-child .art-slot{background:rgba(255,255,255,.45)}
+#akane-concepts .ak figure,#akane-concepts .ak figure:nth-child(n){background:rgba(255,255,255,.55);border-color:var(--ak-line);border-radius:16px}
+#akane-concepts .ak .character-counter{margin:16px 0}.character-count{min-width:28px;text-align:center}
+#akane-concepts .ak .character-tabs{margin:0 0 18px}
+#akane-concepts .ak .breakdown-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;border-bottom:1px solid var(--ak-line);padding:10px 0;font-size:14px}
+#akane-concepts .ak .brief-result{margin:16px 0}
+#akane-concepts .ak .price-setting-label{display:grid;grid-template-columns:minmax(0,1fr) 90px;gap:12px;align-items:center;font-size:14px}
+#akane-concepts .ak .background-options{padding:12px 16px;background:rgba(255,255,255,.8);border-radius:16px;margin-top:8px;max-width:320px}
+#akane-concepts .ak .tos-open{margin-top:14px}
+#akane-concepts .ak .tos-dialog{max-width:720px;width:calc(100% - 32px);max-height:85vh;overflow:auto;border:1px solid #e4c77e;border-radius:24px;padding:24px;background:#fffaf0;color:#5a4a42}
+#akane-concepts .ak .tos-dialog::backdrop{background:rgba(65,40,48,.35);backdrop-filter:blur(5px)}
+#akane-concepts .ak .tos-heading{justify-content:space-between}.tos-content h3{margin-top:22px}
+#akane-concepts .ak .tos-dialog p,#akane-concepts .ak .tos-dialog li{font-size:16px;color:#5a4a42}
+@media(max-width:680px){#akane-concepts .ak .interior{padding:14px}#akane-concepts .ak header,#akane-concepts .ak .hero,#akane-concepts .ak .works,#akane-concepts .ak .calculator{padding:16px}#akane-concepts .ak .admin-grid{grid-template-columns:1fr}#akane-concepts .ak .tos-dialog{padding:18px}}
+
+/* Queue bubble design: shared geometry, typography and palette. */
+#akane-concepts .ak a,#akane-concepts .ak button{display:inline-flex;align-items:center;justify-content:center;background:white;color:#b77a30;border:2px solid #e4c77e;border-radius:50px;padding:10px 15px;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;font-size:15px;font-weight:bold;text-align:center;line-height:1.4;box-shadow:none;transition:background-color .2s ease,color .2s ease,transform .2s ease}
+#akane-concepts .ak nav a:first-child{color:#b77a30}
+#akane-concepts .ak a:hover,#akane-concepts .ak button:hover,#akane-concepts .ak button[aria-pressed=true],#akane-concepts .ak nav a[aria-current=page]{background:#e4c77e;color:white;border-color:#e4c77e}
+#akane-concepts .ak button.primary{background:linear-gradient(135deg,#b77a30,#e4c77e);color:white;border:2px solid white;box-shadow:0 4px 10px rgba(255,145,164,.3)}
+#akane-concepts .ak a.pill{background:#c4e17f;color:white;border:2px solid white;font-size:15px;font-weight:bold;padding:10px 15px;box-shadow:0 4px 12px rgba(196,225,127,.3)}
+#akane-concepts .ak a.pill:hover{background:#c4e17f;color:white;transform:translateY(-2px)}
+#akane-concepts .ak button:disabled{opacity:.45;transform:none}
+
+#akane-concepts .ak header nav a,#akane-concepts .ak header nav button{background:linear-gradient(135deg,#b77a30,#e4c77e);color:white;border:2px solid white;box-shadow:0 4px 10px rgba(255,145,164,.3)}
+#akane-concepts .ak header nav a:hover,#akane-concepts .ak header nav button:hover{background:linear-gradient(135deg,#b77a30,#e4c77e);color:white;border-color:white;transform:translateY(-2px)}
+#akane-concepts .ak header nav button[aria-pressed=true]{background:linear-gradient(135deg,#b77a30,#e4c77e);color:white;border-color:white;box-shadow:0 4px 10px rgba(255,145,164,.3),0 0 0 2px #b77a30}
+#akane-concepts .ak header nav a:first-child{color:white}
+
+#akane-concepts .ak .effect-buttons{margin-left:auto;gap:6px}
+#akane-concepts .ak .effect-buttons button{width:44px;height:44px;padding:0;font-size:23px}
+#akane-concepts .ak .price-settings section{margin-bottom:24px}
+#akane-concepts .ak .pricing-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:15px}
+#akane-concepts .ak .pricing-table th,#akane-concepts .ak .pricing-table td{padding:10px 4px;border-bottom:1px solid #e4c77e;text-align:left}
+#akane-concepts .ak .pricing-table thead th{color:#825522;border-bottom:2px solid #e4c77e}
+#akane-concepts .ak .pricing-table th:first-child{width:25%}
+#akane-concepts .ak .pricing-table input{width:100%;min-width:0;box-sizing:border-box;padding:8px 4px;border:1px solid #e4c77e;background:white;border-radius:8px}
+#akane-concepts .ak .admin-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr)}
+@media(max-width:800px){#akane-concepts .ak .admin-grid{grid-template-columns:1fr}}
+#akane-concepts .ak .footer{flex-wrap:wrap}
+#akane-concepts .ak .footer .effect-buttons{flex-basis:100%;justify-content:center;margin:16px 0 0}
+
+#akane-concepts .ak .tos-dialog{box-sizing:border-box;border:2px solid #e4c77e;padding:0;max-width:760px}
+#akane-concepts .ak .tos-heading{position:sticky;top:0;z-index:2;background:#fffaf0;padding:20px 24px 16px;margin:0;border-bottom:3px solid #dfbc62;gap:12px}
+#akane-concepts .ak .tos-heading h2{margin:0;font-size:32px}
+#akane-concepts .ak .tos-content{padding:0 24px 24px}
+#akane-concepts .ak .tos-content h3{display:flex;align-items:baseline;gap:9px;margin:24px 0 12px;font-size:21px;line-height:1.5}
+#akane-concepts .ak .tos-flower{flex:none;color:#9a692c;font-size:28px;line-height:1}
+#akane-concepts .ak .tos-content p{margin:0 0 22px;padding-left:34px;line-height:1.9}
+#akane-concepts .ak .tos-heading button{min-width:44px;min-height:44px}
+@media(max-width:480px){#akane-concepts .ak .tos-heading{padding:16px 14px}#akane-concepts .ak .tos-content{padding:0 14px 18px}#akane-concepts .ak .tos-content p{padding-left:0}#akane-concepts .ak .tos-heading h2{font-size:27px}#akane-concepts .ak .tos-heading .row{gap:6px}#akane-concepts .ak .tos-heading button{padding:8px 10px}}
+
+#akane-concepts .ak .tos-admin{margin-top:20px}
+#akane-concepts .ak .tos-editor details{padding:14px 0;border-bottom:1px solid #e4c77e;margin-bottom:12px}
+#akane-concepts .ak .tos-editor summary{font-weight:bold;color:#825522;cursor:pointer}
+#akane-concepts .ak .tos-edit-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:14px}
+#akane-concepts .ak .tos-edit-grid label{display:block;margin-bottom:12px;font-size:15px}
+#akane-concepts .ak .tos-edit-grid input,#akane-concepts .ak .tos-edit-grid textarea{display:block;width:100%;box-sizing:border-box;margin-top:6px;padding:10px;border:1px solid #e4c77e;border-radius:10px;background:white;color:#5a4a42;font:inherit;line-height:1.7}
+#akane-concepts .ak .tos-edit-grid textarea{resize:vertical}
+@media(max-width:680px){#akane-concepts .ak .tos-edit-grid{grid-template-columns:1fr}#akane-concepts .ak .tos-edit-grid input,#akane-concepts .ak .tos-edit-grid textarea{font-size:18px}}
+
+#akane-concepts .ak{overflow:visible}
+#akane-concepts .ak .sparkles{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#akane-concepts .ak .sparkles span{font-size:21px;opacity:.4}
+#akane-concepts .ak[data-animation=petals] .sparkles span{animation:ak-page-petals 24s linear infinite}
+@keyframes ak-page-petals{from{transform:translate(0,-110vh) rotate(0deg);opacity:0}10%,85%{opacity:.4}to{transform:translate(70px,110vh) rotate(260deg);opacity:0}}
+@media(prefers-reduced-motion:reduce){#akane-concepts .ak[data-animation] .sparkles span{animation:none}}
+
+#akane-concepts .ak .open-commissions{margin-bottom:32px}
+#akane-concepts .ak .offer-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:24px;border:2px solid white;border-radius:22px;background:rgba(255,255,255,.6);padding:18px;margin-bottom:18px}
+#akane-concepts .ak .offer-image{background:#f8eed0;border-radius:16px;display:grid;place-items:center;min-height:240px;color:#825522;overflow:hidden}
+#akane-concepts .ak .offer-image img{width:100%;max-height:360px;object-fit:contain}
+#akane-concepts .ak .offer-info p{white-space:pre-wrap}
+#akane-concepts .ak .offer-info h3{font-size:27px;margin:12px 0 6px}
+#akane-concepts .ak .offer-price{color:#825522;font-size:23px}
+#akane-concepts .ak .offer-empty{text-align:center;padding:30px 16px;background:rgba(255,255,255,.55);border:2px solid white;border-radius:22px}
+#akane-concepts .ak .offers-admin{margin-top:20px}
+#akane-concepts .ak .offer-editor{margin-top:18px}
+#akane-concepts .ak .offer-cover-preview{max-width:180px;max-height:180px;object-fit:contain;margin-top:10px}
+#akane-concepts .ak .scale-manager{margin-bottom:18px}
+#akane-concepts .ak .scale-manager label{display:block;margin:10px 0}
+@media(max-width:680px){#akane-concepts .ak .offer-card{grid-template-columns:1fr}.offer-image{min-height:180px}}
+
+#akane-concepts .ak .offer-card{gap:28px;padding:22px;background:rgba(255,255,255,.78);box-shadow:0 10px 30px rgba(172,78,104,.06);align-items:stretch}
+#akane-concepts .ak .offer-info{display:flex;flex-direction:column;align-items:flex-start;padding:8px 4px;min-width:0}
+#akane-concepts .ak .offer-info>.pill{background:#e6f0cc;color:#526b3a;font-size:14px;font-weight:bold;padding:5px 14px}
+#akane-concepts .ak .offer-info h3{font-size:32px;font-weight:bold;line-height:1.3;margin:16px 0 10px;overflow-wrap:anywhere}
+#akane-concepts .ak .offer-info .offer-price{font-size:27px;font-weight:bold;margin:0 0 18px;padding-bottom:18px;border-bottom:1px solid #ead49c;width:100%}
+#akane-concepts .ak .offer-info .offer-description{font-size:16px;line-height:1.85;margin:0 0 18px;overflow-wrap:anywhere}
+#akane-concepts .ak .offer-included{box-sizing:border-box;width:100%;background:#fff7df;border:1px solid white;border-radius:16px;padding:16px 18px;margin:0 0 20px;overflow-wrap:anywhere}
+#akane-concepts .ak .offer-included:empty{display:none}
+#akane-concepts .ak .offer-included h4{margin:0 0 8px;color:#825522;font-size:15px;font-weight:bold}
+#akane-concepts .ak .offer-included ul{margin:0;padding-left:20px;line-height:1.8}
+#akane-concepts .ak .offer-included li::marker{color:#b77a30}
+#akane-concepts .ak a.offer-cta{box-sizing:border-box;width:100%;margin-top:auto;background:linear-gradient(135deg,#b77a30,#e4c77e);border:2px solid white;color:white;font-size:17px;padding:12px 18px;box-shadow:0 4px 12px rgba(255,145,164,.3)}
+#akane-concepts .ak .offer-info .offer-slots{align-self:center;font-size:14px;font-weight:bold;color:#526b3a;background:#e6f0cc;border-radius:50px;padding:5px 14px;margin:12px 0 0}
+@media(max-width:680px){#akane-concepts .ak .offer-card{padding:16px;gap:18px}#akane-concepts .ak .offer-info h3{font-size:27px}}
+
+#akane-concepts .ak .offer-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+#akane-concepts .ak .offer-list>.offer-empty{grid-column:1/-1}
+#akane-concepts .ak .offer-list .offer-card{display:flex;flex-direction:column;gap:12px;padding:16px;margin:0;min-width:0}
+#akane-concepts .ak .offer-list .offer-image{height:230px;min-height:0;flex:none}
+#akane-concepts .ak .offer-list .offer-image img{width:100%;height:100%;object-fit:contain}
+#akane-concepts .ak .offer-list .offer-info{flex:1}
+#akane-concepts .ak .offer-summary{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;overflow-wrap:anywhere;line-height:1.8;margin:0 0 16px}
+#akane-concepts .ak .offer-view{margin-bottom:12px;width:100%}
+#akane-concepts .ak .offer-list .offer-info h3{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+#akane-concepts .ak .offer-dialog{box-sizing:border-box;width:calc(100% - 32px);max-width:900px;max-height:85vh;padding:0;overflow:auto;background:#fffaf0;color:#5a4a42;border:2px solid #e4c77e;border-radius:24px}
+#akane-concepts .ak .offer-dialog::backdrop{background:rgba(65,40,48,.35);backdrop-filter:blur(5px)}
+#akane-concepts .ak .offer-dialog-heading{position:sticky;top:0;z-index:2;justify-content:space-between;background:#fffaf0;margin:0;padding:18px 22px;border-bottom:3px solid #dfbc62}
+#akane-concepts .ak .offer-dialog-heading h2{margin:0;font-size:25px}
+#akane-concepts .ak .offer-dialog-close{width:44px;height:44px;padding:0;font-size:23px}
+#akane-concepts .ak .offer-dialog-content{padding:20px}
+#akane-concepts .ak .offer-dialog-content .offer-card{margin:0;align-items:start;box-shadow:none}
+#akane-concepts .ak .offer-dialog-content .offer-image{min-height:0;height:300px}
+#akane-concepts .ak .offer-dialog-content .offer-image img{height:100%;object-fit:contain}
+#akane-concepts .ak .offer-dialog-content .offer-info{width:100%;box-sizing:border-box}
+@media(max-width:680px){#akane-concepts .ak .offer-list{grid-template-columns:1fr}#akane-concepts .ak .offer-dialog-content{padding:12px}#akane-concepts .ak .offer-dialog-heading{padding:14px}#akane-concepts .ak .offer-dialog-heading h2{font-size:21px}}
+
+#akane-concepts .ak .offer-list{grid-template-columns:1fr}
+#akane-concepts .ak .offer-list .offer-card{position:relative;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:24px;padding:18px;align-items:center;overflow:visible}
+#akane-concepts .ak .offer-list .offer-image{height:260px;border-radius:14px}
+#akane-concepts .ak .offer-list .offer-info{padding:4px 12px 4px 0}
+#akane-concepts .ak .offer-list .offer-info h3{margin:10px 0 6px;font-size:27px}
+#akane-concepts .ak .offer-list .offer-info .offer-price{font-size:24px;margin-bottom:10px;padding-bottom:10px}
+#akane-concepts .ak .offer-list .offer-summary{font-size:15px;line-height:1.6;margin-bottom:12px}
+#akane-concepts .ak .offer-list .offer-view{margin-bottom:8px}
+#akane-concepts .ak .offer-ribbon{position:absolute;top:-8px;right:24px;width:24px;height:46px;background:#df7ca0;clip-path:polygon(0 0,100% 0,100% 100%,50% 76%,0 100%);pointer-events:none;z-index:1}
+@media(max-width:680px){#akane-concepts .ak .offer-list .offer-card{grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:14px;padding:14px}#akane-concepts .ak .offer-list .offer-image{height:220px}#akane-concepts .ak .offer-list .offer-info{padding:0}#akane-concepts .ak .offer-list .offer-info h3{font-size:23px;padding-right:18px}#akane-concepts .ak .offer-list .offer-info .offer-price{font-size:21px}#akane-concepts .ak .offer-ribbon{right:16px;width:18px;height:36px}}
+@media(max-width:400px){#akane-concepts .ak .offer-list .offer-card{gap:10px;padding:10px}#akane-concepts .ak .offer-list .offer-info h3{font-size:21px}#akane-concepts .ak .offer-list .offer-info .offer-price{font-size:18px}#akane-concepts .ak .offer-list .offer-summary{-webkit-line-clamp:1}#akane-concepts .ak .offer-list .offer-info .offer-slots{padding:4px 8px;font-size:13px}#akane-concepts .ak .offer-list a.offer-cta{font-size:15px;padding:9px 10px}}
+
+#akane-concepts .ak .offer-badges{gap:8px;margin:0;padding-right:22px}
+#akane-concepts .ak .offer-info .offer-badges .pill,#akane-concepts .ak .offer-info .offer-badges .offer-slots{box-sizing:border-box;border:2px solid white;background:#e6f0cc;color:#526b3a;border-radius:50px;font-size:14px;font-weight:bold;line-height:1.5;padding:5px 12px;margin:0;align-self:auto}
+@media(max-width:400px){#akane-concepts .ak .offer-info .offer-badges .pill,#akane-concepts .ak .offer-info .offer-badges .offer-slots{font-size:13px;padding:4px 8px}}
+
+#akane-concepts .ak a.offer-cta[data-status="open"],#akane-concepts .ak a.offer-cta[data-status="open"]:hover{background:#c4e17f;color:white;border:2px solid white;box-shadow:0 4px 12px rgba(196,225,127,.3)}
+
+#akane-concepts .ak .offer-usage{display:flex;align-items:center;gap:7px;border:2px solid white;background:#fff7df;color:#825522;border-radius:50px;padding:5px 12px;margin:0 0 12px;font-size:14px;font-weight:bold;max-width:100%;box-sizing:border-box}
+#akane-concepts .ak .offer-usage>span:first-child{color:#6c8c40}
+#akane-concepts .ak .offer-use-setting{display:flex;align-items:center;gap:8px}
+#akane-concepts .ak .tos-edit-grid .offer-use-setting input{width:18px;height:18px;margin:0;flex:none;accent-color:#825522}
+
+#akane-concepts .ak .available-heading{gap:14px;margin-bottom:18px}
+#akane-concepts .ak .available-heading h2{margin:0}
+#akane-concepts .ak .availability-toggle{position:relative;display:inline-flex;align-items:center;box-sizing:border-box;width:76px;height:32px;border:2px solid white;border-radius:50px;background:#db6d7b;color:white;font-size:14px;font-weight:bold;transition:background .2s}
+#akane-concepts .ak .availability-knob{position:absolute;left:4px;top:4px;width:20px;height:20px;border-radius:50%;background:white;box-shadow:0 1px 3px rgba(0,0,0,.12);transition:left .2s}
+#akane-concepts .ak .availability-label{margin-left:30px}
+#akane-concepts .ak .availability-toggle[data-on=true]{background:#80c780}
+#akane-concepts .ak .availability-toggle[data-on=true] .availability-knob{left:48px}
+#akane-concepts .ak .availability-toggle[data-on=true] .availability-label{margin-left:12px}
+
+#akane-concepts .ak .offer-image{position:relative}
+#akane-concepts .ak .preview-arrows{position:absolute;bottom:8px;left:8px;right:8px;justify-content:space-between;gap:6px;margin:0}
+#akane-concepts .ak .preview-arrows button{width:44px;height:44px;padding:0;font-size:27px;background:rgba(255,255,255,.95)}
+#akane-concepts .ak .preview-arrows span{border:2px solid white;background:#fff7df;color:#825522;border-radius:50px;padding:3px 9px;font-size:14px}
+#akane-concepts .ak .offer-estimate{width:100%;box-sizing:border-box;border:2px solid white;background:#fff7df;border-radius:18px;padding:16px;margin:0 0 18px}
+#akane-concepts .ak .offer-estimate h4{margin:0 0 12px;font-size:17px;color:#825522}
+#akane-concepts .ak .offer-estimate .row{margin-bottom:18px}
+#akane-concepts .ak .offer-addon{display:flex;align-items:center;justify-content:space-between;gap:12px;background:white;border-radius:12px;padding:12px;margin:8px 0;font-size:15px;overflow-wrap:anywhere}
+#akane-concepts .ak .offer-addon input{box-sizing:border-box;width:70px;min-width:70px;padding:8px;border:1px solid #e4c77e;border-radius:8px;font-size:18px}
+#akane-concepts .ak .offer-total{display:block;font-size:26px;font-weight:bold;color:#825522;margin-top:16px}
+#akane-concepts .ak .offer-addons{display:block;width:100%;box-sizing:border-box}
+
+#akane-concepts .ak .latest-stage{padding:26px 0;border-radius:18px}
+#akane-concepts .ak .latest-group{gap:0;padding-right:0;align-items:center}
+#akane-concepts .ak .latest-stage figure{position:relative;width:48cqw;min-width:0;border:2px solid white;border-radius:14px;margin:0 -2cqw;transform-origin:center;box-shadow:0 8px 20px rgba(172,78,104,.12);background:#f8eed0}
+#akane-concepts .ak .latest-stage .art-slot{aspect-ratio:16/9;background:#f8eed0}
+#akane-concepts .ak .latest-stage .art-slot img{width:100%;height:100%;object-fit:cover}
+#akane-concepts .ak .latest-stage figcaption{display:none}
+@media(max-width:680px){#akane-concepts .ak .latest-stage figure{width:76cqw;margin:0 -3cqw}#akane-concepts .ak .latest-stage{padding:20px 0}}
+
+#akane-concepts .ak .latest-stage{position:relative;height:310px;padding:0;overflow:hidden;perspective:1200px;isolation:isolate}
+#akane-concepts .ak .latest-stage figure{position:absolute;left:50%;top:50%;width:48%;margin:0;min-width:0;transform:translate(-50%,-50%) translateX(calc(var(--rotation-offset,0)*88%)) scale(var(--rotation-scale,1));transition:transform 1.2s cubic-bezier(.22,.61,.36,1),opacity 1.2s ease;will-change:transform,opacity;backface-visibility:hidden;border:2px solid white;border-radius:14px;overflow:hidden}
+#akane-concepts .ak .latest-stage .art-slot{aspect-ratio:16/9}
+@media(max-width:680px){#akane-concepts .ak .latest-stage{height:240px}#akane-concepts .ak .latest-stage figure{width:76%;margin:0}}
+@media(prefers-reduced-motion:reduce){#akane-concepts .ak .latest-stage figure{transition:none}}
+#akane-concepts .ak .latest-stage figure{transition:none}
+
+#akane-concepts .ak .latest-stage{height:auto;padding:0;perspective:none;overflow:hidden;border-radius:14px;isolation:isolate}
+#akane-concepts .ak .latest-track{display:flex;width:max-content;animation:ak-slide-right 36s linear infinite;will-change:transform}
+#akane-concepts .ak .latest-group{display:flex;gap:0;padding:0;align-items:stretch}
+#akane-concepts .ak .latest-stage figure{position:relative;left:auto;top:auto;flex:0 0 auto;width:48cqw;min-width:0;margin:0;padding:0;border:0;border-radius:0;box-shadow:none;transform:none;opacity:1;transition:none;overflow:hidden;box-sizing:border-box}
+#akane-concepts .ak .latest-stage .art-slot{aspect-ratio:16/9;height:auto;border-radius:0}
+#akane-concepts .ak .latest-stage .art-slot img{display:block;width:100%;height:100%;object-fit:cover}
+#akane-concepts .ak .latest-carousel:hover .latest-track{animation-play-state:running}
+#akane-concepts .ak .latest-stage.paused .latest-track{animation-play-state:paused}
+@media(max-width:680px){#akane-concepts .ak .latest-stage{height:auto;padding:0}#akane-concepts .ak .latest-stage figure{width:76cqw;margin:0}}
+@media(prefers-reduced-motion:reduce){#akane-concepts .ak .latest-track{animation:none}}
+#akane-concepts .ak .latest-stage figure .art-slot,#akane-concepts .ak .latest-stage figure:first-child .art-slot{aspect-ratio:16/9;height:auto}
+
+#akane-concepts .ak .latest-stage{padding:18px 0;overflow:hidden;background:transparent}
+#akane-concepts .ak .carousel-cell{flex:0 0 auto;width:48cqw;box-sizing:border-box;padding:0 8px;perspective:900px;overflow:hidden}
+#akane-concepts .ak .latest-stage .carousel-cell figure{width:100%;margin:0;border:1px solid white;border-radius:12px;transform-origin:center;transform-style:preserve-3d;backface-visibility:hidden;will-change:transform;transition:none;box-shadow:none}
+#akane-concepts .ak .latest-stage .carousel-cell .art-slot{aspect-ratio:16/9;height:auto;border-radius:0}
+@media(max-width:680px){#akane-concepts .ak .carousel-cell{width:76cqw;padding:0 6px}#akane-concepts .ak .latest-stage{padding:14px 0}}
+#akane-concepts .ak .carousel-cell{padding:0 3px}
+@media(max-width:680px){#akane-concepts .ak .carousel-cell{padding:0 2px}}
+
+#akane-concepts .ak .latest-stage .carousel-cell figure{box-shadow:0 8px 18px rgba(90,60,70,.10)}
+#akane-concepts .ak .latest-stage .carousel-cell figure::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(var(--tilt-direction,to right),rgba(90,65,75,var(--tilt-shade,0)),transparent 60%);z-index:1}
+#akane-concepts .ak .latest-track{animation:none;transition:none}
+
+#akane-concepts .ak .carousel-cell{padding:0;perspective:1800px}
+#akane-concepts .ak .latest-stage .carousel-cell figure{border:0;border-radius:8px}
+@media(max-width:680px){#akane-concepts .ak .carousel-cell{width:62cqw;padding:0}}
+
+/* Reference composition: three full landscape cards plus cropped outer cards. */
+#akane-concepts .ak .latest-stage{padding:24px 0;border-radius:10px}
+#akane-concepts .ak .carousel-cell{width:28.5cqw;padding:0;perspective:1800px}
+#akane-concepts .ak .latest-stage .carousel-cell figure{width:100%;border:1px solid rgba(255,255,255,.9);border-radius:8px;box-sizing:border-box}
+#akane-concepts .ak .latest-stage .carousel-cell figure .art-slot,#akane-concepts .ak .latest-stage .carousel-cell figure:first-child .art-slot{aspect-ratio:16/9;height:auto}
+@media(max-width:680px){#akane-concepts .ak .carousel-cell{width:28.5cqw;padding:0}#akane-concepts .ak .latest-stage{padding:16px 0}}
+
+#akane-concepts .ak .carousel-cell{width:48cqw;padding:0;perspective:1800px}
+@media(max-width:680px){#akane-concepts .ak .carousel-cell{width:62cqw;padding:0}}
+#akane-concepts .ak .carousel-cell{perspective:1000px}
+#akane-concepts .ak .carousel-cell{overflow:visible}
+
+#akane-concepts .ak{--ak-bg:#fffaf0;--ak-paper:rgba(255,255,255,.82);--ak-soft:#f8ead4;background:radial-gradient(ellipse at 100% 0%,#f5d6b1 0%,transparent 44%),radial-gradient(ellipse at 0% 55%,#f4e9cc 0%,transparent 48%),linear-gradient(145deg,#fffdf7,#f6efdf)}
+#akane-concepts .ak header,#akane-concepts .ak .hero,#akane-concepts .ak .works,#akane-concepts .ak .contact-top,#akane-concepts .ak .calculator{background:var(--ak-paper);border:2px solid white;box-shadow:0 10px 30px rgba(100,65,45,.06)}
+#akane-concepts .ak .art-slot,#akane-concepts .ak .latest-stage .art-slot{background:var(--ak-soft)}
+
+#akane-concepts .ak .offer-list .offer-image img,#akane-concepts .ak .offer-dialog-content .offer-image img{display:block;width:100%;height:100%;max-height:none;object-fit:cover;object-position:center}
+#akane-concepts .ak .offer-dialog{width:75vw;max-width:75vw;max-height:75vh}
+#akane-concepts .ak .offer-dialog-content .offer-image{height:auto;aspect-ratio:1/1;min-height:0;align-self:start}
+@media(max-width:680px){#akane-concepts .ak .offer-dialog{width:calc(100vw - 24px);max-width:calc(100vw - 24px);max-height:75vh}}
+
+#akane-concepts .ak,#akane-concepts .ak a,#akane-concepts .ak button,#akane-concepts .ak input,#akane-concepts .ak select,#akane-concepts .ak textarea,#akane-concepts .ak h1,#akane-concepts .ak h2,#akane-concepts .ak h3,#akane-concepts .ak .brand,#akane-concepts .ak .brand small,#akane-concepts .ak .hero h1 span{font-family:'IBM Plex Sans Thai',sans-serif!important}
+
+#akane-concepts .ak .calculator{width:100%;max-width:980px;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
+#akane-concepts .ak .price-notes{margin:18px 0 22px;padding:16px 18px;background:rgba(255,240,245,.6);border-radius:18px;color:var(--ak-muted)}
+#akane-concepts .ak .price-notes h3{margin:0 0 10px;color:#825522;font-size:18px;font-weight:700}
+#akane-concepts .ak .price-notes ul{margin:0;padding-left:20px}
+#akane-concepts .ak .price-notes li{padding-left:4px;margin:0 0 10px;overflow-wrap:anywhere}
+#akane-concepts .ak .price-notes li:last-child{margin-bottom:0}
+#akane-concepts .ak .price-notes li::marker{color:#9a692c}
+@media(max-width:680px){#akane-concepts .ak .calculator{display:block}#akane-concepts .ak .price-notes{padding:14px}}
+
+#akane-concepts .ak .crop-editor{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),380px));gap:18px;margin:20px 0}
+#akane-concepts .ak .crop-item{padding:18px;background:#fff7df;border-radius:18px;min-width:0}
+#akane-concepts .ak .crop-frame{width:100%;max-width:340px;aspect-ratio:3/2;overflow:hidden;border-radius:14px;background:white;margin-bottom:16px}
+#akane-concepts .ak .crop-frame img{width:100%;height:100%;object-fit:cover;display:block}
+#akane-concepts .ak .crop-item label{display:block;margin:12px 0}
+#akane-concepts .ak .crop-item output{float:right}
+#akane-concepts .ak .crop-item input[type=range]{width:100%;padding:0;accent-color:#9a692c}
+#akane-concepts .ak .offer-image{overflow:hidden}
+#akane-concepts .ak .preview-arrows{z-index:1}
+
+#akane-concepts .ak .offer-admin-list{display:grid;gap:12px;margin:20px 0;max-width:760px}
+#akane-concepts .ak .offer-admin-bubble{display:flex;align-items:center;gap:14px;padding:10px 12px 10px 20px;border:2px solid #ffcfda;border-radius:32px;background:rgba(255,240,245,.65)}
+#akane-concepts .ak .offer-admin-name{flex:1;min-width:0;overflow-wrap:anywhere;font-weight:500}
+#akane-concepts .ak .offer-admin-status{flex:none;background:#eee8e3;color:#73665e;border:2px solid white;border-radius:50px;padding:4px 12px;font-size:14px;font-weight:500}
+#akane-concepts .ak .offer-admin-status[data-status=open]{background:#e6f0cc;color:#526b3a}
+#akane-concepts .ak .offer-admin-status[data-status=waitlist]{background:#eedcb3;color:#825522}
+#akane-concepts .ak .offer-admin-bubble button{flex:none}
+@media(max-width:480px){#akane-concepts .ak .offer-admin-bubble{gap:8px;padding-left:14px;flex-wrap:wrap}#akane-concepts .ak .offer-admin-name{flex-basis:100%}#akane-concepts .ak .offer-admin-bubble button{margin-left:auto}}
+
+#akane-concepts .ak .offer-form-groups{display:grid;gap:24px}
+#akane-concepts .ak .offer-form-group{min-width:0;padding-bottom:22px;border-bottom:1px solid #ead49c}
+#akane-concepts .ak .offer-form-group h3{color:#825522;margin-bottom:14px;font-size:19px;font-weight:500}
+#akane-concepts .ak .offer-form-group .tos-edit-grid{align-items:start;gap:18px}
+#akane-concepts .ak .offer-form-group label{margin-bottom:0;min-width:0}
+#akane-concepts .ak .offer-form-group textarea{min-height:150px;resize:vertical}
+#akane-concepts .ak .offer-form-group .offer-use-setting{display:flex;align-items:center;gap:10px;margin:12px 0}
+#akane-concepts .ak .offer-form-group .offer-use-setting input{width:20px;height:20px;flex:none;margin:0}
+#akane-concepts .ak .offer-form-title{grid-column:1/-1}
+#akane-concepts .ak .offer-form-group:last-child{border-bottom:0;padding-bottom:0}
+#akane-concepts .ak .save-offer{margin-top:20px}
+
+#akane-concepts .ak header{position:relative;padding-right:68px}
+#akane-concepts .ak .admin-entry{position:absolute;right:16px;top:16px;width:44px;height:44px;padding:0;background:white;border:2px solid #e4c77e;box-shadow:none;font-size:21px}
+#akane-concepts .ak .admin-login{width:360px;max-width:calc(100vw - 24px);padding:24px;border:2px solid #e4c77e;border-radius:24px;background:#fffaf5;color:#5a4a42}
+#akane-concepts .ak .admin-login::backdrop{background:rgba(70,50,45,.3);backdrop-filter:blur(6px)}
+#akane-concepts .ak .admin-login .row{justify-content:space-between;margin-bottom:18px}
+#akane-concepts .ak .admin-login h2{margin:0;font-size:24px}
+#akane-concepts .ak .admin-login-close{width:44px;height:44px;padding:0}
+#akane-concepts .ak .admin-login-error{color:#825522;min-height:24px}
+@media(max-width:680px){#akane-concepts .ak header{padding-right:68px}}
+
+#akane-concepts .ak header{padding-right:24px}
+#akane-concepts .ak nav{max-width:none;align-items:center}
+#akane-concepts .ak nav .admin-entry{position:static;flex:none;width:36px;height:36px;min-width:36px;min-height:36px;padding:0;font-size:17px;align-self:center;background:white;border:2px solid #e4c77e;box-shadow:none}
+@media(max-width:680px){#akane-concepts .ak header{padding-right:16px}}
+
+#akane-concepts .ak .offer-list .offer-image,#akane-concepts .ak .offer-dialog-content .offer-image{position:relative;display:block;width:100%;height:auto;min-height:0;aspect-ratio:3/2;align-self:center}
+#akane-concepts .ak .offer-image img{position:absolute;inset:0;width:100%;height:100%;max-height:none;object-fit:cover}
+#akane-concepts .ak .crop-frame{position:relative}
+#akane-concepts .ak .crop-frame img{position:absolute;inset:0}
+#akane-concepts .ak .crop-save{margin-top:14px}
+
+#akane-concepts .ak .offer-image video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#akane-concepts .ak .crop-frame video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#akane-concepts .ak .upload video{width:100%;max-height:180px;border-radius:10px}
+#akane-concepts .ak .art-slot video{width:100%;height:100%;object-fit:cover}
+
+#akane-concepts .ak .latest-stage .art-slot,#akane-concepts .ak .latest-stage figure{background:#ffffff}
+
+#akane-concepts .ak .work-crop-editor{max-width:380px;margin:18px auto}
+#akane-concepts .ak .work-crop-editor .crop-frame{aspect-ratio:16/9}
+#akane-concepts .ak .latest-stage .art-slot{position:relative;overflow:hidden}
+#akane-concepts .ak .latest-stage .art-slot img,#akane-concepts .ak .latest-stage .art-slot video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+#akane-concepts .ak .work-library-title{margin-top:28px}
+#akane-concepts .ak .work-library{display:grid;gap:12px;margin-top:12px}
+#akane-concepts .ak .grouped-gallery .art-slot{overflow:hidden}
+
+#akane-concepts .ak .work-library .offer-admin-bubble{flex-wrap:wrap;border-radius:24px}#akane-concepts .ak .work-library .offer-admin-name{flex-basis:100%}#akane-concepts .ak button.delete-work{color:#825522;border-color:#e4a5b1}
+
+#akane-concepts .ak .work-library .offer-admin-bubble{flex-wrap:nowrap;gap:8px;padding:8px 10px 8px 14px;border-radius:28px}
+#akane-concepts .ak .work-library .offer-admin-name{flex:1 1 0;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#akane-concepts .ak .work-library .offer-admin-bubble button{flex:0 0 auto;padding:8px 10px;font-size:14px}
+#akane-concepts .ak .work-library-pages{justify-content:center;margin-top:8px}
+@media(max-width:480px){#akane-concepts .ak .work-library .offer-admin-bubble{gap:4px;padding:6px 8px}#akane-concepts .ak .work-library .offer-admin-bubble button{padding:7px 6px;font-size:12px}#akane-concepts .ak .work-library .offer-admin-name{flex-basis:0}}
+
+#akane-concepts .ak .grouped-gallery,#akane-concepts .ak .grouped-gallery[data-filter=All]{display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+#akane-concepts .ak .category-section{min-width:0;padding:20px;background:#fff;border:2px solid #ead49c;border-radius:28px}
+#akane-concepts .ak .category-carousel-heading{justify-content:space-between;gap:12px;margin-bottom:16px}
+#akane-concepts .ak .category-carousel-heading h3{margin:0}
+#akane-concepts .ak .category-carousel-heading button{width:44px;height:44px;padding:0}
+#akane-concepts .ak .category-carousel-viewport{overflow:hidden;border-radius:16px}
+#akane-concepts .ak .category-carousel-track{position:relative;display:flex;gap:14px;transition:transform .45s ease}
+#akane-concepts .ak .category-carousel-image,#akane-concepts .ak .category-carousel-image:first-child{position:relative;flex:0 0 48%;aspect-ratio:16/9;overflow:hidden;border-radius:16px;background:white;grid-column:auto}
+#akane-concepts .ak .category-carousel-image img,#akane-concepts .ak .category-carousel-image video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media(max-width:680px){#akane-concepts .ak .category-section{padding:14px}#akane-concepts .ak .category-carousel-image{flex-basis:88%}}
+@media(prefers-reduced-motion:reduce){#akane-concepts .ak .category-carousel-track{transition:none}}
+
+#akane-concepts .ak button.artwork-full-trigger{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;border-radius:16px;background:white;box-shadow:none;overflow:hidden}
+#akane-concepts .ak button.artwork-full-trigger:hover{transform:none}
+#akane-concepts .ak .artwork-lightbox{width:min(1000px,92vw);max-width:92vw;max-height:90vh;padding:54px 18px 18px;background:#fff;border:2px solid #e4c77e;border-radius:24px;color:#5a4a42}
+#akane-concepts .ak .artwork-lightbox::backdrop{background:rgba(50,40,35,.65);backdrop-filter:blur(8px)}
+#akane-concepts .ak .artwork-lightbox-close{position:absolute;top:8px;right:12px;width:40px;height:40px;padding:0}
+#akane-concepts .ak .artwork-lightbox-content{display:flex;justify-content:center;align-items:center}
+#akane-concepts .ak .artwork-lightbox-content img,#akane-concepts .ak .artwork-lightbox-content video{display:block;max-width:100%;max-height:calc(90vh - 90px);width:auto;height:auto;object-fit:contain;user-select:none;-webkit-user-drag:none}
+
+#akane-concepts .ak .artwork-lightbox{width:96vw;max-width:96vw;height:94vh;max-height:94vh;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;overflow:hidden}
+#akane-concepts .ak .artwork-lightbox-content{width:100%;height:100%;padding:48px 58px 14px}
+#akane-concepts .ak .artwork-lightbox-content img,#akane-concepts .ak .artwork-lightbox-content video{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:20px;overflow:hidden}
+#akane-concepts .ak .artwork-lightbox-close{top:0;right:0;z-index:2}
+#akane-concepts .ak .artwork-lightbox-prev,#akane-concepts .ak .artwork-lightbox-next{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;padding:0;z-index:2;background:rgba(255,255,255,.9)}
+#akane-concepts .ak .artwork-lightbox-prev{left:0}#akane-concepts .ak .artwork-lightbox-next{right:0}
+@media(max-width:680px){#akane-concepts .ak .artwork-lightbox-content{padding:48px 0 64px}#akane-concepts .ak .artwork-lightbox-prev,#akane-concepts .ak .artwork-lightbox-next{top:auto;bottom:8px;transform:none}#akane-concepts .ak .artwork-lightbox-prev{left:calc(50% - 52px)}#akane-concepts .ak .artwork-lightbox-next{right:calc(50% - 52px)}}
+
+#akane-concepts .ak .offer-dialog-content .offer-card{align-items:start}
+#akane-concepts .ak .offer-dialog-content .offer-image{align-self:start}
+#akane-concepts .ak .offer-dialog-content .offer-image-stack{display:flex;flex-direction:column;gap:16px;aspect-ratio:auto;height:auto;overflow:visible;background:transparent}
+#akane-concepts .ak .offer-detail-media{position:relative;width:100%;aspect-ratio:3/2;overflow:hidden;border-radius:20px;background:white;flex:none}
+#akane-concepts .ak .offer-detail-media img,#akane-concepts .ak .offer-detail-media video{position:absolute;inset:0;width:100%;height:100%;max-height:none;object-fit:cover}
+
+#akane-concepts .ak .crop-frame .replace-media-icon{position:absolute;top:8px;right:8px;z-index:2;width:32px;height:32px;min-width:32px;padding:0;font-size:16px;line-height:1;border-radius:50%;background:white;box-shadow:0 2px 8px #0002}
+#akane-concepts .ak .change-offer-cover{display:none}
+
+#akane-concepts .ak .crop-item h3{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#akane-concepts .ak .crop-item h3 .replace-media-icon{position:static;flex:none;width:32px;height:32px;min-width:32px;padding:0;font-size:16px;line-height:1;border-radius:50%;background:white;box-shadow:0 2px 8px #0002}
+
+#akane-concepts .ak .artwork-lightbox button:is(.artwork-lightbox-prev,.artwork-lightbox-next),#akane-concepts .ak .artwork-lightbox button:is(.artwork-lightbox-prev,.artwork-lightbox-next):hover,#akane-concepts .ak .artwork-lightbox button:is(.artwork-lightbox-prev,.artwork-lightbox-next):active,#akane-concepts .ak .artwork-lightbox button:is(.artwork-lightbox-prev,.artwork-lightbox-next):focus{transform:translateY(-50%);transition:background .18s;animation:none}
+@media(max-width:680px){#akane-concepts .ak .artwork-lightbox button:is(.artwork-lightbox-prev,.artwork-lightbox-next),#akane-concepts .ak .artwork-lightbox button:is(.artwork-lightbox-prev,.artwork-lightbox-next):hover,#akane-concepts .ak .artwork-lightbox button:is(.artwork-lightbox-prev,.artwork-lightbox-next):active,#akane-concepts .ak .artwork-lightbox button:is(.artwork-lightbox-prev,.artwork-lightbox-next):focus{transform:none}}
+#akane-concepts .ak .taxonomy-manager{margin:18px 0;padding:16px;border-radius:16px;background:#fff7e7}#akane-concepts .ak .taxonomy-manager summary{color:#ad4f70}#akane-concepts .ak .taxonomy-list .row{flex-wrap:nowrap}#akane-concepts .ak .taxonomy-list input{min-width:0;flex:1}#akane-concepts .ak .taxonomy-list button{flex-shrink:0;padding:8px 14px}#akane-concepts .ak .gallery-tag-filters{margin:10px 0 24px;gap:18px}#akane-concepts .ak .gallery-tag-filters label{flex:1;min-width:160px}#akane-concepts .ak .taxonomy-name{min-width:100px;flex:1}#akane-concepts .ak .price-settings{overflow-x:auto}@media(max-width:480px){#akane-concepts .ak .taxonomy-list .row{flex-wrap:wrap}}
+/* Artwork management: image and form together; optional pricing below the library. */
+#akane-concepts .ak .admin-grid{display:flex;flex-direction:column;gap:18px;margin-top:16px}
+#akane-concepts .ak .work-upload-panel{padding:24px}
+#akane-concepts .ak .work-upload-panel>h3{margin:0 0 18px}
+#akane-concepts .ak .work-upload-layout{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:28px;align-items:start}
+#akane-concepts .ak .work-media-column,#akane-concepts .ak .work-fields-column{min-width:0}
+#akane-concepts .ak .work-upload-panel .upload{padding:18px 14px;margin:0;border-color:var(--ak-line)}
+#akane-concepts .ak .work-upload-panel .upload p{margin:6px 0;font-size:12px}
+#akane-concepts .ak .work-upload-panel .upload input{margin:10px 0;font-size:13px}
+#akane-concepts .ak .upload-preview-frame{border-radius:14px;overflow:hidden;background:#fff;aspect-ratio:16/9;position:relative;display:block}
+#akane-concepts .ak .upload-preview-frame:has(img[hidden],video[hidden]){display:none}
+#akane-concepts .ak .work-upload-panel .upload-preview-frame img,#akane-concepts .ak .work-upload-panel .upload-preview-frame video{position:absolute;inset:0;width:100%;height:100%;max-height:none;object-fit:cover;border-radius:0;display:block}
+#akane-concepts .ak .work-crop-tools{margin-top:12px}
+#akane-concepts .ak .work-crop-tools>summary{padding:8px 0}
+#akane-concepts .ak .work-crop-editor{max-width:none;margin:0}
+#akane-concepts .ak .work-crop-editor .crop-item{padding:14px;border-radius:14px}
+#akane-concepts .ak .work-crop-editor .crop-item>h3,#akane-concepts .ak .work-crop-editor .crop-frame{display:none}
+#akane-concepts .ak .work-crop-editor label{margin:0;font-size:13px}
+#akane-concepts .ak .work-crop-editor input[type=range]{padding:0;margin:4px 0 10px}
+#akane-concepts .ak .work-fields-column fieldset{margin:12px 0}
+#akane-concepts .ak .work-fields-column .choices{gap:8px}
+#akane-concepts .ak .work-fields-column .choices button{padding:8px 15px}
+#akane-concepts .ak .work-fields-column .taxonomy-manager{margin:16px 0 0;padding:0;background:transparent;border-top:1px solid var(--ak-line);border-radius:0}
+#akane-concepts .ak .work-fields-column>p.small{margin:8px 0 12px}
+#akane-concepts .ak .work-library-title{margin-top:0}
+#akane-concepts .ak .work-library .offer-admin-bubble{margin:10px 0;padding:10px 14px}
+#akane-concepts .ak .work-library .offer-admin-bubble button{padding:7px 13px}
+#akane-concepts .ak .work-price-panel>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;list-style:none;padding:0}
+#akane-concepts .ak .work-price-panel>summary::-webkit-details-marker{display:none}
+#akane-concepts .ak .work-price-panel>summary h3{margin:0}
+#akane-concepts .ak .work-price-panel>summary span:after{content:' ＋'}
+#akane-concepts .ak .work-price-panel[open]>summary{margin-bottom:20px}
+#akane-concepts .ak .work-price-panel[open]>summary span:after{content:' −'}
+@media(max-width:720px){#akane-concepts .ak .work-upload-layout{grid-template-columns:1fr;gap:20px}#akane-concepts .ak .work-upload-panel{padding:18px}#akane-concepts .ak .work-upload-panel .upload{padding:14px}#akane-concepts .ak .work-library .offer-admin-bubble{padding:9px}#akane-concepts .ak .work-library .offer-admin-bubble button{padding:7px 10px}}
+
+#akane-concepts .ak .work-upload-panel .upload{position:relative;padding-top:36px}
+#akane-concepts .ak .replace-work-media{position:absolute;top:8px;right:8px;padding:0;width:34px;height:34px;border-radius:50%;background:#fff;font-size:16px}
+#akane-concepts .ak .work-library-thumb{width:48px;height:48px;flex:0 0 48px;border-radius:10px;overflow:hidden;background:#fff}
+#akane-concepts .ak .work-library-thumb img,#akane-concepts .ak .work-library-thumb video{display:block;width:100%;height:100%;object-fit:cover}
+#akane-concepts .ak .work-library .replace-work-row{min-width:34px}
+@media(max-width:480px){#akane-concepts .ak .work-library-thumb{width:36px;height:36px;flex-basis:36px}#akane-concepts .ak .work-library .offer-admin-bubble{gap:6px}#akane-concepts .ak .work-library .offer-admin-bubble button{padding:6px 9px}}
+
+#akane-concepts .ak .work-library-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+#akane-concepts .ak .work-library-heading .work-library-title{margin:0}
+#akane-concepts .ak .work-library-heading .sort-showcase{padding:8px 18px}
+#akane-concepts .ak .showcase-sort-dialog{width:min(760px,calc(100vw - 28px));max-height:90vh;padding:24px;background:var(--ak-paper);color:var(--ak-text);border:2px solid var(--ak-line);border-radius:24px}
+#akane-concepts .ak .showcase-sort-dialog::backdrop{background:rgba(65,48,42,.5);backdrop-filter:blur(5px)}
+#akane-concepts .ak .showcase-sort-heading{justify-content:space-between;margin:0}
+#akane-concepts .ak .showcase-sort-heading h2{margin:0;font-size:24px}
+#akane-concepts .ak .showcase-sort-heading button{padding:6px;width:38px;height:38px}
+#akane-concepts .ak .showcase-sort-list{max-height:55vh;overflow:auto;margin:16px 0}
+#akane-concepts .ak .showcase-sort-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--ak-line)}
+#akane-concepts .ak .showcase-sort-row.is-drop-target{background:#fff7df;outline:2px solid var(--ak-accent);outline-offset:-2px}
+#akane-concepts .ak .showcase-sort-row.is-dragging{opacity:.5}
+#akane-concepts .ak .showcase-drag-handle{cursor:grab;padding:4px 8px;border:0;background:transparent;color:var(--ak-text);font-size:18px;flex:0 0 30px}
+#akane-concepts .ak .showcase-drag-handle:active{cursor:grabbing}
+#akane-concepts .ak .showcase-sort-number{font-size:12px;width:20px;text-align:center;flex-shrink:0}
+#akane-concepts .ak .showcase-sort-thumb{width:44px;height:44px;border-radius:9px;overflow:hidden;flex-shrink:0;background:#fff}
+#akane-concepts .ak .showcase-sort-thumb img,#akane-concepts .ak .showcase-sort-thumb video{width:100%;height:100%;object-fit:cover;display:block}
+#akane-concepts .ak .showcase-sort-name{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#akane-concepts .ak .showcase-sort-state{color:var(--ak-accent)}
+#akane-concepts .ak .showcase-move{padding:5px;width:34px;height:34px;flex-shrink:0}
+#akane-concepts .ak .showcase-sort-footer{justify-content:flex-end;gap:10px}
+@media(max-width:480px){#akane-concepts .ak .showcase-sort-dialog{padding:16px}#akane-concepts .ak .showcase-sort-row{gap:5px}#akane-concepts .ak .showcase-sort-state{display:none}#akane-concepts .ak .showcase-sort-thumb{width:34px;height:34px}#akane-concepts .ak .showcase-sort-name{font-size:13px}}
+#akane-concepts .ak .category-section{content-visibility:auto;contain-intrinsic-size:auto 420px}
+</style>
+<div id="akane-concepts" data-admin="true"  aria-label="แบบร่างเว็บคอมมิชชั่น Notton" data-previous-label="แบบก่อนหน้า" data-next-label="แบบถัดไป">
+<p id="initial-load-status" role="status" style="padding:24px;font:18px Tahoma,sans-serif;color:#806959">กำลังเปิดหน้าจัดการผลงาน…</p><section class="ak" aria-label="Notton Commission Gallery"></section>
+
+</div>
+
+
+<script src="template-data.js"></script>
+<script>
+(async()=>{
+const root=document.getElementById('akane-concepts');
+const prices={Character:Array.from({length:5},()=>[0,0,0]),Chibi:Array.from({length:3},()=>[0,0])};
+const scales={Character:['Head shot','Bust-up','Half body','Knee-up','Full body'],Chibi:['Head shot','Half body','Full body']};
+const finishes={Character:['Sketch','Flat Color','Full Color'],Chibi:['Sketch','Full Color']};
+const categories=['Full Body','Half Body','Bust-up','Head Shot','Knee-up','Chibi'];
+let cloudError='';const saved=null;let previewCache=null;let cloudReady=false;
+root.addEventListener('click',event=>{if(!cloudReady&&event.target.closest('.admin-preview,.offers-admin,.tos-admin')){event.preventDefault();event.stopImmediatePropagation();}},true);
+root.addEventListener('submit',event=>{if(!cloudReady&&!event.target.matches('.admin-login-form')){event.preventDefault();event.stopImmediatePropagation();}},true);
+function readPreview(){return previewCache;}
+const typeNames={Character:'Full Scale',Chibi:'Chibi',...(saved?.typeNames||{})};
+if(saved?.scales)Object.assign(scales,saved.scales);if(saved?.finishes)Object.assign(finishes,saved.finishes);if(saved?.pricing)Object.assign(prices,saved.pricing);
+const galleryTypes=saved?.galleryTypes||[{id:'full',name:'Full Scale'},{id:'chibi',name:'Chibi'}];
+const galleryScales=saved?.galleryScales||['Full Body','Half Body','Bust-up','Head Shot','Knee-up'];
+const galleryFinishes=saved?.galleryFinishes||['Full Color','Flat Color','Sketch'];
+if(saved?.scales){for(const type of Object.keys(scales))if(Array.isArray(saved.scales[type])&&saved.scales[type].length&&saved.scales[type].every(v=>typeof v==='string'&&v.trim()))scales[type]=saved.scales[type];}categories.splice(0,categories.length,...galleryTypes.map(t=>t.name));let offers=Array.isArray(saved?.offers)?saved.offers.map(normalizeOffer):[];
+function normalizeOffer(item){return {...item,images:Array.isArray(item.images)?item.images:(item.cover?[item.cover]:[]),addons:Array.isArray(item.addons)?item.addons:[],title:item.title||item.thTitle||item.enTitle||'',details:item.details||item.th||item.en||'',included:item.included||item.thIncluded||item.enIncluded||''};}
+if(saved?.pricing){for(const type of Object.keys(scales))if(Array.isArray(saved.pricing[type])&&saved.pricing[type].length===scales[type].length&&saved.pricing[type].every((row,i)=>Array.isArray(row)&&row.length===finishes[type].length&&row.every(v=>Number.isFinite(v)&&v>=0)))prices[type]=saved.pricing[type];}
+let language=saved?.language==='en'?'en':'th';
+const originalText=new WeakMap();
+const thaiLabels={'Commission':'Commission','Check prices':'เช็คราคา','Queue':'ตารางคิว','Adoptable':'Adoptable','HEWWO!':'สวัสดีค่า!','WELCOME':'สวัสดีค่า!','Notton':'Notton','Commission':'Commission','Check prices':'เช็คราคา','Gallery':'Gallery','Commission details':'รายละเอียดคอมมิชชั่น','Thank you for your interest! ♥️':'ขอบคุณสำหรับความสนใจค่า ♥️','Commission sample':'ตัวอย่างงานคอมมิชชั่น','Character art':'ภาพตัวละคร','Chibi':'Chibi','Illustration':'ภาพประกอบ','Character':'Full Scale','Chibi':'Chibi','Head shot':'Head shot','Bust-up':'Bust-up','Half body':'Half body','Knee-up':'Knee-up','Full body':'Full body','Sketch':'Sketch','Flat Color':'Flat Color','Full Color':'Full Color','Color':'Full Color'};
+const translations={
+'รอใส่รายละเอียดคอมมิชชั่น':'Happy to see you here! If you have anything please contact me ♥️',
+'สถานะรับงาน / ตารางคิว':'Commission status / Queue',
+'ดู Showcase':'View Showcase',
+'พื้นที่ภาพแนะนำของ Notton':'Notton’s featured artwork',
+'เลือกจากผลงานที่อัปโหลด':'Selected from uploaded works',
+'Showcase':'Showcase',
+'เช็คราคา':'Check prices',
+'ประเภทงาน':'Type',
+'สเกลภาพ':'Scale',
+'การลงสี':'Coloring',
+'ใช้เชิงพาณิชย์ ×2.5':'Commercial use ×2.5',
+'ราคาสำหรับ 1 ตัวละครค่ะ':'Price for 1 character',
+'ราคานี้ยังไม่รวมฉากหลังนะคะ ฉากหลังคิดเพิ่มตามดีเทลค่ะ!':'Background not included! The extra cost depends on the details.',
+'ราคาที่แสดงเป็นราคาพื้นฐานนะคะ อาจมีค่าใช้จ่ายเพิ่มเติมตามดีเทลอื่นๆ โดยจะประเมินจากรายละเอียดของงานค่ะ':'The displayed price is a base rate. Additional charges may apply after reviewing the details of your commission.',
+'มากกว่า 1 ตัวละคร และราคาที่เลือกตั้งแต่ 500 บาท ลด 50 บาทครั้งเดียวต่อภาพค่ะ':'For more than one character at a selected rate of ฿500 or more, get ฿50 off once per image.',
+'Price breakdown':'View selected details',
+'อ่านข้อตกลงก่อนจ้างงานด้วยนะคะ':'Please read the TOS before ordering',
+'Facebook: รอใส่ชื่อ':'Facebook: Notton',
+'ดูแบบร่างหลังบ้าน · ส่วนนี้มีเฉพาะในพรีวิว':'Preview the admin page · preview only',
+'จัดการข้อมูลและบันทึกสู่หน้าลูกค้า':'Separate admin page · owner sign-in required',
+'เพิ่มผลงาน':'Add artwork','จัดการผลงาน':'Manage artwork','แอนิเมชันพื้นหลัง':'Background animation','ประกาย':'Sparkles','กลีบดอกไม้':'Petals','จุดลอย':'Floating dots','ไม่ใช้แอนิเมชัน':'No animation',
+'เลือกภาพผลงาน':'Choose artwork',
+'ชื่อผลงาน':'Artwork title',
+'หมวดหมู่':'Category','Overview':'Overview','หยุดเลื่อน':'Pause slideshow','เลื่อนต่อ':'Resume slideshow','พื้นที่รูปผลงาน':'Artwork placeholder','ทั้งหมด':'All','Tag สเกลผลงาน':'Artwork scale tag','Tag การลงสี':'Coloring tag','เลือก Tag สเกลก่อนค่ะ':'Please choose a scale tag','ยังไม่มีผลงานในหมวดนี้ค่ะ':'No artwork in this category yet','หมวดที่ลูกค้าเห็นมาจาก Tag ที่ใส่ตอนลงผลงานค่ะ':'The gallery category comes from the artwork tag.',
+'แสดงในหน้าลูกค้า':'Show on the customer page',
+'บันทึกตัวอย่าง':'Save preview',
+'จัดการผลงานและราคา':'Manage works and prices',
+'เผยแพร่':'Published',
+'ฉบับร่าง':'Draft',
+'ตั้งเป็นภาพแนะนำ · ปรับลำดับ · ซ่อนผลงาน':'Feature · Reorder · Hide artwork',
+'ภาพที่ยังไม่เผยแพร่':'Unpublished artwork',
+'ตั้งราคาตามประเภท / สเกล / การลงสี':'Set prices by style / scale / finish',
+'รูปที่ซ่อนจะไม่ถูกส่งให้หน้าลูกค้า':'Hidden works stay off the customer page',
+'บันทึกตัวอย่างแล้วค่ะ ยังไม่ได้ลงเว็บจริงนะคะ':'Preview saved! This is not on the live site yet.',
+'ใส่ชื่อผลงานก่อนค่ะ':'Please enter an artwork title',
+'ถ้าสนใจ ทักมาพร้อมบรีฟกับเรฟตัวละครได้เลยค่ะ':'If you’re interested, please message me with your brief and character references!'
+};
+function translate(surface){
+const walker=document.createTreeWalker(surface,NodeFilter.SHOW_TEXT);
+while(walker.nextNode()){
+const node=walker.currentNode;
+if(['SCRIPT','STYLE'].includes(node.parentElement?.tagName))continue;
+if(!originalText.has(node))originalText.set(node,node.textContent);
+const original=originalText.get(node);const trimmed=original.trim();
+if(categories.includes(trimmed)&&node.parentElement.closest('.category-section,.category-filters,.work-category')){node.textContent=original;continue;}
+const match=trimmed.match(/^พื้นที่รูปผลงาน (\d+)$/);
+node.textContent=language==='en'?(translations[trimmed]?(original.replace(trimmed,translations[trimmed])):(match?'Artwork placeholder '+match[1]:original)):(thaiLabels[trimmed]?original.replace(trimmed,thaiLabels[trimmed]):original);
+}
+surface.querySelectorAll('.language').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.language===language)));
+surface.setAttribute('lang',language);
+const input=surface.querySelector('.work-title');if(input)input.placeholder=language==='en'?'e.g. Character commission':'เช่น Character commission';
+}
+root.querySelectorAll('.ak').forEach((surface,index)=>{
+let state={type:'Character',scale:1,finish:2,commercial:false,...(saved?.selections?.[index]||{})};
+const characters=[state];let activeCharacter=0;let orderCommercial=state.commercial;
+const look={radius:22,motion:true,animation:saved?.animation||'none',view:root.dataset.admin==='true'?'admin':'customer'};
+surface.innerHTML=`<div class="sparkles" aria-hidden="true">${Array.from({length:16},(_,i)=>`<span style="left:${(i*29)%98}%;top:${(i*17)%96}%;animation-delay:-${i}s">${i%3?'✧':'❀'}</span>`).join('')}</div><div class="interior">
+<header><div class="brand">Notton <small>COMMISSION</small></div><nav aria-label="เมนูเว็บไซต์"><a href="#" data-local="gallery">Commission</a><div class="row" aria-label="Language"><button type="button" class="language cursor-interaction" data-language="th">TH</button><button type="button" class="language cursor-interaction" data-language="en">EN</button></div><button type="button" class="admin-entry cursor-interaction" aria-label="Open admin">🔧</button></nav></header><div class="contact-top"><span>Contact</span><span class="small">รอใส่ช่องทางติดต่อ</span></div>
+<section class="hero"><div><span class="eyebrow">WELCOME</span><h1>Notton<br><span style="display:block;font-size:21px;font-family:Tahoma,sans-serif;margin-top:8px">Commission</span></h1><p>รอใส่รายละเอียดคอมมิชชั่น</p><div class="row"><a href="#" data-local="commission">เช็คราคา</a></div></div><div class="hero-art"><div><i data-lucide="image" aria-hidden="true"></i>พื้นที่ภาพแนะนำของ Notton<br><span class="small">เลือกจากผลงานที่อัปโหลด</span></div></div></section>
+<div class="content-grid"><section class="works"><section class="open-commissions"><div class="available-heading row"><h2>Available</h2><span class="availability-toggle" role="status" aria-live="polite"><span class="availability-knob" aria-hidden="true"></span><span class="availability-label">OFF</span></span></div><div class="offer-list"></div></section><span class="eyebrow">Gallery</span><h2>Showcase</h2><section class="latest-carousel" aria-label="Showcase artwork"><div class="latest-stage"></div><div class="latest-controls row"><button type="button" class="cursor-interaction latest-prev" aria-label="Previous artwork">‹</button><span class="latest-count"></span><button type="button" class="cursor-interaction latest-next" aria-label="Next artwork">›</button></div></section><h2 class="category-title">Overview</h2><div class="category-filters choices" aria-label="หมวดผลงาน"></div><div class="gallery-tag-filters row"></div><div class="grouped-gallery" aria-live="polite"></div></section>
+<section class="calculator" hidden aria-label="เลือกรูปแบบคอมมิชชั่น"><div><span class="eyebrow">Commission details</span><h2>เช็คราคา</h2><div class="character-counter row"><span>Characters</span><button type="button" class="cursor-interaction character-minus" aria-label="Remove character">−</button><output class="character-count">1</output><button type="button" class="cursor-interaction character-plus" aria-label="Add character">+</button></div><div class="character-tabs choices" hidden></div><fieldset><legend>ประเภทงาน</legend><div class="choices types"></div></fieldset><fieldset><legend>สเกลภาพ</legend><div class="choices scales"></div></fieldset><fieldset><legend>การลงสี</legend><div class="choices finishes"></div></fieldset></div><div class="quote"><div class="small selection"></div><div class="price" aria-live="polite"></div><label class="small"><input class="commercial" type="checkbox">ใช้เชิงพาณิชย์ ×2.5</label><section class="price-notes"><h3>Note</h3><span class="single-character-note" hidden></span><p class="profile-note">รอใส่รายละเอียดราคา</p></section><button class="primary cursor-interaction brief">Price breakdown</button><div class="brief-result" aria-live="polite" hidden></div><button type="button" class="tos-open cursor-interaction">TOS / ข้อตกลงการจ้างงาน</button></div></section></div>
+<footer class="footer"><span class="profile-footer">รอใส่ข้อความท้ายเว็บไซต์</span></footer>
+<section class="admin-preview" hidden><h2>จัดการผลงาน</h2><div class="small">จัดการข้อมูลและบันทึกสู่หน้าลูกค้า</div><div class="admin-grid"><section class="admin-panel work-upload-panel"><h3>เพิ่ม / แก้ไขผลงาน</h3><div class="work-upload-layout"><div class="work-media-column"><div class="upload"><button type="button" class="cursor-interaction replace-work-media" aria-label="เลือก / เปลี่ยนภาพผลงาน">🔁</button><i data-lucide="image-plus" aria-hidden="true"></i><div>เลือกภาพผลงาน</div><p class="small">JPG / PNG / GIF / Animated WebP / APNG / MP4 / WebM</p><input type="file" accept="image/*,video/mp4,video/webm,video/quicktime,.gif,.webp,.apng,.mp4,.webm,.mov" aria-label="ภาพตัวอย่าง"><div class="upload-preview-frame"><img hidden alt="ภาพตัวอย่างที่เลือก"></div></div><details class="work-crop-tools" hidden><summary class="cursor-interaction">ปรับ Crop</summary><div class="work-crop-editor" hidden></div></details></div><div class="work-fields-column"><label>ชื่อผลงาน<input class="work-title" placeholder="เช่น Character commission"></label><fieldset><legend>Type</legend><div class="work-types choices"></div></fieldset><div class="tos-edit-grid"><label>สเกลภาพ<select class="work-category"></select></label><label>การลงสี<select class="work-finish"></select></label></div><p class="small">Type และ Tag ที่บันทึกจะอัปเดตหมวดใน Gallery อัตโนมัติ</p><label><input class="publish" type="checkbox" checked> แสดงในหน้าลูกค้า</label><div class="row" style="margin-top:0"><button class="primary cursor-interaction save">บันทึกตัวอย่าง</button></div><p class="small save-result" aria-live="polite"></p><button type="button" class="cursor-interaction cancel-work-edit" hidden>Cancel edit</button><details class="taxonomy-manager"><summary>+ เพิ่ม / จัดการ Type, สเกลภาพ และการลงสี</summary><label>หมวดที่ต้องการจัดการ<select class="taxonomy-kind"><option value="types">Type</option><option value="scales">สเกลภาพ</option><option value="finishes">การลงสี</option></select></label><div class="row"><input class="taxonomy-name" aria-label="ชื่อหมวดใหม่" placeholder="ชื่อใหม่"><button type="button" class="cursor-interaction taxonomy-add">+ เพิ่ม</button></div><div class="taxonomy-list"></div><p class="taxonomy-result small" role="status"></p></details></div></div></section><section class="admin-panel work-library-panel"><div class="work-library-heading"><h3 class="work-library-title">Uploaded artworks</h3><button type="button" class="cursor-interaction sort-showcase">Sort</button></div><div class="work-library"></div></section><details class="admin-panel work-price-panel"><summary class="cursor-interaction"><h3>Price settings</h3><span class="small">เปิดตั้งค่าราคา</span></summary><details class="scale-manager"><summary>Manage scales</summary><label>Type<select class="new-scale-type"><option>Character</option><option>Chibi</option></select></label><label>Scale name<input class="new-scale-name" placeholder="เช่น Icon / Couple"></label><button type="button" class="cursor-interaction add-scale">+ Add scale</button><div class="custom-scale-list row"></div><p class="scale-result small" aria-live="polite"></p></details><div class="price-settings"></div><button type="button" class="cursor-interaction primary save-prices">Save prices</button><p class="price-settings-result small" aria-live="polite"></p><div hidden class="manage-item">Commission sample <span class="pill">เผยแพร่</span><p class="small">ตั้งเป็นภาพแนะนำ · ปรับลำดับ · ซ่อนผลงาน</p></div><div hidden class="manage-item">Character art <span class="pill">เผยแพร่</span></div><div hidden class="manage-item">ภาพที่ยังไม่เผยแพร่ <span class="pill">ฉบับร่าง</span></div><p class="small">ตั้งราคาตามประเภท / สเกล / การลงสี<br>รูปที่ซ่อนจะไม่ถูกส่งให้หน้าลูกค้า</p></details></div></section><p class="cloud-status" role="status" hidden></p><section class="offers-admin admin-panel" hidden><h2>Commission settings</h2><div class="offer-admin-list"></div><button type="button" class="cursor-interaction add-offer">+ Add commission</button><div class="offer-editor" hidden><div class="offer-form-groups"><section class="offer-form-group"><h3>Commission details</h3><div class="tos-edit-grid"><label class="offer-form-title">Title<input data-offer-field="title"></label><label>Details<textarea rows="5" data-offer-field="details"></textarea></label><label>What's included<textarea rows="5" data-offer-field="included"></textarea></label></div></section><section class="offer-form-group"><h3>Pricing & usage</h3><div class="tos-edit-grid"><label>Starting price (THB)<input type="number" min="0" data-offer-field="price"></label><label>Add-ons (หนึ่งรายการต่อบรรทัด: ชื่อ | ราคา)<textarea class="offer-addons" rows="4" placeholder="Extra outfit | 200"></textarea></label><label class="offer-use-setting"><input type="checkbox" class="offer-commercial"> Commercial Use allowed</label></div></section><section class="offer-form-group"><h3>Availability & contact</h3><div class="tos-edit-grid"><label>Status<select data-offer-field="status"><option value="open">Open</option><option value="waitlist">Waitlist</option><option value="hidden">Hidden</option></select></label><label>Slots (เว้นว่างได้)<input type="number" min="1" data-offer-field="slots"></label><label>Contact link<input type="url" data-offer-field="link" placeholder="https://..."></label></div></section><section class="offer-form-group"><h3>Preview images</h3><div class="tos-edit-grid"><label>ภาพปก · Images / GIF / Video<input class="offer-cover" type="file" accept="image/*,video/mp4,video/webm,video/quicktime,.gif,.webp,.apng,.mp4,.webm,.mov"><span class="offer-image-count small"></span><img class="offer-cover-preview" hidden alt="Cover preview"><button type="button" class="cursor-interaction change-offer-cover">เลือก / เปลี่ยนภาพปก</button></label><div><p class="small">ภาพตัวอย่างเพิ่มเติมจะแสดงต่อจากภาพปกในรายละเอียดคอมมิชชั่น</p><button type="button" class="cursor-interaction add-offer-samples">+ เพิ่มภาพตัวอย่าง</button><input class="offer-samples" type="file" accept="image/*,video/mp4,video/webm,video/quicktime,.gif,.webp,.apng,.mp4,.webm,.mov" multiple hidden></div></div></section></div><div class="crop-editor"></div><button type="button" class="primary cursor-interaction save-offer">Save commission</button><p class="offer-save-result small" aria-live="polite"></p></div></section><section class="tos-admin admin-panel" hidden><h2>TOS settings</h2><p class="small">ใส่ข้อตกลงทั้งหมดในกล่องเดียว แล้วกด Save TOS</p><div class="tos-editor"></div><button type="button" class="primary cursor-interaction save-tos">Save TOS</button><p class="tos-save-result small" aria-live="polite"></p></section><dialog class="showcase-sort-dialog" aria-labelledby="showcase-sort-title"><div class="showcase-sort-heading row"><h2 id="showcase-sort-title">จัดลำดับ Showcase</h2><button type="button" class="cursor-interaction showcase-sort-close" aria-label="ปิดจัดลำดับ">×</button></div><p class="small">ลาก ☰ หรือกด ↑ ↓ เพื่อจัดลำดับ · 10 ภาพแรกจะแสดงใน Showcase</p><div class="showcase-sort-list" aria-label="ลำดับผลงาน"></div><p class="showcase-sort-result small" role="status"></p><div class="showcase-sort-footer row"><button type="button" class="cursor-interaction showcase-sort-cancel">ยกเลิก</button><button type="button" class="primary cursor-interaction showcase-sort-save">บันทึกลำดับ</button></div></dialog><dialog class="artwork-lightbox"><button type="button" class="artwork-lightbox-close cursor-interaction" aria-label="Close full artwork">×</button><button type="button" class="artwork-lightbox-prev cursor-interaction" aria-label="Previous full artwork">‹</button><div class="artwork-lightbox-content"></div><button type="button" class="artwork-lightbox-next cursor-interaction" aria-label="Next full artwork">›</button></dialog><dialog class="admin-login"><form class="admin-login-form"><div class="row"><h2>Admin access</h2><button type="button" class="admin-login-close cursor-interaction" aria-label="Close admin access">×</button></div><label>รหัสเข้าหลังบ้าน<input type="password" class="admin-pin" inputmode="numeric" autocomplete="off" required></label><p class="admin-login-error" role="alert"></p><button type="submit" class="primary cursor-interaction">เข้าสู่หลังบ้าน</button></form></dialog><dialog class="offer-dialog" aria-labelledby="offer-dialog-title"><div class="offer-dialog-heading row"><h2 id="offer-dialog-title">Commission details</h2><button type="button" class="cursor-interaction offer-dialog-close" aria-label="Close commission details">×</button></div><div class="offer-dialog-content"></div></dialog><dialog class="tos-dialog"><div class="tos-heading row"><h2>TOS</h2><div class="row"><button type="button" class="cursor-interaction tos-language" data-tos-language="th">TH</button><button type="button" class="cursor-interaction tos-language" data-tos-language="en">EN</button><button type="button" class="cursor-interaction tos-close" aria-label="Close terms">×</button></div></div><div class="tos-content"></div></dialog></div>`;
+const query=s=>surface.querySelector(s);
+let category='All',galleryScale='All',galleryFinish='All';
+let artworks=Array.isArray(saved?.artworks)?saved.artworks.filter(art=>art.image):[];
+
+function showcaseRank(art){return typeof art?.showcaseOrder==='number'&&Number.isFinite(art.showcaseOrder)&&art.showcaseOrder>=0?art.showcaseOrder:Infinity;}
+function orderedArtworkEntries(list){return list.map((art,index)=>({art,index})).filter(entry=>entry.art.image).sort((a,b)=>{const ar=showcaseRank(a.art),br=showcaseRank(b.art);if(ar!==br)return ar<br?-1:1;return (Number(b.art.uploadedAt)||0)-(Number(a.art.uploadedAt)||0)||a.index-b.index;});}
+let showcaseCloudVersion=0,showcaseDraft=null,showcaseSource=null,showcaseDraftVersion=0,showcaseSaving=false,showcaseDragIndex=null;
+
+let latestIndex=0, playing=true, hovering=false;
+const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+if(reduced.matches)playing=false;
+let rotationPhase=0;let tiltFrame=0;let manualPosition=0;let manualTarget=0;
+function drawLatest(){if(root.dataset.admin==='true')return;
+ const latestArtworks=orderedArtworkEntries(artworks).slice(0,10).map(entry=>entry.art);
+ cancelAnimationFrame(tiltFrame);manualPosition=0;manualTarget=0;
+ const stage=query('.latest-stage');stage.replaceChildren();query('.latest-controls').hidden=latestArtworks.length<2;query('.latest-carousel').hidden=latestArtworks.length===0;if(!latestArtworks.length)return;const track=document.createElement('div');track.className='latest-track';
+ // Repeat both ways so stepping across either end stays continuous.
+ for(let copy=0;copy<(latestArtworks.length>1?5:1);copy++){const group=document.createElement('div');group.className='latest-group';if(latestArtworks.length>1&&copy!==2)group.setAttribute('aria-hidden','true');latestArtworks.forEach(art=>{const figure=document.createElement('figure');const slot=document.createElement('div');slot.className='art-slot';if(art.image){const img=makeMedia(art.image,art.title);applyCrop(img,art.crop);slot.appendChild(img);}else{const text=document.createElement('span');text.textContent='พื้นที่รูปผลงาน';slot.appendChild(text);}figure.appendChild(slot);figure.setAttribute('aria-label',art.title);const cell=document.createElement('div');cell.className='carousel-cell';cell.appendChild(figure);group.appendChild(cell);});track.appendChild(group);}
+ stage.appendChild(track);const cells=[...track.querySelectorAll('.carousel-cell')];let previous=0;
+ function frame(time){if(!stage.isConnected)return;const delta=previous?Math.min((time-previous)/1000,.05):0;previous=time;const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;manualPosition=reduced?manualTarget:manualPosition+(manualTarget-manualPosition)*(1-Math.exp(-delta*7));if(Math.abs(manualTarget-manualPosition)<.0005){manualPosition=manualTarget;if(Math.abs(manualPosition)>=latestArtworks.length){const turns=Math.trunc(manualPosition/latestArtworks.length)*latestArtworks.length;manualPosition-=turns;manualTarget-=turns;}}query('.latest-prev').disabled=false;query('.latest-next').disabled=false;
+ const bounds=stage.getBoundingClientRect();const width=cells[0].getBoundingClientRect().width;const shift=bounds.width/2-width/2-((latestArtworks.length>1?2*latestArtworks.length:0)+manualPosition)*width;track.style.transform=`translate3d(${shift}px,0,0)`;
+ const center=bounds.left+bounds.width/2;cells.forEach(cell=>cell.style.transform='');cells.forEach(cell=>{const box=cell.getBoundingClientRect();const offset=Math.max(-1,Math.min(1,(box.left+box.width/2-center)/(bounds.width*.5)));const figure=cell.firstElementChild;figure.style.transform=`rotateY(${-offset*26}deg)`;figure.style.opacity=String(1-Math.abs(offset)*.2);figure.style.setProperty('--tilt-shade',String(Math.abs(offset)*.19));figure.style.setProperty('--tilt-direction',offset<0?'to left':'to right');});
+ const projected=cells.map(cell=>cell.firstElementChild.getBoundingClientRect());let anchor=0;let nearest=Infinity;projected.forEach((rect,i)=>{const distance=Math.abs(rect.left+rect.width/2-center);if(distance<nearest){nearest=distance;anchor=i;}});const shifts=Array(cells.length).fill(0);for(let i=anchor+1;i<cells.length;i++)shifts[i]=projected[i-1].right+shifts[i-1]-projected[i].left;for(let i=anchor-1;i>=0;i--)shifts[i]=projected[i+1].left+shifts[i+1]-projected[i].right;cells.forEach((cell,i)=>cell.style.transform=`translateX(${shifts[i]}px)`);tiltFrame=Math.abs(manualTarget-manualPosition)>.0005?requestAnimationFrame(frame):0;
+ }surface._wakeLatest=()=>{if(!tiltFrame){previous=0;tiltFrame=requestAnimationFrame(frame);}};tiltFrame=requestAnimationFrame(frame);translate(surface);
+}
+function positionRotation(){manualTarget=rotationPhase;surface._wakeLatest?.();}
+function updatePlayback(){}
+window.addEventListener('resize',()=>surface._wakeLatest?.(),{passive:true});
+query('.latest-prev').addEventListener('click',async ()=>{manualTarget--;rotationPhase=manualTarget;surface._wakeLatest?.();});
+query('.latest-next').addEventListener('click',async ()=>{manualTarget++;rotationPhase=manualTarget;surface._wakeLatest?.();});
+
+query('.latest-carousel').addEventListener('mouseenter',async ()=>hovering=true);
+query('.latest-carousel').addEventListener('mouseleave',async ()=>hovering=false);
+let touchStart=null;
+query('.latest-stage').addEventListener('touchstart',async event=>{touchStart=event.changedTouches[0].clientX;},{passive:true});
+query('.latest-stage').addEventListener('touchend',async event=>{if(touchStart===null)return;const delta=event.changedTouches[0].clientX-touchStart;if(Math.abs(delta)>45){manualTarget+=delta<0?1:-1;rotationPhase=manualTarget;surface._wakeLatest?.();}touchStart=null;},{passive:true});
+
+let fullArtworkItems=[];let fullArtworkIndex=0;
+function renderFullArtwork(){const art=fullArtworkItems[fullArtworkIndex];if(!art)return;const target=query('.artwork-lightbox-content');target.querySelectorAll('video').forEach(video=>video.pause());target.replaceChildren();const media=makeMedia(art.image,art.title);media.draggable=false;if(media.tagName==='VIDEO')media.setAttribute('controlsList','nodownload');target.append(media);query('.artwork-lightbox-prev').hidden=fullArtworkItems.length<2;query('.artwork-lightbox-next').hidden=fullArtworkItems.length<2;}
+function openFullArtwork(art,items=artworks){fullArtworkItems=items.filter(item=>item.image);fullArtworkIndex=Math.max(0,fullArtworkItems.indexOf(art));renderFullArtwork();query('.artwork-lightbox').showModal();}
+function stepFullArtwork(step){if(!fullArtworkItems.length)return;fullArtworkIndex=(fullArtworkIndex+step+fullArtworkItems.length)%fullArtworkItems.length;renderFullArtwork();}
+query('.artwork-lightbox-prev').addEventListener('click',async ()=>stepFullArtwork(-1));query('.artwork-lightbox-next').addEventListener('click',async ()=>stepFullArtwork(1));
+query('.artwork-lightbox').addEventListener('keydown',async event=>{if(event.key==='ArrowRight'){event.preventDefault();stepFullArtwork(1);}if(event.key==='ArrowLeft'){event.preventDefault();stepFullArtwork(-1);}});
+query('.artwork-lightbox-close').addEventListener('click',async ()=>query('.artwork-lightbox').close());
+query('.artwork-lightbox').addEventListener('contextmenu',async event=>event.preventDefault());
+query('.artwork-lightbox').addEventListener('dragstart',async event=>event.preventDefault());
+query('.artwork-lightbox').addEventListener('close',async ()=>query('.artwork-lightbox-content').replaceChildren());
+query('.grouped-gallery').addEventListener('contextmenu',async event=>event.preventDefault());
+function drawGallery(){if(root.dataset.admin==='true')return;
+if(category!=='All'&&!categories.includes(category))category='All';if(galleryScale!=='All'&&!galleryScales.includes(galleryScale))galleryScale='All';if(galleryFinish!=='All'&&!galleryFinishes.includes(galleryFinish))galleryFinish='All';
+query('.category-filters').replaceChildren();
+['All',...categories].forEach(tag=>{const button=document.createElement('button');button.type='button';button.className='cursor-interaction';button.dataset.category=tag;button.setAttribute('aria-pressed',String(category===tag));button.textContent=tag==='All'?'ทั้งหมด':tag;query('.category-filters').appendChild(button);});
+drawGalleryTagFilters();const target=query('.grouped-gallery');target.dataset.filter=category;target.replaceChildren();
+const displayed=category==='All'?categories:[category];
+displayed.forEach(tag=>{const type=galleryTypes.find(t=>t.name===tag);const matching=artworks.filter(a=>(a.typeId||'full')===type?.id&&(galleryScale==='All'||(a.scale||a.tags[0])===galleryScale)&&(galleryFinish==='All'||(a.finish||a.tags[1])===galleryFinish));if(!matching.length)return;
+const section=document.createElement('section');section.className='category-section';const header=document.createElement('div');header.className='category-carousel-heading row';const heading=document.createElement('h3');heading.textContent=tag;header.append(heading);const viewport=document.createElement('div');viewport.className='category-carousel-viewport';const track=document.createElement('div');track.className='category-carousel-track';const frames=[];matching.filter(art=>art.image).forEach(art=>{const figure=document.createElement('figure');figure.className='category-carousel-image';const media=makeMedia(art.image,art.title);applyCrop(media,art.crop);media.draggable=false;const view=document.createElement('button');view.type='button';view.className='artwork-full-trigger cursor-interaction';view.setAttribute('aria-label',`View full artwork ${art.title}`);view.append(media);view.addEventListener('click',async ()=>openFullArtwork(art,matching));figure.append(view);track.append(figure);frames.push(figure);});viewport.append(track);if(frames.length>1){let current=0;const controls=document.createElement('div');controls.className='row';for(const [text,step,label] of [['‹',-1,'Previous'],['›',1,'Next']]){const button=document.createElement('button');button.type='button';button.textContent=text;button.className='cursor-interaction';button.setAttribute('aria-label',`${label} ${tag} artwork`);button.addEventListener('click',async ()=>{current=(current+step+frames.length)%frames.length;track.querySelectorAll('video').forEach(video=>video.pause());track.style.transform=`translateX(-${frames[current].offsetLeft}px)`;});controls.append(button);}header.append(controls);}section.append(header,viewport);target.appendChild(section);});
+if(!target.children.length){const empty=document.createElement('p');empty.textContent='ยังไม่มีผลงานในหมวดนี้ค่ะ';target.appendChild(empty);}
+translate(surface);
+}
+surface._drawGallery=drawGallery;
+query('.category-filters').addEventListener('click',async event=>{const button=event.target.closest('button[data-category]');if(!button)return;category=button.dataset.category;galleryScale='All';galleryFinish='All';drawGallery();});
+
+async function remember(){if(!cloudReady){cloudError='ข้อมูลยังโหลดไม่ครบ กรุณารอสักครู่ค่ะ';return false;}if(root.dataset.admin!=='true'||!adminUnlocked())return true;const data={profile:window.nottonProfile,language,pricing:prices,animation:look.animation,terms,scales,finishes,typeNames,categories,galleryTypes,galleryScales,galleryFinishes,artworks,offers:offers.map(({cover,...item})=>item)};const buttons=[...surface.querySelectorAll('.admin-preview button,.offers-admin button,.tos-admin button')];buttons.forEach(b=>b.disabled=true);query('.cloud-status').textContent='กำลังบันทึกและบันทึก…';try{await window.NottonData.save(data);previewCache=data;query('.cloud-status').textContent='บันทึกเข้า Firebase และบันทึกแล้วค่ะ';return true;}catch(error){cloudError=window.NottonData?.errorMessage(error)||error.message;query('.cloud-status').textContent=cloudError;return false;}finally{buttons.forEach(b=>b.disabled=false);}}
+
+function render(){if(!scales[state.type])state.type=Object.keys(scales)[0];state.scale=Math.min(Math.max(0,state.scale),scales[state.type].length-1);state.finish=Math.min(Math.max(0,state.finish),finishes[state.type].length-1);
+[['.types',Object.keys(scales),'type'],['.scales',scales[state.type],'scale'],['.finishes',finishes[state.type],'finish']].forEach(([selector,labels,key])=>{query(selector).innerHTML=labels.map((label,i)=>`<button class="cursor-interaction" type="button" data-key="${key}" data-value="${escapeText(key==='type'?label:i)}" aria-pressed="${state[key]===(key==='type'?label:i)}">${escapeText(key==='type'?(typeNames[label]||label):label)}</button>`).join('');});
+const unitPrice=Number(prices[state.type]?.[state.scale]?.[state.finish])||0;const imageDiscount=0;const total=(unitPrice*characters.length-imageDiscount)*(orderCommercial?2.5:1);query('.price').textContent=`฿${total.toLocaleString('th-TH')}`;query('.selection').textContent=`${typeNames[state.type]||state.type} · ${scales[state.type][state.scale]} · ${finishes[state.type][state.finish]}`;query('.commercial').checked=orderCommercial;surface._selection={...state};query('.single-character-note').hidden=characters.length>1;query('.character-count').textContent=characters.length;query('.character-minus').disabled=characters.length===1;query('.character-tabs').innerHTML=characters.map((char,i)=>`<button type="button" class="cursor-interaction" data-character="${i}" aria-pressed="${i===activeCharacter}">Character ${i+1}</button>`).join('');if(!query('.brief-result').hidden)drawBreakdown();translate(surface);}
+surface.addEventListener('click',async event=>{const langButton=event.target.closest('button[data-language]');if(langButton){language=langButton.dataset.language;root.querySelectorAll('.ak').forEach(s=>{translate(s);s._drawGallery?.();s._drawOffers?.();});await remember();return;}const button=event.target.closest('button[data-key]');if(button){const key=button.dataset.key;state[key]=key==='type'?button.dataset.value:Number(button.dataset.value);render();await remember();}const anchor=event.target.closest('a[data-local]');if(anchor){event.preventDefault();const pricing=anchor.dataset.local==='commission';query('.calculator').hidden=!pricing;query('.works').hidden=pricing;query('.hero').hidden=pricing;surface.querySelectorAll('nav a[data-local]').forEach(a=>a.setAttribute('aria-current',a.dataset.local===anchor.dataset.local?'page':'false'));query(pricing?'.calculator':'.works').scrollIntoView({behavior:look.motion?'smooth':'auto',block:'start'});}});
+query('.commercial').addEventListener('change',async event=>{orderCommercial=event.target.checked;characters.forEach(c=>c.commercial=orderCommercial);render();await remember();});
+function drawBreakdown(){
+const target=query('.brief-result');target.replaceChildren();let subtotal=0;
+const unit=Number(prices[state.type]?.[state.scale]?.[state.finish])||0;subtotal=unit*characters.length;const discount=0;
+const line=document.createElement('div');line.className='breakdown-row';const description=document.createElement('span');description.textContent=`${typeNames[state.type]||state.type} / ${scales[state.type][state.scale]} / ${finishes[state.type][state.finish]} · ${characters.length} Characters × ฿${unit.toLocaleString()}`;const amount=document.createElement('span');amount.textContent=`฿${subtotal.toLocaleString()}`;line.append(description,amount);target.appendChild(line);
+
+for(const [label,amount] of [['Subtotal',subtotal],...(orderCommercial?[['Commercial use ×2.5 (additional 150%)',subtotal*1.5]]:[]),['Total',subtotal*(orderCommercial?2.5:1)]]){const row=document.createElement('div');row.className='breakdown-row';row.innerHTML=`<span>${label}</span><span>฿${amount.toLocaleString()}</span>`;target.appendChild(row);}
+}
+query('.brief').addEventListener('click',async ()=>{query('.brief-result').hidden=!query('.brief-result').hidden;if(!query('.brief-result').hidden)drawBreakdown();});
+query('.character-plus').addEventListener('click',async ()=>{characters.push({});render();});
+query('.character-minus').addEventListener('click',async ()=>{if(characters.length===1)return;characters.pop();render();});
+query('.character-tabs').addEventListener('click',async event=>{const button=event.target.closest('button[data-character]');if(!button)return;activeCharacter=Number(button.dataset.character);state=characters[activeCharacter];render();});
+surface.querySelectorAll('[data-effect]').forEach(button=>button.addEventListener('click',async ()=>{look.animation=button.dataset.effect;appearance();await remember();}));
+let workType=galleryTypes[0]?.id||'full';
+function escapeText(value){return String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));}
+function fillOptions(select,values){const old=select.value;select.replaceChildren(...values.map(v=>new Option(v,v)));if(values.includes(old))select.value=old;}
+function drawTaxonomy(){if(!galleryTypes.some(t=>t.id===workType))workType=galleryTypes[0]?.id||'full';const target=query('.work-types');target.replaceChildren();galleryTypes.forEach(t=>{const b=document.createElement('button');b.type='button';b.textContent=t.name;b.className='cursor-interaction';b.setAttribute('aria-pressed',String(t.id===workType));b.addEventListener('click',()=>{workType=t.id;drawTaxonomy();});target.append(b);});fillOptions(query('.work-category'),galleryScales);const selectedType=galleryTypes.find(t=>t.id===workType);const animationKey=Object.keys(finishes).find(id=>String(typeNames[id]||id).trim().toLowerCase()==='animation');fillOptions(query('.work-finish'),selectedType?.name.trim().toLowerCase()==='animation'&&animationKey?finishes[animationKey]:galleryFinishes);const list=query('.taxonomy-list');list.replaceChildren();const kind=query('.taxonomy-kind').value;const values=kind==='types'?galleryTypes.map(t=>t.name):kind==='scales'?galleryScales:galleryFinishes;values.forEach((name,i)=>{const row=document.createElement('div');row.className='row';row.style.marginTop='10px';const input=document.createElement('input');input.value=name;input.setAttribute('aria-label',`แก้ชื่อ ${name}`);const b=document.createElement('button');b.type='button';b.className='cursor-interaction';b.textContent='บันทึกชื่อ';b.dataset.taxonomySave='true';b.addEventListener('click',async()=>{const value=input.value.trim();if(!value||values.some((v,j)=>j!==i&&v.toLowerCase()===value.toLowerCase())){query('.taxonomy-result').textContent='ใส่ชื่อที่ไม่ว่างและไม่ซ้ำค่ะ';return;}const backup=JSON.stringify({galleryTypes,galleryScales,galleryFinishes,scales,finishes,prices,typeNames,artworks});if(kind==='types'){const id=galleryTypes[i].id;galleryTypes[i].name=value;const key=id==='full'?'Character':id==='chibi'?'Chibi':id;typeNames[key]=value;}else{const choices=kind==='scales'?galleryScales:galleryFinishes;choices[i]=value;artworks.forEach(art=>{if(kind==='scales'&&(art.scale||art.tags[0])===name){art.scale=value;art.tags[0]=value;}if(kind==='finishes'&&(art.finish||art.tags[1])===name){art.finish=value;art.tags[1]=value;}});Object.values(kind==='scales'?scales:finishes).forEach(labels=>labels.forEach((v,j)=>{if(v.toLowerCase()===name.toLowerCase())labels[j]=value;}));}categories.splice(0,categories.length,...galleryTypes.map(t=>t.name));if(!(await remember())){restoreTaxonomy(backup);query('.taxonomy-result').textContent=cloudError;return;}refreshTaxonomy();query('.taxonomy-result').textContent='เปลี่ยนชื่อและอัปเดต Gallery แล้วค่ะ';});const remove=document.createElement('button');remove.type='button';remove.className='cursor-interaction';remove.textContent='ลบ';remove.onclick=()=>removeTaxonomy(kind,i);row.append(input,b,remove);list.append(row);});}
+async function removeTaxonomy(kind,index){const values=kind==='types'?galleryTypes.map(t=>t.name):kind==='scales'?galleryScales:galleryFinishes;const name=values[index];if(values.length<=1){query('.taxonomy-result').textContent='ต้องเหลืออย่างน้อย 1 ตัวเลือกค่ะ';return;}const affected=artworks.some(art=>kind==='types'?art.typeId===galleryTypes[index].id:kind==='scales'?(art.scale||art.tags?.[0])===name:(art.finish||art.tags?.[1])===name);let replacement='';if(affected){replacement=window.prompt(`มีผลงานใช้ “${name}” อยู่ ให้ย้ายไปชื่อใดก่อนลบ?\n${values.filter((_,i)=>i!==index).join(' / ')}`,values.find((_,i)=>i!==index));if(!replacement)return;if(!values.some((v,i)=>i!==index&&v===replacement)){query('.taxonomy-result').textContent='เลือกชื่อที่มีอยู่ในรายการค่ะ';return;}}if(!window.confirm(`ลบ “${name}” และช่องราคาของหมวดนี้?${replacement?' ผลงานจะย้ายไป '+replacement:''}`))return;const backup=JSON.stringify({galleryTypes,galleryScales,galleryFinishes,scales,finishes,prices,typeNames,artworks});if(kind==='types'){const removed=galleryTypes[index],destination=galleryTypes.find(t=>t.name===replacement);artworks.forEach(art=>{if(art.typeId===removed.id&&destination)art.typeId=destination.id;});galleryTypes.splice(index,1);const id=removed.id==='full'?'Character':removed.id==='chibi'?'Chibi':removed.id;delete scales[id];delete finishes[id];delete prices[id];delete typeNames[id];}else{const choices=kind==='scales'?galleryScales:galleryFinishes;choices.splice(index,1);artworks.forEach(art=>{art.tags||=[];if(kind==='scales'&&(art.scale||art.tags[0])===name){art.scale=replacement;art.tags[0]=replacement;}if(kind==='finishes'&&(art.finish||art.tags[1])===name){art.finish=replacement;art.tags[1]=replacement;}});for(const id of Object.keys(scales)){const labels=kind==='scales'?scales[id]:finishes[id];const position=labels.indexOf(name);if(position<0)continue;labels.splice(position,1);if(kind==='scales')prices[id].splice(position,1);else prices[id].forEach(row=>row.splice(position,1));if(!labels.length){labels.push(replacement||choices[0]);if(kind==='scales')prices[id].push(finishes[id].map(()=>0));else prices[id].forEach(row=>row.push(0));}}}categories.splice(0,categories.length,...galleryTypes.map(t=>t.name));if(!(await remember())){restoreTaxonomy(backup);query('.taxonomy-result').textContent=cloudError;return;}refreshTaxonomy();query('.taxonomy-result').textContent='ลบและอัปเดตตัวเลือก ราคา และ Gallery แล้วค่ะ';}
+function restoreTaxonomy(json){const old=JSON.parse(json);for(const [list,key] of [[galleryTypes,'galleryTypes'],[galleryScales,'galleryScales'],[galleryFinishes,'galleryFinishes']])list.splice(0,list.length,...old[key]);for(const [obj,key] of [[scales,'scales'],[finishes,'finishes'],[prices,'prices'],[typeNames,'typeNames']]){Object.keys(obj).forEach(k=>delete obj[k]);Object.assign(obj,old[key]);}artworks=old.artworks;categories.splice(0,categories.length,...galleryTypes.map(t=>t.name));}
+function refreshTaxonomy(){category='All';galleryScale='All';galleryFinish='All';drawTaxonomy();drawPriceSettings();drawGallery();drawWorkLibrary();render();}
+query('.taxonomy-kind').addEventListener('change',drawTaxonomy);
+query('.taxonomy-add').addEventListener('click',async()=>{const kind=query('.taxonomy-kind').value,name=query('.taxonomy-name').value.trim();const values=kind==='types'?galleryTypes.map(t=>t.name):kind==='scales'?galleryScales:galleryFinishes;if(!name||values.some(v=>v.toLowerCase()===name.toLowerCase())){query('.taxonomy-result').textContent='ใส่ชื่อใหม่ที่ไม่ซ้ำค่ะ';return;}const backup=JSON.stringify({galleryTypes,galleryScales,galleryFinishes,scales,finishes,prices,typeNames,artworks});if(kind==='types'){const id='type-'+crypto.randomUUID();galleryTypes.push({id,name});typeNames[id]=name;scales[id]=[...galleryScales];finishes[id]=[...galleryFinishes];prices[id]=galleryScales.map(()=>galleryFinishes.map(()=>0));workType=id;}else if(kind==='scales'){galleryScales.push(name);for(const id of Object.keys(scales)){scales[id].push(name);prices[id].push(finishes[id].map(()=>0));}}else{galleryFinishes.push(name);for(const id of Object.keys(finishes)){finishes[id].push(name);prices[id].forEach(row=>row.push(0));}}categories.splice(0,categories.length,...galleryTypes.map(t=>t.name));if(!(await remember())){restoreTaxonomy(backup);query('.taxonomy-result').textContent=cloudError;return;}query('.taxonomy-name').value='';refreshTaxonomy();query('.taxonomy-result').textContent='เพิ่มและอัปเดต Gallery แล้วค่ะ';});
+function drawGalleryTagFilters(){const target=query('.gallery-tag-filters');target.replaceChildren();for(const [label,values,selected,set] of [['สเกลภาพ',galleryScales,galleryScale,v=>galleryScale=v],['การลงสี',galleryFinishes,galleryFinish,v=>galleryFinish=v]]){const wrap=document.createElement('label');wrap.textContent=label;const select=document.createElement('select');select.setAttribute('aria-label',label);select.replaceChildren(new Option('ทั้งหมด','All'),...values.map(v=>new Option(v,v)));select.value=selected;select.addEventListener('change',()=>{set(select.value);drawGallery();});wrap.append(select);target.append(wrap);}}
+function normalizeAnimationFinishes(){
+ const labels=['FullColor','Cell Shade','Black-White'];
+ const aliases={'Full Color':'FullColor','Flat Color':'Cell Shade','Sketch':'Black-White'};
+ for(const type of Object.keys(scales)){
+  if(String(typeNames[type]||type).trim().toLowerCase()!=='animation')continue;
+  const old=finishes[type]||[];
+  const columns=labels.map((label,i)=>{const found=old.findIndex(v=>(aliases[v]||v)===label);return found>=0?found:i;});
+  prices[type]=scales[type].map((_,i)=>columns.map(j=>Number(prices[type]?.[i]?.[j])||0));
+  finishes[type]=[...labels];
+  const galleryType=galleryTypes.find(t=>t.id===type||t.name.trim().toLowerCase()==='animation');
+  artworks.forEach(art=>{if(art.typeId!==(galleryType?.id||type))return;const finish=aliases[art.finish||art.tags?.[1]];if(finish){art.finish=finish;if(Array.isArray(art.tags))art.tags[1]=finish;}});
+  labels.forEach(label=>{if(!galleryFinishes.includes(label))galleryFinishes.push(label);});
+ }
+}
+function drawPriceSettings(){normalizeAnimationFinishes();query('.price-settings').replaceChildren();
+for(const type of Object.keys(scales)){
+ const section=document.createElement('section');const heading=document.createElement('h3');heading.textContent=typeNames[type]||type;section.appendChild(heading);
+ const table=document.createElement('table');table.className='pricing-table';const head=document.createElement('thead');const header=document.createElement('tr');
+ ['Scale',...finishes[type]].forEach(name=>{const cell=document.createElement('th');cell.scope='col';cell.textContent=name;header.appendChild(cell);});head.appendChild(header);table.appendChild(head);
+ const body=document.createElement('tbody');prices[type].forEach((row,i)=>{const tr=document.createElement('tr');const scale=document.createElement('th');scale.scope='row';scale.textContent=scales[type][i];tr.appendChild(scale);row.forEach((amount,j)=>{const cell=document.createElement('td');const input=document.createElement('input');input.type='number';input.min='0';input.step='1';input.value=amount;input.dataset.priceType=type;input.dataset.priceScale=i;input.dataset.priceFinish=j;input.setAttribute('aria-label',`${type} ${scales[type][i]} ${finishes[type][j]} price in THB`);cell.appendChild(input);tr.appendChild(cell);});body.appendChild(tr);});table.appendChild(body);section.appendChild(table);query('.price-settings').appendChild(section);
+}
+}
+drawPriceSettings();
+query('.save-prices').addEventListener('click',async ()=>{const inputs=[...surface.querySelectorAll('[data-price-type]')];if(inputs.some(i=>i.value.trim()===''||!Number.isFinite(Number(i.value))||Number(i.value)<0)){query('.price-settings-result').textContent=language==='en'?'Please enter a price of 0 or more.':'ใส่ราคาเป็นเลข 0 ขึ้นไปนะคะ';return;}inputs.forEach(input=>prices[input.dataset.priceType][Number(input.dataset.priceScale)][Number(input.dataset.priceFinish)]=Number(input.value));render();const ok=await remember();if(!ok){query('.price-settings-result').textContent=cloudError;return;}query('.price-settings-result').textContent=language==='en'?'Prices published.':'บันทึกราคาและบันทึกแล้วค่ะ';});
+window.addEventListener('focus',()=>{if(root.dataset.admin!=='true')window.dispatchEvent(new StorageEvent('storage',{key:'akane-preview-update'}));});
+surface._applyCloud=updated=>{if(!updated)return;window.applyNottonProfile?.(updated.profile);showcaseCloudVersion++;if(query('.showcase-sort-dialog').open&&!showcaseSaving){query('.showcase-sort-result').textContent='ข้อมูลอัปเดตจากอีกหน้า กรุณาปิดแล้วกด Sort ใหม่ก่อนบันทึกค่ะ';}Object.assign(scales,updated.scales||{});Object.assign(finishes,updated.finishes||{});Object.assign(prices,updated.pricing||{});Object.assign(typeNames,updated.typeNames||{});if(updated.galleryTypes)galleryTypes.splice(0,galleryTypes.length,...updated.galleryTypes);if(updated.galleryScales)galleryScales.splice(0,galleryScales.length,...updated.galleryScales);if(updated.galleryFinishes)galleryFinishes.splice(0,galleryFinishes.length,...updated.galleryFinishes);categories.splice(0,categories.length,...galleryTypes.map(t=>t.name));artworks=updated.artworks||[];offers=(updated.offers||[]).map(normalizeOffer);if(validTerms(updated.terms))terms.splice(0,terms.length,...updated.terms);if(updated.animation)look.animation=updated.animation;drawPriceSettings();drawTaxonomy();drawGallery();drawLatest();drawWorkLibrary();drawOffers();drawOfferAdmin();render();appearance();};
+
+const terms=Array.from({length:6},()=>({thTitle:'',enTitle:'',th:'',en:''}));
+let termsLanguage=language;
+function syncScaleTags(){const list=query('.custom-scale-list');list.replaceChildren();const sel=query('.new-scale-type');const old=sel.value;sel.replaceChildren(...Object.keys(scales).map(id=>new Option(typeNames[id]||id,id)));if(scales[old])sel.value=old;drawTaxonomy();}
+query('.add-scale').addEventListener('click',async ()=>{const type=query('.new-scale-type').value;const name=query('.new-scale-name').value.trim();if(!name||scales[type].some(v=>v.toLowerCase()===name.toLowerCase())){query('.scale-result').textContent='ใส่ชื่อสเกลใหม่ที่ยังไม่ซ้ำค่ะ';return;}scales[type].push(name);prices[type].push(finishes[type].map(()=>0));if(!galleryScales.some(v=>v.toLowerCase()===name.toLowerCase()))galleryScales.push(name);drawPriceSettings();syncScaleTags();drawGallery();render();await remember();query('.new-scale-name').value='';query('.scale-result').textContent='เพิ่มสเกลแล้วค่ะ ตั้งราคาในตารางแล้วกด Save prices ได้เลย';});
+let editingOffer=-1;let offerCover='';let offerImages=[];let offerCrops=[];
+function videoPoster(src) {
+    const cache = window.akaneVideoPosterCache ||= new Map();
+    if (cache.has(src)) return cache.get(src);
+    const promise = (async()=>{const cached=await window.NottonData?.getPoster?.(src);if(cached)return cached;return new Promise(resolve => {
+        const probe = document.createElement('video');
+        probe.muted = true;
+        probe.playsInline = true;
+        probe.preload = 'auto';
+        let done = false;
+        const finish = poster => {
+            if (done) return;
+            done = true;
+            clearTimeout(timer);
+            probe.pause();
+            probe.removeAttribute('src');
+            probe.load();
+            if(poster)window.NottonData?.putPoster?.(src,poster);resolve(poster);
+        };
+        const capture = () => {
+            if (done || probe.readyState < 2 || !probe.videoWidth) return;
+            try {
+                const canvas = document.createElement('canvas');
+                canvas.width = Math.min(960, probe.videoWidth);
+                canvas.height = Math.max(1, Math.round(canvas.width * probe.videoHeight / probe.videoWidth));
+                canvas.getContext('2d').drawImage(probe, 0, 0, canvas.width, canvas.height);
+                finish(canvas.toDataURL('image/jpeg', 0.85));
+            } catch { finish(''); }
+        };
+        const timer = setTimeout(() => finish(''), 20000);
+        probe.addEventListener('error', () => finish(''), { once: true });
+        probe.addEventListener('loadedmetadata', () => {
+            const time = Number.isFinite(probe.duration) ? Math.min(1, probe.duration / 2) : 0;
+            if (time > 0) {
+                probe.addEventListener('seeked', capture, { once: true });
+                probe.currentTime = time;
+            } else {
+                probe.addEventListener('loadeddata', capture, { once: true });
+                capture();
+            }
+        }, { once: true });
+        probe.src = src;
+        probe.load();
+    });
+    })();
+    cache.set(src, promise);
+    return promise;
+}
+function makeMedia(src, label) {
+    const isVideo = /^data:video\//i.test(src || '');
+    const media = document.createElement(isVideo ? 'video' : 'img');
+    if (isVideo) {
+        media.controls = true;
+        media.playsInline = true;
+        media.preload = 'none';
+        media.setAttribute('aria-label', label || 'Video preview');
+        videoPoster(src).then(poster => {
+            if (poster) media.poster = poster;
+        });
+    } else {
+        media.alt = label || 'Preview';
+        media.loading = 'lazy';
+        media.decoding = 'async';
+    }
+    media.src = src;
+    return media;
+}
+
+let workCrop={x:50,y:50,zoom:1};let editingWork=-1;
+function showUploadMedia(src){const old=query('.upload img,.upload video');const media=makeMedia(src,'ภาพตัวอย่างที่เลือก');old.replaceWith(media);workCrop=cropValue();drawWorkCrop(src);}
+function drawWorkCrop(src){query('.work-crop-tools').hidden=true;query('.work-crop-editor').hidden=true;query('.work-crop-editor').replaceChildren();const frame=query('.upload-preview-frame')||query('.upload');frame.querySelectorAll('.direct-crop-toggle,.direct-crop-reset,.direct-crop-hint').forEach(el=>el.remove());const media=query('.upload img,.upload video');applyCrop(media,workCrop);enableDirectCrop(frame,media,()=>workCrop,value=>{workCrop=cropValue(value);applyCrop(media,workCrop);});}
+
+function enableDirectCrop(frame,media,getCrop,onChange){
+frame._cropAbort?.abort();const abort=new AbortController();frame._cropAbort=abort;const listen=(type,handler,options={})=>frame.addEventListener(type,handler,{...options,signal:abort.signal});frame.classList.add('direct-crop-frame');const button=document.createElement('button');button.type='button';button.className='direct-crop-toggle';button.textContent='✥';button.title='ปรับ Crop · ลากภาพเพื่อจัดตำแหน่ง';button.setAttribute('aria-label','ลากปรับ Crop');button.setAttribute('aria-pressed','false');frame.append(button);const reset=document.createElement('button');reset.type='button';reset.className='direct-crop-reset';reset.textContent='↺';reset.title='Reset crop';reset.setAttribute('aria-label','Reset crop');reset.hidden=true;frame.append(reset);const hint=document.createElement('span');hint.className='direct-crop-hint';hint.textContent='ลากภาพ · เลื่อนล้อเพื่อซูม';hint.hidden=true;frame.append(hint);let active=false;const points=new Map();let lastPinch=0;function setActive(next){active=next;frame.classList.toggle('is-cropping',active);button.setAttribute('aria-pressed',String(active));button.title=active?'เสร็จสิ้นการปรับ Crop':'ปรับ Crop · ลากภาพ';button.textContent=active?'✓':'✥';reset.hidden=!active;hint.hidden=!active;media.controls=media.tagName==='VIDEO'&&!active;if(!active){points.clear();lastPinch=0;}media.draggable=false;}button.onclick=()=>setActive(!active);reset.onclick=()=>onChange(cropValue());frame.tabIndex=0;frame.setAttribute('aria-label','ภาพตัวอย่าง กดปุ่ม Crop แล้วลากภาพ');listen('pointerdown',e=>{if(!active||e.target.closest('button'))return;e.preventDefault();frame.setPointerCapture(e.pointerId);points.set(e.pointerId,{x:e.clientX,y:e.clientY});lastPinch=points.size===2?distance():0;});function distance(){const p=[...points.values()];return p.length<2?0:Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);}listen('pointermove',e=>{if(!active||!points.has(e.pointerId))return;const previous=points.get(e.pointerId);points.set(e.pointerId,{x:e.clientX,y:e.clientY});const crop=cropValue(getCrop());if(points.size===2){const d=distance();if(lastPinch)crop.zoom=Math.min(3,Math.max(1,crop.zoom*d/lastPinch));lastPinch=d;}else{const r=frame.getBoundingClientRect();crop.x=Math.min(100,Math.max(0,crop.x-(e.clientX-previous.x)/r.width*100));crop.y=Math.min(100,Math.max(0,crop.y-(e.clientY-previous.y)/r.height*100));}onChange(crop);});const end=e=>{points.delete(e.pointerId);lastPinch=0;};listen('pointerup',end);listen('pointercancel',end);listen('wheel',e=>{if(!active)return;e.preventDefault();const crop=cropValue(getCrop());crop.zoom=Math.min(3,Math.max(1,crop.zoom*Math.exp(-e.deltaY*.002)));onChange(crop);},{passive:false});listen('keydown',e=>{if(!active||e.target!==frame)return;const crop=cropValue(getCrop());const keys={ArrowLeft:['x',2],ArrowRight:['x',-2],ArrowUp:['y',2],ArrowDown:['y',-2]};if(e.key==='Escape'){setActive(false);return;}if(keys[e.key]){e.preventDefault();const[k,d]=keys[e.key];crop[k]=Math.min(100,Math.max(0,crop[k]+d));onChange(crop);}if(e.key==='+'||e.key==='-'){e.preventDefault();crop.zoom=Math.min(3,Math.max(1,crop.zoom+(e.key==='+'?.1:-.1)));onChange(crop);}});
+}
+
+function cropValue(value){return {x:Math.min(100,Math.max(0,Number(value?.x??50))),y:Math.min(100,Math.max(0,Number(value?.y??50))),zoom:Math.min(3,Math.max(1,Number(value?.zoom??1))) };}
+function applyCrop(img,value){const crop=cropValue(value);img.style.objectPosition='50% 50%';img.style.transformOrigin='center';img.style.transform=`translate(${50-crop.x}%,${50-crop.y}%) scale(${crop.zoom})`;}
+function drawCropEditor(){const editor=query('.crop-editor');editor.replaceChildren();offerImages.forEach((src,index)=>{const section=document.createElement('section');section.className='crop-item';const heading=document.createElement('h3');heading.textContent=index===0?'Crop · ภาพปก':`Crop · ภาพตัวอย่าง ${index}`;const frame=document.createElement('div');frame.className='crop-frame';const img=makeMedia(src,`Crop preview ${index+1}`);frame.append(img);applyCrop(img,offerCrops[index]);section.append(heading,frame);if(index===0){const replaceCover=document.createElement('button');replaceCover.type='button';replaceCover.className='cursor-interaction replace-media-icon';replaceCover.textContent='🔁';replaceCover.title='เปลี่ยนภาพปก';replaceCover.setAttribute('aria-label','เปลี่ยนภาพปก');replaceCover.addEventListener('click',async ()=>query('.offer-cover').click());heading.append(replaceCover);}if(index>0){const actions=document.createElement('div');actions.className='row';const replace=document.createElement('button');replace.type='button';replace.className='cursor-interaction';replace.textContent='🔁';replace.classList.add('replace-media-icon');replace.setAttribute('aria-label','เปลี่ยนภาพตัวอย่าง');replace.title='เปลี่ยนภาพตัวอย่าง';const picker=document.createElement('input');picker.type='file';picker.accept=query('.offer-cover').accept;picker.hidden=true;replace.addEventListener('click',async ()=>picker.click());picker.addEventListener('change',async()=>{const file=picker.files[0];if(!file)return;try{const [src]=await readOfferMedia([file]);offerImages[index]=src;offerCrops[index]=cropValue();refreshOfferMedia();query('.offer-save-result').textContent='เปลี่ยนภาพแล้ว กด Save commission เพื่อบันทึกค่ะ';}catch{query('.offer-save-result').textContent='อ่านไฟล์ไม่สำเร็จ กรุณาลองอีกครั้งค่ะ';}});const remove=document.createElement('button');remove.type='button';remove.className='cursor-interaction';remove.textContent='ลบภาพ';remove.addEventListener('click',async ()=>{offerImages.splice(index,1);offerCrops.splice(index,1);refreshOfferMedia();query('.offer-save-result').textContent='ลบภาพตัวอย่างแล้ว กด Save commission เพื่อบันทึกค่ะ';});heading.append(replace);actions.append(remove,picker);section.append(actions);}enableDirectCrop(frame,img,()=>offerCrops[index],value=>{offerCrops[index]=cropValue(value);applyCrop(img,offerCrops[index]);});const save=document.createElement('button');save.type='button';save.className='primary cursor-interaction crop-save';save.textContent='Save crop & commission';save.addEventListener('click',async ()=>query('.save-offer').click());section.append(save);editor.append(section);});}
+function drawOffers(expanded=false,selected=null){const available=offers.some(item=>item.status==='open');const toggle=query('.availability-toggle');toggle.dataset.on=String(available);query('.availability-label').textContent=available?'ON':'OFF';toggle.setAttribute('aria-label',available?'Available: ON':'Available: OFF');const target=query(expanded?'.offer-dialog-content':'.offer-list');target.replaceChildren();const visible=selected?[selected]:offers.filter(item=>item.status==='open'||item.status==='waitlist');if(!visible.length){const empty=document.createElement('div');empty.className='offer-empty';const title=document.createElement('h3');title.textContent='Coming soon';const text=document.createElement('p');text.textContent=language==='en'?'New commissions will appear here. Feel free to message me!':'รอใส่รายละเอียดคอมมิชชั่นที่เปิดรับ';empty.append(title,text);target.appendChild(empty);return;}visible.forEach(item=>{const card=document.createElement('article');card.className='offer-card';if(!expanded){const ribbon=document.createElement('span');ribbon.className='offer-ribbon';ribbon.setAttribute('aria-hidden','true');card.appendChild(ribbon);}const image=document.createElement('div');image.className='offer-image';const previews=item.images?.length?item.images:(item.cover?[item.cover]:[]);if(expanded&&previews.length){image.classList.add('offer-image-stack');previews.forEach((src,index)=>{const frame=document.createElement('div');frame.className='offer-detail-media';const media=makeMedia(src,item.title);applyCrop(media,item.crops?.[index]);frame.append(media);image.append(frame);});}else if(previews.length){let current=0;let img=makeMedia(previews[0],item.title);applyCrop(img,item.crops?.[0]);image.appendChild(img);if(previews.length>1){const controls=document.createElement('div');controls.className='preview-arrows row';const prev=document.createElement('button');prev.type='button';prev.textContent='‹';prev.setAttribute('aria-label','Previous preview');const next=document.createElement('button');next.type='button';next.textContent='›';next.setAttribute('aria-label','Next preview');const count=document.createElement('span');count.textContent=`1 / ${previews.length}`;const move=step=>{current=(current+step+previews.length)%previews.length;if(img.tagName==='VIDEO')img.pause();const replacement=makeMedia(previews[current],item.title);img.replaceWith(replacement);img=replacement;applyCrop(img,item.crops?.[current]);count.textContent=`${current+1} / ${previews.length}`;};prev.addEventListener('click',async ()=>move(-1));next.addEventListener('click',async ()=>move(1));controls.append(prev,count,next);image.appendChild(controls);}}else image.textContent='Commission preview';const content=document.createElement('div');content.className='offer-info';const status=document.createElement('span');status.className='pill';status.textContent=item.status==='waitlist'?'Waitlist':'Open';const title=document.createElement('h3');title.textContent=item.title;const price=document.createElement('p');price.className='offer-price';price.textContent=`Price ฿${Number(item.price).toLocaleString()}`;const detail=document.createElement('p');detail.className='offer-description';detail.textContent=item.details;const included=document.createElement('div');included.className='offer-included';if(item.included){const label=document.createElement('h4');label.textContent="You'll get";const list=document.createElement('ul');item.included.split('\n').map(line=>line.trim()).filter(Boolean).forEach(text=>{const li=document.createElement('li');li.textContent=text.replace(/^[-•]\s*/, '');list.appendChild(li);});included.append(label,list);}const contact=document.createElement('a');contact.textContent=item.status==='waitlist'?'Join wait list':'Accept';contact.className='offer-cta';contact.dataset.status=item.status;contact.href=/^https?:\/\//i.test(item.link||'')?item.link:'';contact.target='_blank';contact.rel='noopener';if(expanded){content.append(status,title,price,detail,included,contact);const estimate=buildOfferEstimate(item);contact.before(estimate);}else{const preview=document.createElement('p');preview.className='offer-summary';preview.textContent=item.details;const view=document.createElement('button');view.type='button';view.className='cursor-interaction offer-view';view.textContent='View details';view.addEventListener('click',async ()=>{drawOffers(true,item);query('.offer-dialog').showModal();});content.append(status,title,price,preview,view,contact);}if(item.slots){const slots=document.createElement('p');slots.className='offer-slots';slots.textContent=`${item.slots} slots available`;const badges=document.createElement('div');badges.className='offer-badges row';status.replaceWith(badges);badges.append(status,slots);}const usage=document.createElement('div');usage.className='offer-usage';const check=document.createElement('span');check.setAttribute('aria-hidden','true');check.textContent='✓';const label=document.createElement('span');label.textContent=item.commercialAllowed?'Personal / Commercial Use':'Personal Use Only';usage.append(check,label);price.after(usage);card.append(image,content);target.appendChild(card);});}
+surface._drawOffers=()=>drawOffers();query('.offer-dialog-close').addEventListener('click',async ()=>query('.offer-dialog').close());query('.offer-dialog').addEventListener('click',async event=>{if(event.target!==query('.offer-dialog'))return;const bounds=event.target.getBoundingClientRect();if(event.clientX<bounds.left||event.clientX>bounds.right||event.clientY<bounds.top||event.clientY>bounds.bottom)event.target.close();});
+function buildOfferEstimate(item){const panel=document.createElement('section');panel.className='offer-estimate';const title=document.createElement('h4');title.textContent='License scope';panel.appendChild(title);const choices=document.createElement('div');choices.className='row';let multiplier=1;const licenses=[];for(const [name,factor] of [['Personal Use',1],...(item.commercialAllowed?[['Commercial Use',2.5]]:[])]){const button=document.createElement('button');button.type='button';button.className='cursor-interaction';button.textContent=name+(factor===1?' · Included':' · ×2.5');button.setAttribute('aria-pressed',String(factor===1));button.addEventListener('click',async ()=>{multiplier=factor;licenses.forEach(entry=>entry.button.setAttribute('aria-pressed',String(entry.factor===factor)));update();});licenses.push({button,factor});choices.appendChild(button);}panel.appendChild(choices);const inputs=[];if(item.addons?.length){const heading=document.createElement('h4');heading.textContent='Add-ons';panel.appendChild(heading);item.addons.forEach(addon=>{const label=document.createElement('label');label.className='offer-addon';const name=document.createElement('span');name.textContent=`${addon.name} · +฿${Number(addon.price).toLocaleString()}`;const input=document.createElement('input');input.type='number';input.min='0';input.step='1';input.value='0';input.setAttribute('aria-label',addon.name+' quantity');input.addEventListener('input',update);label.append(name,input);inputs.push({input,price:Number(addon.price)});panel.appendChild(label);});}const total=document.createElement('output');total.className='offer-total';total.setAttribute('aria-live','polite');const note=document.createElement('p');note.className='small';note.textContent=language==='en'?'Base estimate. The final price depends on the details.':'ราคาประเมินเบื้องต้น อาจคิดเพิ่มตามรายละเอียดงานค่ะ';panel.append(total,note);function update(){const extras=inputs.reduce((sum,{input,price})=>sum+Math.max(0,Math.floor(Number(input.value)||0))*price,0);total.textContent=`Total ฿${((Number(item.price)+extras)*multiplier).toLocaleString()}`;}update();return panel;}
+function editOffer(index){editingOffer=index;const item=offers[index]||{status:'open',price:0};query('.offer-editor').hidden=false;surface.querySelectorAll('[data-offer-field]').forEach(field=>field.value=item[field.dataset.offerField]??'');query('.offer-commercial').checked=item.commercialAllowed===true;offerImages=[...(item.images|| (item.cover?[item.cover]:[]))];offerCover=offerImages[0]||'';offerCrops=offerImages.map((_,i)=>({...cropValue(item.crops?.[i])}));drawCropEditor();query('.offer-addons').value=(item.addons||[]).map(a=>`${a.name} | ${a.price}`).join('\n');query('.offer-image-count').textContent=offerImages.length?`ภาพปก 1 · ภาพตัวอย่าง ${offerImages.length-1}`:'ยังไม่มีภาพปก';query('.offer-cover').value='';query('.offer-cover-preview').hidden=!offerCover;const oldPreview=query('.offer-cover-preview');const newPreview=makeMedia(offerCover,'Cover preview');newPreview.className='offer-cover-preview';newPreview.hidden=!offerCover;oldPreview.replaceWith(newPreview);query('.offer-save-result').textContent='';}
+function drawOfferAdmin(){const target=query('.offer-admin-list');target.replaceChildren();offers.forEach((item,index)=>{const row=document.createElement('div');row.className='offer-admin-bubble';const name=document.createElement('span');name.className='offer-admin-name';name.textContent=item.title;const status=document.createElement('span');status.className='offer-admin-status';status.dataset.status=item.status;status.textContent=({open:'Open',waitlist:'Waitlist',hidden:'Hidden'})[item.status]||item.status;const edit=document.createElement('button');edit.type='button';edit.textContent='Edit';edit.className='cursor-interaction';edit.addEventListener('click',async ()=>editOffer(index));row.append(name,status,edit);target.appendChild(row);});}
+query('.add-offer').addEventListener('click',async ()=>editOffer(-1));
+function readOfferMedia(files){return Promise.all(files.map(file=>new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(file);})))}
+function refreshOfferMedia(){offerCover=offerImages[0]||'';drawCropEditor();const oldPreview=query('.offer-cover-preview');const preview=makeMedia(offerCover,'Cover preview');preview.className='offer-cover-preview';preview.hidden=!offerCover;oldPreview.replaceWith(preview);query('.offer-image-count').textContent=offerImages.length?`ภาพปก 1 · ภาพตัวอย่าง ${offerImages.length-1}`:'ยังไม่มีภาพปก';}
+query('.change-offer-cover').addEventListener('click',async event=>{event.preventDefault();query('.offer-cover').click();});
+query('.offer-cover').addEventListener('change',async event=>{const file=event.target.files[0];if(!file)return;try{const [src]=await readOfferMedia([file]);if(offerImages.length){offerImages[0]=src;offerCrops[0]=cropValue();}else{offerImages.push(src);offerCrops.push(cropValue());}refreshOfferMedia();}catch{query('.offer-save-result').textContent='อ่านไฟล์ไม่สำเร็จ กรุณาลองอีกครั้งค่ะ';}event.target.value='';});
+query('.add-offer-samples').addEventListener('click',async ()=>{if(!offerImages.length){query('.offer-save-result').textContent='เลือกภาพปกก่อน แล้วเพิ่มภาพตัวอย่างได้ค่ะ';query('.offer-cover').click();return;}query('.offer-samples').click();});
+query('.offer-samples').addEventListener('change',async event=>{const files=[...event.target.files];if(!files.length)return;try{const media=await readOfferMedia(files);offerImages.push(...media);offerCrops.push(...media.map(()=>cropValue()));refreshOfferMedia();query('.offer-save-result').textContent='เพิ่มภาพตัวอย่างแล้ว กด Save commission เพื่อบันทึกค่ะ';}catch{query('.offer-save-result').textContent='อ่านไฟล์ไม่สำเร็จ กรุณาลองอีกครั้งค่ะ';}event.target.value='';});
+query('.save-offer').addEventListener('click',async ()=>{const addons=[];for(const line of query('.offer-addons').value.split('\n').filter(v=>v.trim())){const [name,amount,...extra]=line.split('|');if(!name?.trim()||amount===undefined||!amount.trim()||extra.length||!Number.isFinite(Number(amount))||Number(amount)<0){query('.offer-save-result').textContent='Add-ons ใช้รูปแบบ ชื่อ | ราคา (เลข 0 ขึ้นไป) ค่ะ';return;}addons.push({name:name.trim(),price:Number(amount)});}const item={images:offerImages,crops:offerCrops,addons,cover:offerCover,commercialAllowed:query('.offer-commercial').checked};surface.querySelectorAll('[data-offer-field]').forEach(field=>item[field.dataset.offerField]=field.value.trim());if(!item.title||!item.details||item.price===''||!Number.isFinite(Number(item.price))||Number(item.price)<0){query('.offer-save-result').textContent='ใส่ชื่อและรายละเอียด พร้อมราคา 0 ขึ้นไปค่ะ';return;}if(item.link&&!/^https?:\/\//i.test(item.link)){query('.offer-save-result').textContent='ใส่ลิงก์ที่เริ่มด้วย https:// หรือ http:// ค่ะ';return;}if(item.slots&&(!Number.isInteger(Number(item.slots))||Number(item.slots)<1)){query('.offer-save-result').textContent='จำนวนคิวต้องเป็นจำนวนเต็มตั้งแต่ 1 ขึ้นไปค่ะ';return;}item.price=Number(item.price);if(editingOffer<0){offers.push(item);editingOffer=offers.length-1;}else offers[editingOffer]=item;const persisted=await remember();drawOffers();drawOfferAdmin();query('.offer-save-result').textContent=persisted?'บันทึกคอมมิชชั่นและ Crop แล้วค่ะ':cloudError||'บันทึก Firebase ไม่สำเร็จ กรุณาลองอีกครั้งค่ะ';});
+syncScaleTags();drawOffers();drawOfferAdmin();
+function validTerms(value){return Array.isArray(value)&&value.length>0&&value.every(item=>['thTitle','enTitle','th','en'].every(key=>typeof item[key]==='string'));}
+if(validTerms(saved?.terms))terms.splice(0,terms.length,...saved.terms);
+function mergedTos(){return terms.map(item=>[item.thTitle,item.th||item.en].filter(Boolean).join('\n')).filter(Boolean).join('\n\n');}
+const tosField=document.createElement('textarea');tosField.className='tos-single-text';tosField.rows=18;tosField.setAttribute('aria-label','ข้อความ TOS');tosField.value=mergedTos();tosField.dataset.termIndex='0';tosField.dataset.termKey='th';query('.tos-editor').replaceChildren(tosField);
+query('.save-tos').addEventListener('click',async()=>{const text=tosField.value.trim();terms.splice(0,terms.length,{thTitle:'',enTitle:'',th:text,en:text});if(!(await remember())){query('.tos-save-result').textContent=cloudError;return;}drawTerms();query('.tos-save-result').textContent='บันทึก TOS แล้วค่ะ';});
+function drawTerms(){const target=query('.tos-content');target.replaceChildren();const text=document.createElement('p');text.textContent=mergedTos();text.style.whiteSpace='pre-wrap';target.append(text);surface.querySelectorAll('[data-tos-language]').forEach(button=>button.hidden=true);}
+query('.tos-open').addEventListener('click',async ()=>{termsLanguage=language;drawTerms();query('.tos-dialog').showModal();});
+query('.tos-close').addEventListener('click',async ()=>query('.tos-dialog').close());
+surface.querySelectorAll('[data-tos-language]').forEach(button=>button.addEventListener('click',async ()=>{termsLanguage=button.dataset.tosLanguage;drawTerms();}));
+query('.tos-dialog').addEventListener('click',async event=>{if(event.target===query('.tos-dialog')){const r=event.target.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)event.target.close();}});
+query('.replace-work-media').addEventListener('click',()=>query('.upload input[type=file]').click());
+query('input[type=file]').addEventListener('change',async event=>{const file=event.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{showUploadMedia(reader.result);};reader.readAsDataURL(file);});
+let workLibraryPage=1;
+function drawWorkLibrary(){const target=query('.work-library');target.replaceChildren();const entries=orderedArtworkEntries(artworks);const pageCount=Math.max(1,Math.ceil(entries.length/10));workLibraryPage=Math.min(workLibraryPage,pageCount);entries.slice((workLibraryPage-1)*10,workLibraryPage*10).forEach(({art,index})=>{const row=document.createElement('div');row.className='offer-admin-bubble';const title=document.createElement('span');title.className='offer-admin-name';title.textContent=art.title;title.title=art.title;const edit=document.createElement('button');edit.type='button';edit.textContent='Edit';edit.className='cursor-interaction';edit.addEventListener('click',async ()=>{editingWork=index;query('.work-title').value=art.title;workType=art.typeId||'full';drawTaxonomy();query('.work-category').value=art.scale||art.tags[0];query('.work-finish').value=art.finish||art.tags[1];query('.publish').checked=true;showUploadMedia(art.image);workCrop=cropValue(art.crop);drawWorkCrop(art.image);query('.save').textContent='Save changes';query('.cancel-work-edit').hidden=false;query('.save-result').textContent='';query('.work-title').focus();});const remove=document.createElement('button');remove.type='button';remove.textContent='Delete';remove.className='cursor-interaction delete-work';remove.setAttribute('aria-label',`Delete ${art.title}`);remove.addEventListener('click',async ()=>{if(!window.confirm(`ลบผลงาน “${art.title}” ใช่ไหมคะ?`))return;const removed=artworks.splice(index,1)[0];if(!(await remember())){artworks.splice(index,0,removed);query('.save-result').textContent='ลบไม่สำเร็จ กรุณาลองอีกครั้งค่ะ';return;}if(editingWork===index)query('.cancel-work-edit').click();else if(editingWork>index)editingWork--;category='All';latestIndex=0;drawGallery();drawLatest();drawWorkLibrary();query('.save-result').textContent='ลบผลงานแล้วค่ะ';});const replace=document.createElement('button');replace.type='button';replace.textContent='🔁';replace.className='cursor-interaction replace-work-row';replace.setAttribute('aria-label',`Change media ${art.title}`);replace.addEventListener('click',async ()=>{edit.click();query('.upload input[type=file]').click();});const thumb=document.createElement('div');thumb.className='work-library-thumb';const visual=makeMedia(art.image,'');if(visual.tagName==='VIDEO')visual.controls=false;applyCrop(visual,art.crop);thumb.append(visual);row.append(thumb,title,edit,replace,remove);target.append(row);});if(pageCount>1){const pages=document.createElement('nav');pages.className='work-library-pages row';pages.setAttribute('aria-label','Artwork pages');for(let page=1;page<=pageCount;page++){const button=document.createElement('button');button.type='button';button.textContent=String(page);button.className='cursor-interaction';button.setAttribute('aria-label',`Artwork page ${page}`);button.setAttribute('aria-current',page===workLibraryPage?'page':'false');button.setAttribute('aria-pressed',String(page===workLibraryPage));button.addEventListener('click',async ()=>{workLibraryPage=page;drawWorkLibrary();});pages.append(button);}target.append(pages);}}
+
+function setShowcaseBusy(busy){showcaseSaving=busy;query('.showcase-sort-dialog').querySelectorAll('button').forEach(button=>button.disabled=busy);if(!busy&&showcaseDraft)drawShowcaseDraft();}
+function closeShowcaseSort(){if(showcaseSaving)return;query('.showcase-sort-dialog').close();showcaseDraft=null;showcaseSource=null;showcaseDragIndex=null;}
+function moveShowcaseDraft(from,to){if(showcaseSaving||!showcaseDraft||from<0||to<0||from>=showcaseDraft.length||to>=showcaseDraft.length||from===to)return;const [entry]=showcaseDraft.splice(from,1);showcaseDraft.splice(to,0,entry);drawShowcaseDraft();}
+function drawShowcaseDraft(){const list=query('.showcase-sort-list');list.replaceChildren();if(!showcaseDraft?.length){const empty=document.createElement('p');empty.className='small';empty.textContent='ยังไม่มีผลงานให้จัดลำดับ';list.append(empty);return;}showcaseDraft.forEach((entry,index)=>{const row=document.createElement('div');row.className='showcase-sort-row';row.dataset.showcaseIndex=index;const handle=document.createElement('button');handle.type='button';handle.className='showcase-drag-handle';handle.textContent='☰';handle.draggable=true;handle.setAttribute('aria-label',`ลากจัดลำดับ ${entry.art.title}`);handle.addEventListener('dragstart',event=>{if(showcaseSaving){event.preventDefault();return;}showcaseDragIndex=index;event.dataTransfer.effectAllowed='move';event.dataTransfer.setData('text/plain',String(index));row.classList.add('is-dragging');});handle.addEventListener('dragend',()=>{showcaseDragIndex=null;row.classList.remove('is-dragging');});row.addEventListener('dragover',event=>{if(showcaseDragIndex===null||showcaseSaving)return;event.preventDefault();event.dataTransfer.dropEffect='move';row.classList.add('is-drop-target');});row.addEventListener('dragleave',()=>row.classList.remove('is-drop-target'));row.addEventListener('drop',event=>{event.preventDefault();row.classList.remove('is-drop-target');if(showcaseDragIndex!==null)moveShowcaseDraft(showcaseDragIndex,index);showcaseDragIndex=null;});const order=document.createElement('span');order.className='showcase-sort-number';order.textContent=String(index+1);const thumb=document.createElement('div');thumb.className='showcase-sort-thumb';const media=makeMedia(entry.art.image,'');media.draggable=false;if(media.tagName==='VIDEO')media.controls=false;applyCrop(media,entry.art.crop);thumb.append(media);const title=document.createElement('span');title.className='showcase-sort-name';title.textContent=entry.art.title;title.title=entry.art.title;const state=document.createElement('span');state.className='showcase-sort-state small';state.textContent=index<10?'Showcase':'';const up=document.createElement('button');up.type='button';up.className='cursor-interaction showcase-move';up.textContent='↑';up.disabled=index===0;up.setAttribute('aria-label',`เลื่อน ${entry.art.title} ขึ้น`);up.addEventListener('click',()=>{moveShowcaseDraft(index,index-1);query('.showcase-sort-list').children[index-1]?.querySelector('.showcase-move')?.focus();});const down=document.createElement('button');down.type='button';down.className='cursor-interaction showcase-move';down.textContent='↓';down.disabled=index===showcaseDraft.length-1;down.setAttribute('aria-label',`เลื่อน ${entry.art.title} ลง`);down.addEventListener('click',()=>{moveShowcaseDraft(index,index+1);query('.showcase-sort-list').children[index+1]?.querySelector('.showcase-move')?.focus();});row.append(handle,order,thumb,title,state,up,down);list.append(row);});}
+function openShowcaseSort(){showcaseSource=artworks;showcaseDraftVersion=showcaseCloudVersion;showcaseDraft=orderedArtworkEntries(artworks);showcaseDragIndex=null;query('.showcase-sort-result').textContent='';drawShowcaseDraft();query('.showcase-sort-dialog').showModal();}
+async function saveShowcaseOrder(){if(showcaseSaving||!showcaseDraft)return;if(showcaseSource!==artworks||showcaseDraftVersion!==showcaseCloudVersion){query('.showcase-sort-result').textContent='ข้อมูลเปลี่ยนระหว่างจัดลำดับ กรุณาปิดแล้วกด Sort ใหม่ค่ะ';return;}const original=artworks;const ranks=new Map(showcaseDraft.map((entry,index)=>[entry.art,index]));const planned=original.map(art=>ranks.has(art)?{...art,showcaseOrder:ranks.get(art)}:art);artworks=planned;setShowcaseBusy(true);query('.showcase-sort-result').textContent='กำลังบันทึกลำดับ…';try{const ok=await remember();if(!ok){if(artworks===planned)artworks=original;query('.showcase-sort-result').textContent=cloudError||'บันทึกลำดับไม่สำเร็จ กรุณาลองอีกครั้งค่ะ';return;}workLibraryPage=1;latestIndex=0;drawLatest();drawWorkLibrary();setShowcaseBusy(false);closeShowcaseSort();query('.save-result').textContent='บันทึกลำดับ Showcase และบันทึกแล้วค่ะ';}catch(error){if(artworks===planned)artworks=original;query('.showcase-sort-result').textContent='บันทึกลำดับไม่สำเร็จ กรุณาลองอีกครั้งค่ะ';}finally{setShowcaseBusy(false);}}
+query('.sort-showcase').addEventListener('click',openShowcaseSort);
+query('.showcase-sort-save').addEventListener('click',saveShowcaseOrder);
+query('.showcase-sort-cancel').addEventListener('click',closeShowcaseSort);
+query('.showcase-sort-close').addEventListener('click',closeShowcaseSort);
+query('.showcase-sort-dialog').addEventListener('cancel',event=>{if(showcaseSaving)event.preventDefault();});
+query('.showcase-sort-dialog').addEventListener('close',()=>{if(!showcaseSaving){showcaseDraft=null;showcaseSource=null;showcaseDragIndex=null;}});
+
+query('.cancel-work-edit').addEventListener('click',async ()=>{editingWork=-1;query('.save').textContent='บันทึกตัวอย่าง';query('.cancel-work-edit').hidden=true;query('.work-title').value='';query('.work-crop-editor').hidden=true;query('.work-crop-tools').hidden=true;query('.work-crop-tools').open=false;query('.upload img,.upload video').hidden=true;query('.upload input').value='';});
+query('.save').addEventListener('click',async ()=>{
+const title=query('.work-title').value.trim();const tag=query('.work-category').value;const preview=query('.upload img,.upload video');
+if(!title||!tag||preview.hidden||!preview.getAttribute('src')){query('.save-result').textContent=!title?'ใส่ชื่อผลงานก่อนค่ะ':!tag?'เลือก Tag สเกลก่อนค่ะ':'เลือกภาพหรือวิดีโอก่อนค่ะ';return;}
+if(!query('.publish').checked){query('.save-result').textContent='ติ๊กแสดงในหน้าลูกค้าเพื่อเผยแพร่ผลงานค่ะ';return;}
+const item={title,typeId:workType,scale:tag,finish:query('.work-finish').value,tags:[tag,query('.work-finish').value],image:preview.src,crop:{...workCrop},uploadedAt:editingWork>=0?(artworks[editingWork].uploadedAt||0):Date.now()};const previous=editingWork>=0?artworks[editingWork]:null;if(showcaseRank(previous)!==Infinity)item.showcaseOrder=previous.showcaseOrder;if(previous&&previous.image!==item.image)item.uploadedAt=Date.now();if(editingWork>=0)artworks[editingWork]=item;else artworks.unshift(item);
+if(!(await remember())){if(editingWork>=0)artworks[editingWork]=previous;else artworks.shift();query('.save-result').textContent=cloudError||'บันทึก Firebase ไม่สำเร็จ กรุณาลองอีกครั้งค่ะ';return;}
+category='All';latestIndex=0;drawGallery();drawLatest();drawWorkLibrary();editingWork=-1;query('.save').textContent='บันทึกตัวอย่าง';query('.cancel-work-edit').hidden=true;query('.save-result').textContent='บันทึกแล้ว ผลงานแสดงในShowcaseและ Overview ค่ะ';
+});
+
+function adminUnlocked(){return true;}
+function showAdminLogin(){if(root.dataset.admin!=='true'){location.href='admin.html';return;}query('.admin-pin').value='';query('.admin-login-error').textContent='';query('.admin-login').showModal();query('.admin-pin').focus();}
+
+query('.admin-entry').addEventListener('click',showAdminLogin);
+query('.admin-login-close').addEventListener('click',async ()=>query('.admin-login').close());
+query('.admin-login-form').addEventListener('submit',async event=>{event.preventDefault();if(false){query('.admin-login-error').textContent='รหัสไม่ถูกต้อง กรุณาลองอีกครั้งค่ะ';return;}try{sessionStorage.setItem('akane-admin-unlocked','true');}catch{}query('.admin-login').close();if(root.dataset.admin==='true'){appearance();}else window.open('admin.html','_blank');});
+function appearance(){surface.dataset.animation=look.animation;surface.querySelectorAll('[data-effect]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.effect===look.animation)));query('.sparkles').querySelectorAll('span').forEach((span,i)=>{span.textContent=look.animation==='petals'?'❀':look.animation==='dots'?'•':i%3?'✧':'✦';});query('.calculator').style.borderRadius=look.radius+'px';query('.sparkles').style.display=look.motion&&look.animation!=='none'?'':'none';const admin=look.view==='admin';const locked=admin&&!adminUnlocked();query('.admin-entry').hidden=admin;query('.admin-preview').hidden=!admin||locked;query('.tos-admin').hidden=!admin||locked;query('.offers-admin').hidden=!admin||locked;query('.content-grid').hidden=admin;query('.footer').hidden=admin;query('.hero').hidden=admin||!query('.calculator').hidden;query('header nav').hidden=admin;query('.contact-top').hidden=admin;}
+render();drawTaxonomy();drawGallery();drawLatest();drawWorkLibrary();appearance();query('.cloud-status').textContent=cloudError||'เชื่อมต่อ Firebase แล้วค่ะ';if(root.dataset.admin==='true'&&!adminUnlocked())showAdminLogin();if(globalThis.Tweak){const tweak=new Tweak({container:surface,onChange:appearance});tweak.addSlider(look,'radius',{label:'ความโค้งของกล่องเลือกงาน',min:8,max:32,unit:'px'});tweak.addSelect(look,'animation',{label:'แอนิเมชันพื้นหลัง',options:[{label:'ประกาย',value:'sparkles'},{label:'กลีบดอกไม้',value:'petals'},{label:'จุดลอย',value:'dots'},{label:'ไม่ใช้แอนิเมชัน',value:'none'}]});tweak.addSelect(look,'view',{label:'หน้าที่แสดงในพรีวิว',options:[{label:'หน้าลูกค้า',value:'customer'},{label:'หลังบ้าน',value:'admin'}]});}
+});
+const loadStatus=document.getElementById('initial-load-status');
+loadStatus.textContent='กำลังโหลดข้อมูลและสื่อ…';
+root.querySelectorAll('.admin-preview,.offers-admin,.tos-admin').forEach(panel=>panel.inert=true);
+// Render the interface before waiting for Firebase and media hydration.
+await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+
+try{
+ if(!window.NottonData)throw new Error('โหลดการเชื่อมต่อ Firebase ไม่สำเร็จ กรุณารีเฟรชหน้า');
+ let data=await window.NottonData.load();
+ if(!data){const response=await fetch('site-data.json',{cache:'no-store'});if(!response.ok)throw new Error('โหลดข้อมูลเริ่มต้นไม่สำเร็จ');data=await response.json();}
+ root.querySelectorAll('.ak').forEach(surface=>surface._applyCloud?.(data));
+ cloudReady=true;
+ root.querySelectorAll('.admin-preview,.offers-admin,.tos-admin').forEach(panel=>panel.inert=false);
+ loadStatus.hidden=true;
+ window.NottonData.subscribe(data=>{root.querySelectorAll('.ak').forEach(surface=>surface._applyCloud?.(data));},message=>{root.querySelectorAll('.cloud-status').forEach(status=>status.textContent=message);});
+}catch(error){loadStatus.textContent=window.NottonData?.errorMessage(error)||error.message;loadStatus.setAttribute('role','alert');}
+
+window.addEventListener('openai:set_globals',async event=>{const incoming=event.detail?.globals?.widgetState?.modelContent;if(incoming?.language){language=incoming.language==='en'?'en':'th';root.querySelectorAll('.ak').forEach(translate);}});
+})();
+</script>
+<script src="profile.js"></script><script src="rate-admin.js"></script><script src="admin-auth.js"></script></body></html>
