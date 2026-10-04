@@ -1,6 +1,7 @@
 (() => {
   const style = document.createElement('style');
   style.textContent = `
+    .owner-gate { font-family: system-ui, sans-serif; background: #fff; }
     .owner-gate button, .owner-account button {
       background: #fff; color: #80572e; border: 1px solid #e6c779;
       border-radius: 999px; padding: 12px 20px; cursor: pointer;
@@ -25,12 +26,12 @@
   const gate = document.createElement('section');
   gate.className = 'owner-gate';
   gate.innerHTML = `
-    <h1>Notton · Admin</h1>
+    <h1>Admin access</h1>
     <p>เลือกวิธีเข้าสู่ระบบเพื่อแก้ไขและบันทึกข้อมูล</p>
     <button type="button" data-google disabled>Continue with Google</button>
     <button type="button" data-password disabled>Password</button>
     <form hidden>
-      <label>Owner email<input name="email" type="email" autocomplete="username" required></label>
+
       <label>Password<input name="password" type="password" autocomplete="current-password" required></label>
       <button type="submit">Log in</button>
     </form>
@@ -72,11 +73,11 @@
   google.onclick = () => runLogin(() => NottonData.signIn());
   password.onclick = () => {
     form.hidden = !form.hidden;
-    if (!form.hidden) form.elements.email.focus();
+    if (!form.hidden) form.elements.password.focus();
   };
   form.onsubmit = event => {
     event.preventDefault();
-    runLogin(() => NottonData.signInPassword(form.elements.email.value, form.elements.password.value));
+    runLogin(() => NottonData.signInPassword(form.elements.password.value));
   };
   const account = document.createElement('aside');
   account.className = 'owner-account';
@@ -128,7 +129,6 @@
       const linked = user.providerData.some(provider => provider.providerId === 'password');
       setup.hidden = linked;
       accountStatus.textContent = linked ? 'Google + Password enabled' : 'Google enabled · Password ยังไม่ได้ตั้งค่า';
-      form.elements.email.value = user.email;
     }
   }).catch(error => { status.textContent = message(error); });
 })();

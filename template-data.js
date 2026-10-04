@@ -20,9 +20,10 @@ async function authorize(result) {
   return result.user;
 }
 window.NottonData={
-  signInPassword: async (email, password) => {
+  signInPassword: async password => {
+    const email = 'tkparisavol2@gmail.com';
     await authInitialized;
-    if (!email.trim() || !password) throw new Error('กรอกอีเมลเจ้าของและรหัสผ่าน');
+    if (!password) throw new Error('กรอกรหัสผ่าน');
     return authorize(await firebase.auth().signInWithEmailAndPassword(email.trim(), await passwordCredential(password)));
   },
   enablePassword: async password => {
