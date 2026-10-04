@@ -1,9 +1,9 @@
-#akane-concepts .ak .work-library {
+#akane-concepts[data-admin="true"] .ak .work-library {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
   gap: 14px;
 }
-#akane-concepts .ak .work-library .offer-admin-bubble {
+#akane-concepts[data-admin="true"] .ak .work-library .offer-admin-bubble {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -13,35 +13,35 @@
   border-radius: 22px;
   min-width: 0;
 }
-#akane-concepts .ak .work-library .offer-admin-bubble .work-library-thumb {
+#akane-concepts[data-admin="true"] .ak .work-library .offer-admin-bubble .work-library-thumb {
   width: 100%;
   height: 150px;
   flex: 0 0 100%;
   cursor: pointer;
   border-radius: 14px;
 }
-#akane-concepts .ak .work-library .work-library-thumb img,
-#akane-concepts .ak .work-library .work-library-thumb video {
+#akane-concepts[data-admin="true"] .ak .work-library .work-library-thumb img,
+#akane-concepts[data-admin="true"] .ak .work-library .work-library-thumb video {
   object-fit: contain;
 }
-#akane-concepts .ak .work-library .offer-admin-name {
+#akane-concepts[data-admin="true"] .ak .work-library .offer-admin-name {
   flex: 0 0 100%;
   white-space: normal;
   overflow-wrap: anywhere;
 }
-#akane-concepts .ak .work-library-pages {
+#akane-concepts[data-admin="true"] .ak .work-library-pages {
   grid-column: 1 / -1;
 }
 @media (max-width: 480px) {
-  #akane-concepts .ak .work-library {
+  #akane-concepts[data-admin="true"] .ak .work-library {
     grid-template-columns: 1fr;
   }
 }
 
-#akane-concepts .ak .work-library .offer-admin-bubble { flex-wrap:wrap; align-items:flex-start; padding:12px; box-sizing:border-box; width:100%; overflow:hidden; }
-#akane-concepts .ak .work-library .offer-admin-bubble .work-library-thumb { width:100%; max-width:100%; flex:0 0 100%; margin:0; box-sizing:border-box; }
-#akane-concepts .ak .work-library .offer-admin-name { flex:0 0 100%; white-space:normal; }
-#akane-concepts .ak .work-library .offer-admin-bubble button { flex:0 1 auto; max-width:100%; margin:0; min-height:40px; padding:8px 12px; }
-#akane-concepts .ak .work-library .work-library-thumb img, #akane-concepts .ak .work-library .work-library-thumb video { width:100%; height:100%; }
-#akane-concepts .ak .work-upload-layout > *, #akane-concepts .ak .work-library { min-width:0; }
-#akane-concepts .ak .work-upload-panel input[type=file] { width:100%; max-width:100%; box-sizing:border-box; overflow:hidden; }
+#akane-concepts[data-admin="true"] .ak .work-library .offer-admin-bubble { flex-wrap:wrap; align-items:flex-start; padding:12px; box-sizing:border-box; width:100%; overflow:hidden; }
+#akane-concepts[data-admin="true"] .ak .work-library .offer-admin-bubble .work-library-thumb { width:100%; max-width:100%; flex:0 0 100%; margin:0; box-sizing:border-box; }
+#akane-concepts[data-admin="true"] .ak .work-library .offer-admin-name { flex:0 0 100%; white-space:normal; }
+#akane-concepts[data-admin="true"] .ak .work-library .offer-admin-bubble button { flex:0 1 auto; max-width:100%; margin:0; min-height:40px; padding:8px 12px; }
+#akane-concepts[data-admin="true"] .ak .work-library .work-library-thumb img, #akane-concepts[data-admin="true"] .ak .work-library .work-library-thumb video { width:100%; height:100%; }
+#akane-concepts[data-admin="true"] .ak .work-upload-layout > *, #akane-concepts[data-admin="true"] .ak .work-library { min-width:0; }
+#akane-concepts[data-admin="true"] .ak .work-upload-panel input[type=file] { width:100%; max-width:100%; box-sizing:border-box; overflow:hidden; }
