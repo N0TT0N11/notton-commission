@@ -285,7 +285,7 @@ export function button(text, action, label = text) {
 }
 export function styles() {
   if (document.querySelector('[data-rate-builder-style]')) return;
-  const link = document.createElement('link'); link.rel = 'stylesheet'; link.href = 'rate-builder.css'; link.dataset.rateBuilderStyle = ''; document.head.append(link);
+  const link = document.createElement('link'); link.rel = 'stylesheet'; link.href = 'rate-builder.css?v=embed-20261005'; link.dataset.rateBuilderStyle = ''; document.head.append(link);
 }
 export function render(target, model, pages = {}, repaint = null) {
   target.replaceChildren();
