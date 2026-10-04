@@ -6,5 +6,35 @@ async function write(key,value){const db=await database;if(!db)return;return new
 function script(src){return new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=src;s.async=true;s.onload=resolve;s.onerror=()=>reject(new Error('โหลด Firebase ไม่สำเร็จ'));document.head.append(s);});}
 const authInitialized=(async()=>{await script('https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js');await Promise.all([script('https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js'),script('https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js')]);await script('notton-cloud.js');await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);return window.NottonCloud;})();
 const ready=authInitialized.then(async cloud=>{const data=await window.NottonCloud.load();if(data){last=data;await write('site',data);listeners.forEach(fn=>fn(data));}window.NottonCloud.subscribe(async data=>{if(data){last=data;await write('site',data);listeners.forEach(fn=>fn(data));}},message=>console.warn(message));return cloud;});ready.catch(e=>{console.warn(e.message);document.dispatchEvent(new CustomEvent('notton-cloud-error',{detail:e.message}));});
-window.NottonData={loadFresh:async()=>{await ready;return last;},load:async()=>{if(!loadPromise)loadPromise=read('site').then(cached=>{if(cached)last=cached;return last;});await loadPromise;return last;},save:async data=>{const cloud=await ready;const user=firebase.auth().currentUser;if(!(await isOwner(user)))throw new Error('เข้าสู่ระบบด้วยบัญชีเจ้าของ Notton ก่อนบันทึก');const merged={...last,...data};await cloud.save(merged);last=merged;await write('site',merged);listeners.forEach(fn=>fn(merged));},subscribe:fn=>{listeners.add(fn);return()=>listeners.delete(fn);},getPoster:async src=>(await ready).getPoster(src),putPoster:async(src,poster)=>(await ready).putPoster(src,poster),errorMessage:e=>window.NottonCloud?.errorMessage(e)||e.message||'บันทึกไม่สำเร็จ',signIn:async()=>{await authInitialized;await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);const result=await firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());if(!(await isOwner(result.user))){await firebase.auth().signOut();throw new Error('บัญชีนี้ไม่มีสิทธิ์จัดการ Notton');}return result.user;},signOut:async()=>{await authInitialized;await firebase.auth().signOut();},authReady:async fn=>{await authInitialized;return firebase.auth().onAuthStateChanged(async user=>fn(await isOwner(user)?user:null));}};
+// Versioned credential encoding keeps the user-facing password unchanged.
+// It does not add entropy: authentication and rate limiting happen in Firebase.
+async function passwordCredential(password) {
+  const bytes = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('notton-password-v1:' + password));
+  return 'Notton1!' + [...new Uint8Array(bytes)].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+async function authorize(result) {
+  if (!(await isOwner(result.user))) {
+    await firebase.auth().signOut();
+    throw new Error('บัญชีนี้ไม่มีสิทธิ์จัดการ Notton');
+  }
+  return result.user;
+}
+window.NottonData={
+  signInPassword: async (email, password) => {
+    await authInitialized;
+    if (!email.trim() || !password) throw new Error('กรอกอีเมลเจ้าของและรหัสผ่าน');
+    return authorize(await firebase.auth().signInWithEmailAndPassword(email.trim(), await passwordCredential(password)));
+  },
+  enablePassword: async password => {
+    await authInitialized;
+    const user = firebase.auth().currentUser;
+    if (!(await isOwner(user))) throw new Error('เข้าสู่ระบบด้วย Google เจ้าของก่อนตั้งรหัสผ่าน');
+    if (user.providerData.some(provider => provider.providerId === 'password')) {
+      throw new Error('บัญชีนี้เปิดใช้ Password แล้ว');
+    }
+    if (!password) throw new Error('กรอกรหัสผ่าน');
+    await user.linkWithCredential(firebase.auth.EmailAuthProvider.credential(user.email, await passwordCredential(password)));
+    return user;
+  },
+loadFresh:async()=>{await ready;return last;},load:async()=>{if(!loadPromise)loadPromise=read('site').then(cached=>{if(cached)last=cached;return last;});await loadPromise;return last;},save:async data=>{const cloud=await ready;const user=firebase.auth().currentUser;if(!(await isOwner(user)))throw new Error('เข้าสู่ระบบด้วยบัญชีเจ้าของ Notton ก่อนบันทึก');const merged={...last,...data};await cloud.save(merged);last=merged;await write('site',merged);listeners.forEach(fn=>fn(merged));},subscribe:fn=>{listeners.add(fn);return()=>listeners.delete(fn);},getPoster:async src=>(await ready).getPoster(src),putPoster:async(src,poster)=>(await ready).putPoster(src,poster),errorMessage:e=>window.NottonCloud?.errorMessage(e)||e.message||'บันทึกไม่สำเร็จ',signIn:async()=>{await authInitialized;await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);const result=await firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());if(!(await isOwner(result.user))){await firebase.auth().signOut();throw new Error('บัญชีนี้ไม่มีสิทธิ์จัดการ Notton');}return result.user;},signOut:async()=>{await authInitialized;await firebase.auth().signOut();},authReady:async fn=>{await authInitialized;return firebase.auth().onAuthStateChanged(async user=>fn(await isOwner(user)?user:null));}};
 })();
