@@ -1,5 +1,5 @@
 <!doctype html><html lang="th"><head><style id="owner-access-gate">body:not(.owner-authorized) #akane-concepts,body:not(.owner-authorized) .prototype-banner{display:none!important}.owner-gate{max-width:480px;margin:15vh auto;padding:32px;border-radius:24px;background:#fffaf0;border:1px solid #e5c982;color:#694b2d}.owner-gate button{padding:14px 22px;background:#e2b443;border:0;border-radius:24px;font:inherit;cursor:pointer}</style><meta charset="utf-8"><link rel="icon" type="image/svg+xml" href="favicon.svg"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Notton admin</title><style>body{margin:0;padding:16px;background:#fffaf0}#akane-concepts{max-width:1120px;margin:auto}button{cursor:pointer}
-</style><link rel="stylesheet" href="notton.css"></head><body><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;700&amp;display=swap">
+</style><link rel="stylesheet" href="notton.css"><link rel="stylesheet" href="artwork-admin-ui.css"></head><body><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;700&amp;display=swap">
 <style>
 #akane-concepts .ak { --ak-bg:#fffaf5;--ak-paper:#ffffff;--ak-text:#493a32;--ak-muted:#806959;--ak-line:#eedfd3;--ak-soft:#ffeadb;--ak-accent:#ae4c20;--ak-green:#fff0e3;--ak-orange:#ed8b50;font:16px/1.6 'Tahoma',sans-serif;color:var(--ak-text);background:var(--ak-bg);padding:28px;border-radius:24px;position:relative;overflow:hidden;min-height:1050px;box-sizing:border-box}
 #akane-concepts .ak *{box-sizing:border-box}#akane-concepts .ak [hidden]{display:none!important}
@@ -568,7 +568,7 @@
 </div>
 
 
-<script src="template-data.js"></script>
+<script src="template-data.js?v=login-20261004"></script>
 <script>
 (async()=>{
 const root=document.getElementById('akane-concepts');
@@ -937,4 +937,4 @@ try{
 window.addEventListener('openai:set_globals',async event=>{const incoming=event.detail?.globals?.widgetState?.modelContent;if(incoming?.language){language=incoming.language==='en'?'en':'th';root.querySelectorAll('.ak').forEach(translate);}});
 })();
 </script>
-<script src="profile.js"></script><script src="rate-admin.js"></script><script src="admin-auth.js"></script></body></html>
+<script src="profile.js?v=login-20261004"></script><script src="rate-admin.js?v=visual-20261004"></script><script src="admin-auth.js?v=login-20261004"></script><script src="artwork-admin-ui.js"></script></body></html>

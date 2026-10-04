@@ -1,10 +1,21 @@
-(()=>{
-const galleries=[...document.querySelectorAll('.gallery-component')];const defaults={};
-for(const gallery of galleries)defaults[gallery.id]=[...gallery.querySelectorAll('img')].map(img=>({src:img.getAttribute('src'),alt:img.alt}));
-const texts={};for(const element of document.querySelectorAll('#text09,#text11,#text13,.table-component td,.list-component p')){const key=element.id||`${element.closest('[id]').id}-${[...element.closest('[id]').querySelectorAll('td,p')].indexOf(element)}`;element.dataset.rateText=key;texts[key]=element.textContent;}
-const baseline={galleries:defaults,texts};let model=structuredClone(baseline);const pages={};
-function draw(){for(const [key,value] of Object.entries(model.texts||{})){const el=[...document.querySelectorAll('[data-rate-text]')].find(e=>e.dataset.rateText===key);if(el)el.textContent=value;}
- for(const gallery of galleries){const list=gallery.querySelector('ul');const items=model.galleries?.[gallery.id]||[];const count=Math.max(1,Math.ceil(items.length/(gallery.id==='image04'?1:2)));pages[gallery.id]=Math.min(pages[gallery.id]||1,count);list.replaceChildren();const size=gallery.id==='image04'?1:2;for(const item of items.slice((pages[gallery.id]-1)*size,pages[gallery.id]*size)){const li=document.createElement('li'),span=document.createElement('span'),frame=document.createElement('span'),img=document.createElement('img');span.className='thumbnail';frame.className='frame';img.src=item.src;img.alt=item.alt||'';img.loading='lazy';img.decoding='async';frame.append(img);span.append(frame);li.append(span);if(item.alt&&item.alt!=='Untitled'){const caption=document.createElement('div');caption.className='caption';caption.textContent=item.alt;li.append(caption);}list.append(li);}gallery.querySelector('.rate-carousel-head')?.remove();if(count>1){const nav=document.createElement('nav');nav.className='rate-carousel-head';nav.setAttribute('aria-label','Image pages');const button=(label,page,disabled=false)=>{const b=document.createElement('button');b.textContent=label;b.disabled=disabled;b.onclick=()=>{pages[gallery.id]=page;draw();};if(page===pages[gallery.id]&&/^\d+$/.test(label))b.setAttribute('aria-current','page');nav.append(b);};button('‹',pages[gallery.id]-1,pages[gallery.id]===1);button('›',pages[gallery.id]+1,pages[gallery.id]===count);gallery.prepend(nav);}}
-}
-window.NottonRateDefaults=baseline;draw();window.NottonData.load().then(site=>{if(site.priceRate)model={galleries:{...defaults,...site.priceRate.galleries},texts:{...texts,...site.priceRate.texts}};draw();});window.NottonData.subscribe(site=>{if(site?.priceRate){model={galleries:{...defaults,...site.priceRate.galleries},texts:{...texts,...site.priceRate.texts}};draw();}});
-})();
+(async () => {
+  const core = await import('./rate-core.js?v=20261004-media1');
+  core.styles();
+  const target = document.getElementById('rate-page');
+  const pages = {};
+  let lastSignature = '';
+  function apply(site) {
+    const model = core.normalize(site);
+    const signature = JSON.stringify(model);
+    if (signature === lastSignature) return;
+    lastSignature = signature;
+    core.render(target, model, pages);
+  }
+  apply({});
+  apply(await window.NottonData.load());
+  window.NottonData.subscribe(apply);
+})().catch(error => {
+  const status = document.getElementById('rate-load-status');
+  if (status) status.textContent = 'ยังโหลดข้อมูลล่าสุดไม่ได้ กรุณาลองใหม่';
+  console.error(error);
+});

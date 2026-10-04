@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Notton · Visual Price rate Editor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="rate-builder.css?v=natural2">
+  <link rel="stylesheet" href="visual-rate-editor.css?v=drag9">
+<style>
+    body:not(.owner-authorized) #rate-page,
+    body:not(.owner-authorized) #editor-tools,
+    body:not(.owner-authorized) #editor-properties,
+    body:not(.owner-authorized) #editor-add { display: none; }
+    .owner-gate { max-width: 420px; margin: 10vh auto; padding: 32px; background: white; border-radius: 28px; }
+    .owner-gate[hidden] { display: none; }
+  </style>
+</head>
+<body class="visual-editor">
+  <nav id="editor-tools" aria-label="เครื่องมือปรับแต่ง"></nav>
+  <div id="editor-status" role="status">กำลังตรวจสอบการเข้าสู่ระบบ…</div>
+  <aside id="editor-properties" aria-label="ตั้งค่าองค์ประกอบ" hidden></aside>
+  <aside id="editor-add" aria-label="เพิ่มองค์ประกอบ" hidden></aside>
+  <main id="rate-page" aria-label="คลิกองค์ประกอบเพื่อแก้ไข"></main>
+  <script src="template-data.js?v=login-20261004"></script>
+  <script src="admin-auth.js?v=login-20261004"></script>
+  <script type="module" src="visual-rate-editor.js?v=20261004-clean10"></script>
+</body>
+</html>

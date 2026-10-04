@@ -526,7 +526,7 @@
 </div>
 
 
-<script src="template-data.js"></script>
+<script src="template-data.js?v=login-20261004"></script>
 <script>
 (async()=>{
 const root=document.getElementById('akane-concepts');
@@ -850,7 +850,7 @@ category='All';latestIndex=0;drawGallery();drawLatest();drawWorkLibrary();editin
 });
 
 function adminUnlocked(){return true;}
-function showAdminLogin(){if(root.dataset.admin!=='true'){window.NottonData.signIn().then(()=>location.href='admin.html').catch(e=>alert(window.NottonData.errorMessage(e)));return;}query('.admin-pin').value='';query('.admin-login-error').textContent='';query('.admin-login').showModal();query('.admin-pin').focus();}
+function showAdminLogin(){if(root.dataset.admin!=='true'){location.href='admin.html';return;}query('.admin-pin').value='';query('.admin-login-error').textContent='';query('.admin-login').showModal();query('.admin-pin').focus();}
 
 query('.admin-entry').addEventListener('click',showAdminLogin);
 query('.admin-login-close').addEventListener('click',async ()=>query('.admin-login').close());
@@ -875,4 +875,4 @@ try{
 window.addEventListener('openai:set_globals',async event=>{const incoming=event.detail?.globals?.widgetState?.modelContent;if(incoming?.language){language=incoming.language==='en'?'en':'th';root.querySelectorAll('.ak').forEach(translate);}});
 })();
 </script>
-<script src="profile.js"></script></body></html>
+<script src="profile.js?v=login-20261004"></script></body></html>
