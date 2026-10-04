@@ -88,3 +88,24 @@
 #editor-properties .ve-image-row .ve-field {margin:0;min-width:0;}
 #editor-properties .ve-image-row button {padding:0;width:30px;min-height:30px;}
 #editor-properties .ve-row-drop {border-top:3px solid #b48b3d;background:#fff8e7;}
+
+/* Keep embedded browsing inside preview; editing clicks select the block. */
+.visual-editor:not(.ve-preview) .rate-embed iframe,
+.visual-editor:not(.ve-preview) .rate-embed video,
+.visual-editor:not(.ve-preview) .rate-embed audio {pointer-events:none;}
+.visual-editor:not(.ve-preview) .rate-embed {cursor:pointer;}
+
+.visual-editor .rate-embed {position:relative;padding-top:44px;}
+.visual-editor .ve-embed-delete {position:absolute;top:4px;right:4px;width:36px;height:36px;padding:0;background:#fff;color:#80572e;border:1px solid #dfb44c;border-radius:999px;z-index:2;}
+.visual-editor.ve-preview .rate-embed {padding-top:0;}
+
+@media(max-width:600px){
+ .visual-editor {padding:120px 10px 24px;}
+ #editor-tools {top:28px;left:10px;right:10px;max-width:none;border-radius:24px;gap:4px;justify-content:center;}
+ #editor-tools button {min-width:40px;min-height:44px;padding:7px 10px;}
+ #editor-status {top:6px;left:12px;right:12px;max-width:none;text-align:center;font-size:12px;}
+ #editor-properties,#editor-add {left:10px!important;right:10px!important;top:136px;bottom:12px;width:auto;max-width:none;padding:16px;max-height:calc(100dvh - 148px);}
+ #editor-add {bottom:auto;}
+ #editor-properties input,#editor-properties select,#editor-properties textarea {font-size:16px;}
+ .rate-public-card {padding:18px 14px;}
+}

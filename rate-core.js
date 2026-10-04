@@ -1,4 +1,4 @@
-import {renderExtra} from './element-library.js?v=test3';
+import {renderExtra} from './element-library.js?v=embed-20261005';
 const DEFAULT_SECTIONS = [
   {
     "id": "image04",
@@ -325,8 +325,8 @@ export function render(target, model, pages = {}, repaint = null) {
           else image.src=item.src;
           image.style.objectFit=block.fit==='contain'?'contain':'cover';
           image.style.objectPosition=block.position||'center';
-          figure.dataset.imageIndex=images.indexOf(item); figure.append(image);
-          if (item.alt && item.alt !== 'Untitled') figure.append(el('figcaption', '', item.alt)); gallery.append(figure);
+          figure.dataset.imageIndex=images.indexOf(item); figure.dataset.mediaPosition=block.position||'center'; figure.append(image);
+          gallery.append(figure);
         }
         card.append(gallery);
       }

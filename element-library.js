@@ -1,3 +1,4 @@
+import {resolveEmbed} from './embed-resolver.js?v=embed-20261005';
 export const elements = [
   ['text','Text'],['list','List'],
   ['gallery','Image / Gallery'],['video','Video'],
@@ -46,8 +47,20 @@ export function renderExtra(card,block,{el,button,mediaSource}){
     const update=()=>{const end=Date.parse(block.deadline);if(!Number.isFinite(end)){output.textContent='เลือกวันและเวลาที่ต้องการ';return;}const seconds=Math.max(0,Math.floor((end-Date.now())/1000));output.textContent=seconds===0?'ครบกำหนดแล้ว':`${Math.floor(seconds/86400)} วัน ${Math.floor(seconds/3600)%24} ชั่วโมง ${Math.floor(seconds/60)%60} นาที ${seconds%60} วินาที`;};update();wrap.append(output);card.append(wrap);const clock=setInterval(()=>{if(!wrap.isConnected){clearInterval(clock);return;}update();},1000);
   }
   if(['embed','widget'].includes(block.kind)){
-    const wrap=el('div','rate-embed');const url=safeLink(block.url);
-    if(url&&/^https?:/.test(url)){const frame=el('iframe');frame.src=url;frame.title=block.kind==='widget'?'วิดเจ็ต':'เว็บไซต์ที่ฝัง';frame.loading='lazy';frame.height=Number(block.height)||320;frame.setAttribute('sandbox','allow-scripts allow-same-origin allow-forms allow-popups');frame.allow='fullscreen';wrap.append(frame);}else wrap.append(el('p','','คลิกเพื่อตั้งค่าลิงก์ฝังเว็บ'));card.append(wrap);
+    const wrap=el('div','rate-embed'), info=resolveEmbed(block.url,block.embedMode);
+    const height=Math.max(100,Math.min(1200,Number(block.height)||320));
+    if(['image','video','audio'].includes(info.kind)){
+      const media=el(info.kind==='image'?'img':info.kind);media.src=info.src;
+      if(info.kind==='image'){media.alt=block.caption||'Embedded image';media.loading='lazy';}
+      else {media.controls=true;media.preload='metadata';}
+      media.onerror=()=>{media.hidden=true;wrap.prepend(el('p','','Media unavailable. Open the original link below.'));};wrap.append(media);
+    } else if(info.kind==='iframe'){
+      const frame=el('iframe');frame.src=info.src;frame.title=block.caption||info.provider+' embed';frame.loading='lazy';frame.height=height;
+      frame.setAttribute('sandbox','allow-scripts allow-same-origin allow-forms allow-popups allow-presentation');frame.allow='fullscreen; picture-in-picture; encrypted-media';frame.referrerPolicy='strict-origin-when-cross-origin';wrap.append(frame);
+    }
+    if(info.message)wrap.append(el('p','rate-embed-note',info.message));
+    if(info.source){const link=el('a','rate-embed-source',info.kind==='bookmark'?'↗ '+(block.caption||info.provider):'Open original ↗');link.href=info.source;link.target='_blank';link.rel='noopener noreferrer';wrap.append(link);}
+    card.append(wrap);
   }
   if(block.kind==='form'){
     const form=el('form','rate-contact-form');form.append(el('h3','',block.label||'ติดต่อเรา'));

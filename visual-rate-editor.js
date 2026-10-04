@@ -2,8 +2,8 @@ import {tosModel} from './tos-core.js';
 const editingTos=document.body.dataset.editor==='tos';
 const contentKey=editingTos?'tosContent':'priceRate';
 const editorModel=site=>editingTos?tosModel(site):normalize(site);
-import {elements,defaults,elementIcon} from './element-library.js?v=test3';
-import {normalize, render, el, button, uid, clone, readImage, readMedia, mediaSource, move} from './rate-core.js?v=20261004-test4';
+import {elements,defaults,elementIcon} from './element-library.js?v=embed-20261005';
+import {normalize, render, el, button, uid, clone, readImage, readMedia, mediaSource, move} from './rate-core.js?v=embed-20261005';
 let saved={};
 let savedSignature='';
 let saving=false;
@@ -75,6 +75,14 @@ function paint(){
     node.classList.add('ve-element'); node.classList.toggle('ve-selected',node.dataset.blockId===selected);
     node.draggable=!preview&&!node.matches('.rate-paragraph');
   }
+  if(!preview)for(const node of canvas.querySelectorAll('.rate-embed[data-block-id]')) {
+    const remove=action('Delete embed',()=>act(()=>{
+      const section=model.sections.find(s=>s.id===node.closest('[data-section-id]').dataset.sectionId);
+      const at=section.blocks.findIndex(b=>b.id===node.dataset.blockId);
+      if(at>=0)section.blocks.splice(at,1);selected=null;
+    }),'×');
+    remove.className='ve-embed-delete';node.append(remove);
+  }
   for(const figure of canvas.querySelectorAll('[data-image-index]')) {figure.draggable=!preview;figure.querySelector('img,video').draggable=false;}
   for(const node of canvas.querySelectorAll('.rate-public-card > h2'))node.classList.add('ve-section-title');
   for(const node of canvas.querySelectorAll('.rate-paragraph[data-block-id],.rate-page-title,.ve-section-title')) {
@@ -139,7 +147,7 @@ function galleryEditor(block){
   properties.append(select('จำนวนภาพต่อหน้า',String(block.perPage||3),[1,2,3,4,5,6].map(n=>[String(n),String(n)]),v=>block.perPage=Number(v)),select('การแสดงรูป',block.fit||'cover',[['cover','เต็มกรอบ (Fit in)'],['contain','เต็มภาพ ไม่ตัดขอบ'],['natural','Original ratio · No frame']],v=>block.fit=v),select('ตำแหน่งภาพ',block.position||'center',[['center','กึ่งกลาง'],['top','ด้านบน'],['bottom','ด้านล่าง'],['left','ด้านซ้าย'],['right','ด้านขวา']],v=>block.position=v));
   properties.append(select('Media width',String(!!block.fullWidth),[['false','Gallery columns'],['true','Full container width']],v=>block.fullWidth=v==='true'));
   const upload=el('input');upload.type='file';upload.multiple=true;upload.accept='image/*,video/*';upload.setAttribute('aria-label','เพิ่มภาพ วิดีโอ หรือ GIF');upload.onchange=async()=>{
-    upload.disabled=true;status.textContent='กำลังเตรียมภาพ…';try{const additions=[];for(const file of upload.files)additions.push(await readMedia(file));act(()=>block.images.push(...additions));}catch(e){status.textContent=e.message;}finally{upload.disabled=false;}
+    upload.disabled=true;status.textContent='กำลังเตรียมภาพ…';try{const additions=[];for(const file of upload.files)additions.push({...await readMedia(file),alt:''});act(()=>block.images.push(...additions));}catch(e){status.textContent=e.message;}finally{upload.disabled=false;}
   };properties.append(upload);
   block.images.forEach((image,i)=>{
     const row=el('div','ve-image-row'),img=el('img');
@@ -175,7 +183,8 @@ function buildAdd(){
   });item.replaceChildren(elementIcon(kind),el('span','',label));addPanel.append(item);}
 }
 canvas.onclick=event=>{
-  if(preview||event.target.closest('button'))return;
+  if(preview)return;
+  if(event.target.closest('button')&&!event.target.closest('.rate-embed'))return;
   if(event.target.closest('a'))event.preventDefault();
   addPanel.hidden=true;
   if(event.target.closest('.rate-page-title')){selected='page';properties.hidden=true;return;}
@@ -247,7 +256,7 @@ function extraEditor(block){
   if(block.kind==='list')properties.append(field('รายการ (หนึ่งบรรทัดต่อรายการ)',block.text,v=>block.text=v,'textarea'),select('รูปแบบรายการ',String(!!block.ordered),[['false','จุดนำหน้า'],['true','ลำดับเลข']],v=>block.ordered=v==='true'));
   if(block.kind==='timer'){const date=field('วันเวลาสิ้นสุด',block.deadline,v=>block.deadline=v);date.querySelector('input').type='datetime-local';properties.append(field('ข้อความ',block.text,v=>block.text=v),date);}
   if(block.kind==='divider')properties.append(field('ช่องว่าง (px)',block.space,v=>block.space=Math.max(0,Math.min(200,Number(v)||0))),field('สีเส้น',block.color,v=>block.color=v));
-  if(['embed','widget'].includes(block.kind))properties.append(field('ลิงก์สำหรับฝัง (Embed URL)',block.url,v=>block.url=v),field('ความสูง (px)',block.height,v=>block.height=Math.max(100,Math.min(1200,Number(v)||320))),el('p','','เว็บไซต์ปลายทางต้องอนุญาตให้ฝังผ่าน iframe'));
+  if(['embed','widget'].includes(block.kind))properties.append(field('Embed URL or iframe code',block.url,v=>block.url=v,'textarea'),select('Display',block.embedMode||'embed',[['embed','Embed'],['bookmark','Bookmark']],v=>block.embedMode=v),field('Caption',block.caption,v=>block.caption=v),field('ความสูง (px)',block.height,v=>block.height=Math.max(100,Math.min(1200,Number(v)||320))),el('p','','Paste a public link. Use Preview to interact with embedded content.'));
   if(block.kind==='audio'){
     properties.append(field('ชื่อเสียง',block.title,v=>block.title=v),field('ลิงก์ไฟล์เสียง',block.url,v=>{block.url=v;delete block.mediaId;}));
     const upload=el('input');upload.type='file';upload.accept='audio/*';upload.setAttribute('aria-label','เพิ่มไฟล์เสียง');upload.onchange=async()=>{try{const asset=await readMedia(upload.files[0]);act(()=>{block.url=asset.src;delete block.mediaId;block.title=asset.alt;});}catch(e){status.textContent=e.message;}};properties.append(upload);

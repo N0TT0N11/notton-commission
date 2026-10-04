@@ -20,9 +20,9 @@ async function sharedPoster(src){const id=mediaIds.get(src)||await digest(src),k
 async function prepareVideo(data,id){if(!/^data:video\//i.test(data))return;if(/^data:video\/(mp4|quicktime)/i.test(data)){const binary=atob(data.slice(data.indexOf(',')+1));if(binary.includes('hvc1')||binary.includes('hev1'))throw new Error('วิดีโอนี้เป็น HEVC/H.265 ซึ่งบางเครื่องเล่นได้แต่เสียง กรุณาส่งออกเป็น MP4 H.264 ก่อนอัปโหลดค่ะ');}const ref=db.collection('commissionVideoPosters').doc(id);const existing=await ref.get();if(existing.exists&&existing.data().poster)return;const poster=await capturePoster(data);await ref.set({poster});await window.NottonCache.set('notton:poster:'+id,poster);}
 
 async function storeMedia(data){const id=await digest(data),ref=db.collection('commissionMedia').doc(id);await prepareVideo(data,id);if(!mediaCache.has(id)){const exists=await ref.get();if(!exists.exists){const pieces=data.match(/[\s\S]{1,600000}/g)||[];await parallel(pieces,(text,i)=>ref.collection('parts').doc(String(i)).set({text}));await ref.set({count:pieces.length,createdAt:firebase.firestore.FieldValue.serverTimestamp()});}mediaCache.set(id,data);}mediaIds.set(data,id);await window.NottonCache.set('notton:media:'+id,data);return 'notton-media:'+id;}
-async function fetchMedia(id){if(mediaCache.has(id))return mediaCache.get(id);const cached=await window.NottonCache.get('notton:media:'+id);if(typeof cached==='string'){mediaCache.set(id,cached);mediaIds.set(cached,id);return cached;}const ref=db.collection('commissionMedia').doc(id),doc=await ref.get();if(!doc.exists)throw new Error('ไม่พบไฟล์ภาพที่บันทึกไว้');const parts=await parallel(Array.from({length:doc.data().count},(_,i)=>i),async i=>{const part=await ref.collection('parts').doc(String(i)).get();if(!part.exists)throw new Error('โหลดไฟล์ภาพไม่ครบ กรุณาลองอีกครั้ง');return part.data().text;});const data=parts.join('');mediaCache.set(id,data);mediaIds.set(data,id);await window.NottonCache.set('notton:media:'+id,data);return data;}
+async function fetchMedia(id){if(mediaCache.has(id))return mediaCache.get(id);const cached=await window.NottonCache.get('notton:media:'+id);if(typeof cached==='string'){mediaCache.set(id,cached);mediaIds.set(cached,id);return cached;}const ref=db.collection('commissionMedia').doc(id),doc=await ref.get();if(!doc.exists)throw new Error('ไม่พบไฟล์ภาพที่บันทึกไว้');const snapshot=await ref.collection('parts').get(),count=doc.data().count,parts=new Array(count);snapshot.forEach(part=>{const index=Number(part.id);if(Number.isInteger(index)&&index>=0&&index<count)parts[index]=part.data().text;});if(parts.filter(p=>typeof p==='string').length!==count)throw new Error('โหลดไฟล์ภาพไม่ครบ กรุณาลองอีกครั้ง');const data=parts.join('');mediaCache.set(id,data);mediaIds.set(data,id);window.NottonCache.set('notton:media:'+id,data);return data;}
 let mediaActive=0;const mediaWaiting=[];
-async function limitedMedia(fn){if(mediaActive>=2)await new Promise(resolve=>mediaWaiting.push(resolve));mediaActive++;try{return await fn();}finally{mediaActive--;mediaWaiting.shift()?.();}}
+async function limitedMedia(fn){if(mediaActive>=4)await new Promise(resolve=>mediaWaiting.push(resolve));mediaActive++;try{return await fn();}finally{mediaActive--;mediaWaiting.shift()?.();}}
 const progressivePublic=!/admin\.html$/.test(location.pathname);
 let progressiveNotify=null,progressiveError=null,progressiveGeneration=0;
 const placeholder='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="100%" height="100%" fill="#fff7e1"/><text x="50%" y="50%" text-anchor="middle" fill="#80572e" font-size="20">Loading media…</text></svg>');
@@ -36,10 +36,12 @@ async function publicData(encoded){
   if(typeof value==='string'&&value.startsWith('assets/images/')){const path=value.split('?')[0].split('/');return 'rate-'+path[path.length-2]+'-'+path[path.length-1];}
   return value;
  }
- const data=walk(encoded);
+ // Prioritize visible commission covers before off-screen galleries and editor assets.
+ const ordered={offers:encoded.offers,...encoded};
+ const data=walk(ordered);
  // Cached files appear first; uncached assets never delay text or pricing.
- for(const job of jobs){const cached=await window.NottonCache.get('notton:media:'+job.id);if(cached){mediaCache.set(job.id,cached);mediaIds.set(cached,job.id);job.parent[job.key]=cached;}}
- setTimeout(()=>{for(const job of jobs){if(mediaCache.has(job.id))continue;loadMedia(job.id).then(asset=>{if(generation!==progressiveGeneration)return;for(const same of jobs)if(same.id===job.id)same.parent[same.key]=asset;clearTimeout(repaint);repaint=setTimeout(()=>progressiveNotify?.(data),180);}).catch(error=>progressiveError?.(errorMessage(error)));}},0);
+ await Promise.all(jobs.map(async job=>{const cached=await window.NottonCache.get('notton:media:'+job.id);if(cached){mediaCache.set(job.id,cached);mediaIds.set(cached,job.id);job.parent[job.key]=cached;}}));
+ setTimeout(()=>{for(const job of jobs){if(mediaCache.has(job.id))continue;loadMedia(job.id).then(asset=>{if(generation!==progressiveGeneration)return;for(const same of jobs)if(same.id===job.id)same.parent[same.key]=asset;if(!repaint)repaint=setTimeout(()=>{repaint=null;progressiveNotify?.(data);},80);}).catch(error=>progressiveError?.(errorMessage(error)));}},0);
  return data;
 }
 function loadMedia(id){

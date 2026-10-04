@@ -239,3 +239,24 @@ body {
 #akane-concepts .ak .tos-content img,#akane-concepts .ak .tos-content video{max-width:100%;}
 #akane-concepts .ak .tos-content .rate-public-card h2:empty{display:none;}
 #akane-concepts .ak .hero .hero-tos{background:#fff;border:2px solid #e6c779;border-radius:999px;padding:12px 24px;color:#80572e;font:inherit;font-weight:600;}
+
+#akane-concepts .ak .hero .row > a,#akane-concepts .ak .hero .row > button.hero-tos{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;width:150px;min-width:150px;height:52px;padding:10px 14px;border:2px solid #dfb44c;border-radius:999px;background:#dfb44c;color:#fff;font-family:inherit;font-size:16px;font-weight:700;line-height:1.2;text-decoration:none;}
+#akane-concepts .ak .hero .row > a:hover,#akane-concepts .ak .hero .row > button.hero-tos:hover{background:#cda13c;border-color:#cda13c;}
+#akane-concepts .ak .hero .row{display:flex;flex-wrap:wrap;gap:12px;}
+
+.prototype-banner a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;box-sizing:border-box;padding:10px 20px;border:2px solid #dfb44c;border-radius:999px;background:#dfb44c;color:#fff;font-weight:700;text-decoration:none;box-shadow:0 4px 14px #dfb44c22;}
+.prototype-banner a:hover{background:#cda13c;border-color:#cda13c;}
+.prototype-banner{align-items:center;}
+
+@media(max-width:680px){
+ #akane-concepts .ak .offer-list .offer-card,#akane-concepts .ak .offer-dialog-content .offer-card {display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:16px!important;padding:14px!important;}
+ #akane-concepts .ak .offer-list .offer-image {width:100%;height:auto;aspect-ratio:4/3;min-height:180px;order:0;}
+ #akane-concepts .ak .offer-list .offer-info {width:100%;padding:0;order:1;}
+ #akane-concepts .ak .offer-list .offer-summary {-webkit-line-clamp:3;}
+ #akane-concepts .ak .hero .row {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;}
+ #akane-concepts .ak .hero .row>a,#akane-concepts .ak .hero .row>button.hero-tos {width:100%;min-width:0;height:48px;padding:8px;font-size:14px;}
+ #akane-concepts .ak .offer-badges {display:flex;flex-wrap:wrap;gap:8px;}
+ #akane-concepts .ak .offer-info .offer-slots {margin:0;align-self:auto;}
+ #akane-concepts .ak input,#akane-concepts .ak select,#akane-concepts .ak textarea {font-size:16px;max-width:100%;box-sizing:border-box;}
+ .prototype-banner {padding:10px 12px;gap:12px;}
+}

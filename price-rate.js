@@ -1,5 +1,5 @@
 (async () => {
-  const core = await import('./rate-core.js?v=20261004-media1');
+  const core = await import('./rate-core.js?v=embed-20261005');
   core.styles();
   const target = document.getElementById('rate-page');
   const pages = {};

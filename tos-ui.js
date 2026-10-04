@@ -1,5 +1,5 @@
 import {tosModel} from './tos-core.js';
-import {render,styles} from './rate-core.js?v=20261004-test4';
+import {render,styles} from './rate-core.js?v=embed-20261005';
 styles();
 let site=await NottonData.loadFresh();
 NottonData.subscribe(value=>{site=value;queueMicrotask(()=>{if(document.querySelector('.tos-dialog')?.open)openTos();});});
