@@ -2,10 +2,10 @@
   const style = document.createElement('style');
   style.textContent = `
     .owner-gate { font-family: system-ui, sans-serif; background: #fff; }
-    .owner-gate button, .owner-account button {
+    .owner-gate button, .owner-gate > a, .owner-account button {
       background: #fff; color: #80572e; border: 1px solid #e6c779;
       border-radius: 999px; padding: 12px 20px; cursor: pointer;
-      font: inherit;
+      font: inherit; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;
     }
     .owner-gate button:disabled { opacity: .5; cursor: wait; }
     .owner-gate form { display: grid; gap: 14px; margin: 22px 0; }
@@ -29,7 +29,7 @@
     <label>ID<input name="username" autocomplete="username" required></label>
     <label>Password<input name="password" type="password" autocomplete="current-password" required></label>
     <button type="submit">Log in</button></form>
-    <p role="status" aria-live="polite"></p><a href="index.html">กลับหน้า Commission</a>`;
+    <p role="status" aria-live="polite"></p><a href="index.html">Back</a>`;
   document.body.prepend(gate);
   const form = gate.querySelector('form'), status = gate.querySelector('[role=status]');
   form.onsubmit = async event => {

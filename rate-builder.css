@@ -218,3 +218,6 @@
 .rate-gallery-grid.rate-media-natural figure {border:0!important;border-radius:0!important;background:transparent!important;overflow:visible!important;}
 .rate-gallery-grid.rate-media-natural img,.rate-gallery-grid.rate-media-natural video {width:100%!important;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;border:0!important;border-radius:0!important;background:transparent!important;}
 .rate-gallery-grid.rate-media-full {grid-template-columns:1fr!important;}
+
+.rate-site-header .rate-back { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:10px 24px; box-sizing:border-box; border:2px solid #e6c779; border-radius:999px; background:#fff; color:#80572e; font-weight:600; text-decoration:none; }
+.rate-site-header .rate-back:hover { background:#fff7e1; }
